@@ -1,10 +1,8 @@
 package pl.marcinchwedczuk.javafx.validation;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import pl.marcinchwedczuk.javafx.validation.demo.Demo;
 
 /**
  * JavaFX App
