@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import pl.marcinchwedczuk.javafx.validation.extra.ValidationDecorator?>
 
-<AnchorPane prefHeight="308.0" prefWidth="596.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.marcinchwedczuk.javafx.validation.demo.Demo">
+<AnchorPane prefHeight="308.0" prefWidth="596.0" stylesheets="@Demo.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.marcinchwedczuk.javafx.validation.demo.Demo">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
