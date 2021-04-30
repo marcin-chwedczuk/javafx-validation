@@ -13,7 +13,10 @@ public class Property<UIV,MV> {
     private final SimpleObjectProperty<UIV> uiValueProperty = new SimpleObjectProperty<>(null);
     private final SimpleObjectProperty<MV> modelValueProperty = new SimpleObjectProperty<>(null);
     private final SimpleBooleanProperty validProperty = new SimpleBooleanProperty(false);
-    private final SimpleListProperty<ValidationError> validationErrorsProperty =
+
+    // Sorted by priority
+    // TODO: check automatically sorted by JavaFX
+    private final SimpleListProperty<Objection> validationErrorsProperty =
             new SimpleListProperty<>(FXCollections.observableArrayList());
 
     private boolean updating = false;
@@ -55,32 +58,38 @@ public class Property<UIV,MV> {
 
         updating = true;
         try {
+            List<Objection> nonErrorObjections = new ArrayList<>();
+
             ValidationResult<UIV> uiValidationResult = runValidators(uiValidators, newValue);
             if (!uiValidationResult.isValid()) {
-                validationErrorsProperty.setAll(uiValidationResult.errors);
+                validationErrorsProperty.setAll(uiValidationResult.objections);
                 validProperty.setValue(false);
                 modelValueProperty.setValue(null);
                 return;
             }
+            nonErrorObjections.addAll(uiValidationResult.objections);
 
             ConversionResult<UIV, MV> conversionResult = converter.toModelValue(newValue);
             if (!conversionResult.isSuccessful()) {
-                validationErrorsProperty.setAll(conversionResult.validationErrors);
+                validationErrorsProperty.setAll(conversionResult.objections);
                 validProperty.setValue(false);
                 modelValueProperty.setValue(null);
                 return;
             }
+            nonErrorObjections.addAll(conversionResult.objections);
 
             MV newModelValue = conversionResult.modelValue;
 
             ValidationResult<MV> modelValidationResult = runValidators(modelValidators, newModelValue);
             if (!modelValidationResult.isValid()) {
-                validationErrorsProperty.setAll(modelValidationResult.errors);
+                validationErrorsProperty.setAll(modelValidationResult.objections);
                 validProperty.setValue(false);
                 modelValueProperty.setValue(null);
             }
+            nonErrorObjections.addAll(modelValidationResult.objections);
 
-            validationErrorsProperty.clear();
+            nonErrorObjections.sort(Objections.compareBySeverity());
+            validationErrorsProperty.setAll(nonErrorObjections);
             validProperty.setValue(true);
             modelValueProperty.setValue(newModelValue);
         } finally {
@@ -99,21 +108,28 @@ public class Property<UIV,MV> {
             UIV newUiValue = converter.toUiValue(newValue);
             uiValueProperty.setValue(newUiValue);
 
+            List<Objection> nonErrorObjections = new ArrayList<>();
+
+            // TODO: Merge warning from prev stages with current errors
+            // TODO: Sort before adding - check auto sorted list setErrors(...) method
             ValidationResult<MV> modelValidationResult = runValidators(modelValidators, newValue);
             if (!modelValidationResult.isValid()) {
-                validationErrorsProperty.setAll(modelValidationResult.errors);
+                validationErrorsProperty.setAll(modelValidationResult.objections);
                 validProperty.setValue(false);
                 return;
             }
+            nonErrorObjections.addAll(modelValidationResult.objections);
 
             ValidationResult<UIV> uiValidationResult = runValidators(uiValidators, newUiValue);
             if (!uiValidationResult.isValid()) {
-                validationErrorsProperty.setAll(uiValidationResult.errors);
+                validationErrorsProperty.setAll(uiValidationResult.objections);
                 validProperty.setValue(false);
                 return;
             }
+            nonErrorObjections.addAll(uiValidationResult.objections);
 
-            validationErrorsProperty.clear();
+            nonErrorObjections.sort(Objections.compareBySeverity());
+            validationErrorsProperty.setAll(nonErrorObjections);
             validProperty.setValue(true);
 
         } finally {
@@ -178,10 +194,10 @@ public class Property<UIV,MV> {
     public boolean isValid() { return validProperty.get(); }
 
 
-    public ReadOnlyListProperty<ValidationError> validationErrorsProperty() {
+    public ReadOnlyListProperty<Objection> validationErrorsProperty() {
         return validationErrorsProperty;
     }
-    public ObservableList<ValidationError> getValidationErrors() {
+    public ObservableList<Objection> getValidationErrors() {
         return validationErrorsProperty().get();
     }
 }

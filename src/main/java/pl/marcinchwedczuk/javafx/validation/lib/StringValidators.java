@@ -7,7 +7,9 @@ public class StringValidators {
       return (value) -> {
           boolean isValid = (value != null) && !value.isBlank();
           return new ValidationResult<>(value,
-                  ValidationError.onlyIf(!isValid, "Value is required."));
+                  Objections.combine(
+                      Objections.errorIf(!isValid, "Value is required."),
+                      Objections.warningIf(true, "Sample warning")));
       };
     }
 
@@ -20,7 +22,7 @@ public class StringValidators {
             int length = (value == null) ? 0 : value.length();
             boolean isValid = (min <= length && length < maxExcluding);
             return new ValidationResult<>(value,
-                    ValidationError.onlyIf(!isValid, errorMessage));
+                    Objections.errorIf(!isValid, errorMessage));
         };
     }
 }

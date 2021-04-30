@@ -1,29 +1,35 @@
 package pl.marcinchwedczuk.javafx.validation.lib;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
+import static pl.marcinchwedczuk.javafx.validation.lib.ObjectionSeverity.ERROR;
 
 public class ValidationResult<V> {
     public final V value;
-    public final List<ValidationError> errors;
+    public final List<Objection> objections;
 
-    public ValidationResult(V value, List<ValidationError> errors) {
+    public ValidationResult(V value, List<Objection> objections) {
         this.value = value;
-        this.errors = List.copyOf(errors);
+        this.objections = List.copyOf(objections);
     }
 
     public boolean isValid() {
-        return errors.isEmpty();
+        for (Objection ve: objections) {
+            if (ve.severity == ERROR) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public static <V> ValidationResult<V> merge(List<ValidationResult<V>> results) {
         // TODO: Args validation
         V value = results.get(0).value;
 
-        List<ValidationError> errors = results.stream()
-                .flatMap(r -> r.errors.stream())
+        List<Objection> errors = results.stream()
+                .flatMap(r -> r.objections.stream())
                 .collect(toList());
 
         return new ValidationResult<>(value, errors);

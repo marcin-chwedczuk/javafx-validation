@@ -1,21 +1,17 @@
 package pl.marcinchwedczuk.javafx.validation.demo;
 
-import javafx.beans.binding.Bindings;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import pl.marcinchwedczuk.javafx.validation.extra.ValidationDecorator;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.joining;
 
@@ -72,7 +68,7 @@ public class Demo implements Initializable {
                                 .collect(joining("\n")),
                         viewModel.username.validationErrorsProperty()));
          */
-        usernameE.validationErrorsProperty()
+        usernameE.objectionsProperty()
                 .bind(viewModel.username.validationErrorsProperty());
 
         modelUsernameF.textProperty()

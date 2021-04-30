@@ -5,16 +5,15 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import pl.marcinchwedczuk.javafx.validation.lib.ValidationError;
+import pl.marcinchwedczuk.javafx.validation.lib.Objection;
+import pl.marcinchwedczuk.javafx.validation.lib.ObjectionSeverity;
 
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class ValidationDecorator extends VBox {
     private final VBox decoratedComponentsContainer;
     private final VBox validationMessagesContainer;
 
-    private final SimpleListProperty<ValidationError> validationErrors =
+    private final SimpleListProperty<Objection> objectionsProperty =
             new SimpleListProperty<>(FXCollections.observableArrayList());
 
     public ValidationDecorator() {
@@ -42,22 +41,22 @@ public class ValidationDecorator extends VBox {
 
         super.getChildren().addAll(decoratedComponentsContainer, validationMessagesContainer);
 
-        validationErrors.addListener((InvalidationListener) observable -> {
-            List<ValidationError> errors = validationErrors.getValue();
-            System.out.printf("Errors: %d%n", errors.size());
+        objectionsProperty.addListener((InvalidationListener) observable -> {
+            List<Objection> objections = this.objectionsProperty.getValue();
+            System.out.printf("Errors: %d%n", objections.size());
 
             var messagesFx = validationMessagesContainer.getChildren();
 
-            if (messagesFx.size() > errors.size()) {
-                messagesFx.remove(errors.size(), messagesFx.size());
+            if (messagesFx.size() > objections.size()) {
+                messagesFx.remove(objections.size(), messagesFx.size());
             }
-            while (messagesFx.size() < errors.size()) {
+            while (messagesFx.size() < objections.size()) {
                 messagesFx.add(new ValidationMessageFx());
             }
 
-            for (int i = 0; i < errors.size(); i++) {
+            for (int i = 0; i < objections.size(); i++) {
                 ((ValidationMessageFx)messagesFx.get(i))
-                        .setValidationError(errors.get(i));
+                        .setObjection(objections.get(i));
             }
         });
     }
@@ -66,8 +65,8 @@ public class ValidationDecorator extends VBox {
         return decoratedComponentsContainer.getChildren();
     }
 
-    public SimpleListProperty<ValidationError> validationErrorsProperty() {
-        return validationErrors;
+    public SimpleListProperty<Objection> objectionsProperty() {
+        return objectionsProperty;
     }
 
     public class ValidationMessageFx extends HBox {
@@ -84,8 +83,9 @@ public class ValidationDecorator extends VBox {
             this.getChildren().addAll(circle, text);
         }
 
-        public void setValidationError(ValidationError e) {
+        public void setObjection(Objection e) {
             this.text.setText("!!!" + e.message);
+            this.circle.setFill(e.severity == ObjectionSeverity.ERROR ? Color.RED : Color.ORANGE);
         }
     }
 }
