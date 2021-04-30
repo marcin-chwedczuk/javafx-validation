@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import pl.marcinchwedczuk.javafx.validation.extra.ValidationDecorator;
 
 import java.io.IOException;
 import java.net.URL;
@@ -30,7 +31,7 @@ public class Demo implements Initializable {
             window.setMinHeight(480);
             window.setResizable(true);
 
-            Demo controller = (Demo)loader.getController();
+            Demo controller = (Demo) loader.getController();
 
             window.sizeToScene();
             window.show();
@@ -41,12 +42,17 @@ public class Demo implements Initializable {
         }
     }
 
-    @FXML private TextField usernameF;
-    @FXML private Label modelUsernameF;
-    @FXML private Text usernameE;
+    @FXML
+    private TextField usernameF;
+    @FXML
+    private Label modelUsernameF;
+    @FXML
+    private ValidationDecorator usernameE;
 
-    @FXML private TextField passwordF;
-    @FXML private Label modelPasswordF;
+    @FXML
+    private TextField passwordF;
+    @FXML
+    private Label modelPasswordF;
 
     private final DemoViewModel viewModel = new DemoViewModel();
 
@@ -55,17 +61,23 @@ public class Demo implements Initializable {
         usernameF.textProperty()
                 .bindBidirectional(viewModel.username.uiValueProperty());
 
+        // TODO: Create custom control that will add and remove Text nodes as needed
+        // VBox with Text nodes + word wrap + elipsis...
+        // viewModel.username.showErrorsOn(usernameE);
+        /*
         usernameE.textProperty().bind(
                 Bindings.createStringBinding(
                         () -> viewModel.username.validationErrorsProperty().getValue().stream()
                                 .map(ve -> "* " + ve.message)
                                 .collect(joining("\n")),
                         viewModel.username.validationErrorsProperty()));
+         */
+        usernameE.validationErrorsProperty()
+                .bind(viewModel.username.validationErrorsProperty());
 
         modelUsernameF.textProperty()
                 .bind(viewModel.username.modelValueProperty());
     }
-
 
     @FXML
     private void registerUser() {
