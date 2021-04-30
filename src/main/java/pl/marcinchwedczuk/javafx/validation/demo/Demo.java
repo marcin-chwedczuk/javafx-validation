@@ -62,9 +62,6 @@ public class Demo implements Initializable {
         modelUsernameF.textProperty()
                 .bind(viewModel.username.modelValueProperty());
 
-        passwordF.textProperty().addListener((InvalidationListener)o -> {
-            System.out.print("invalidation listener fired");
-        });
     }
 
     @FXML
