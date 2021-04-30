@@ -1,5 +1,6 @@
 package pl.marcinchwedczuk.javafx.validation.demo;
 
+import javafx.beans.InvalidationListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -55,25 +56,15 @@ public class Demo implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //usernameF.textProperty()
-        //        .bindBidirectional(viewModel.username.uiValueProperty());
-
-        UiBindings.biBind(usernameF.textProperty(), viewModel.username);
-        // TODO: Create custom control that will add and remove Text nodes as needed
-        // VBox with Text nodes + word wrap + elipsis...
-        // viewModel.username.showErrorsOn(usernameE);
-        /*
-        usernameE.textProperty().bind(
-                Bindings.createStringBinding(
-                        () -> viewModel.username.validationErrorsProperty().getValue().stream()
-                                .map(ve -> "* " + ve.message)
-                                .collect(joining("\n")),
-                        viewModel.username.validationErrorsProperty()));
-         */
+        UiBindings.biBind(usernameF, viewModel.username);
         usernameE.displayErrorsFor(viewModel.username);
 
         modelUsernameF.textProperty()
                 .bind(viewModel.username.modelValueProperty());
+
+        passwordF.textProperty().addListener((InvalidationListener)o -> {
+            System.out.print("invalidation listener fired");
+        });
     }
 
     @FXML

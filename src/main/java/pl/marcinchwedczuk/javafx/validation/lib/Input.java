@@ -58,6 +58,10 @@ public class Input<UIV,MV> {
         }
     }
 
+    public void reevaluateUiValue() {
+        guardedPropagateUiValue(uiValueProperty.getValue());
+    }
+
     private boolean propagateUiValue(UIV newValue) {
         List<Objection> objections = new ArrayList<>();
 
