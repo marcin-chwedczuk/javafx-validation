@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import pl.marcinchwedczuk.javafx.validation.extra.UiBindings;
 import pl.marcinchwedczuk.javafx.validation.extra.ValidationDecorator;
 
 import java.io.IOException;
@@ -54,9 +55,10 @@ public class Demo implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        usernameF.textProperty()
-                .bindBidirectional(viewModel.username.uiValueProperty());
+        //usernameF.textProperty()
+        //        .bindBidirectional(viewModel.username.uiValueProperty());
 
+        UiBindings.biBind(usernameF.textProperty(), viewModel.username);
         // TODO: Create custom control that will add and remove Text nodes as needed
         // VBox with Text nodes + word wrap + elipsis...
         // viewModel.username.showErrorsOn(usernameE);
@@ -68,8 +70,7 @@ public class Demo implements Initializable {
                                 .collect(joining("\n")),
                         viewModel.username.validationErrorsProperty()));
          */
-        usernameE.objectionsProperty()
-                .bind(viewModel.username.validationErrorsProperty());
+        usernameE.displayErrorsFor(viewModel.username);
 
         modelUsernameF.textProperty()
                 .bind(viewModel.username.modelValueProperty());

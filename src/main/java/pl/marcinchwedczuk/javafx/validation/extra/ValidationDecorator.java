@@ -14,6 +14,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import pl.marcinchwedczuk.javafx.validation.lib.Objection;
 import pl.marcinchwedczuk.javafx.validation.lib.ObjectionSeverity;
+import pl.marcinchwedczuk.javafx.validation.lib.Input;
 
 import java.util.List;
 
@@ -43,7 +44,6 @@ public class ValidationDecorator extends VBox {
 
         objectionsProperty.addListener((InvalidationListener) observable -> {
             List<Objection> objections = this.objectionsProperty.getValue();
-            System.out.printf("Errors: %d%n", objections.size());
 
             var messagesFx = validationMessagesContainer.getChildren();
 
@@ -55,8 +55,7 @@ public class ValidationDecorator extends VBox {
             }
 
             for (int i = 0; i < objections.size(); i++) {
-                ((ValidationMessageFx)messagesFx.get(i))
-                        .setObjection(objections.get(i));
+                ((ValidationMessageFx)messagesFx.get(i)).setObjection(objections.get(i));
             }
         });
     }
@@ -67,6 +66,10 @@ public class ValidationDecorator extends VBox {
 
     public SimpleListProperty<Objection> objectionsProperty() {
         return objectionsProperty;
+    }
+
+    public <UIV,MV> void displayErrorsFor(Input<UIV, MV> input) {
+        this.objectionsProperty().bind(input.objectionsProperty());
     }
 
     public class ValidationMessageFx extends HBox {

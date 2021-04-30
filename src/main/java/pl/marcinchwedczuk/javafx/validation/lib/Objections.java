@@ -47,7 +47,7 @@ public class Objections {
                 .collect(toList());
     }
 
-    public static Comparator<Objection> compareBySeverity() {
-        return Comparator.comparingInt(o -> o.severity.priority);
+    public static Comparator<Objection> compareBySeverityDesc() {
+        return Comparator.<Objection>comparingInt(o -> o.severity.priority).reversed();
     }
 }
