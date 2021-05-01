@@ -11,6 +11,7 @@ import javafx.scene.layout.Pane;
 import pl.marcinchwedczuk.javafx.validation.demo.Demo;
 import pl.marcinchwedczuk.javafx.validation.extra.UiBindings;
 import pl.marcinchwedczuk.javafx.validation.extra.ValidationDecorator;
+import pl.marcinchwedczuk.javafx.validation.extra.ValidationDecorator2;
 
 import java.io.IOException;
 import java.net.URL;
@@ -37,7 +38,7 @@ public class UserRegistration implements Initializable {
     @FXML
     private TextField usernameF;
     @FXML
-    private ValidationDecorator usernameE;
+    private ValidationDecorator2 usernameE;
     @FXML
     private Label modelUsernameF;
 

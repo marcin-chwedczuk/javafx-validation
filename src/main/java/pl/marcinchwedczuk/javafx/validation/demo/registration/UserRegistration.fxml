@@ -2,13 +2,14 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import pl.marcinchwedczuk.javafx.validation.extra.ValidationDecorator?>
+<?import pl.marcinchwedczuk.javafx.validation.extra.ValidationDecorator2?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.marcinchwedczuk.javafx.validation.demo.registration.UserRegistration">
 
@@ -25,7 +26,8 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
         <children>
             <Label text="Username:" />
@@ -35,21 +37,15 @@
             <Label text="Model Password:" GridPane.rowIndex="4" />
             <Label fx:id="modelUsernameF" text="???" GridPane.columnIndex="2" GridPane.rowIndex="3" />
             <Label fx:id="modelPasswordF" text="???" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <ValidationDecorator fx:id="usernameE" GridPane.columnIndex="2">
-                <decorated>
+            <ValidationDecorator2 fx:id="usernameE" GridPane.columnIndex="2">
+                <content>
                     <TextField fx:id="usernameF" />
-                </decorated>
-            </ValidationDecorator>
-            <ValidationDecorator fx:id="passwordE" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                <decorated>
+                </content>
+            </ValidationDecorator2>
+            <ValidationDecorator2 fx:id="passwordE" GridPane.columnIndex="2" GridPane.rowIndex="2">
                     <TextField fx:id="passwordF" />
-                </decorated>
-            </ValidationDecorator>
-         <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6">
-           <content>
-             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-           </content>
-         </ScrollPane>
+            </ValidationDecorator2>
+
         </children>
     </GridPane>
 </AnchorPane>

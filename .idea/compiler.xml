@@ -13,4 +13,9 @@
       <module name="demo" target="11" />
     </bytecodeTargetLevel>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="demo" options="--add-exports javafx.controls/com.sun.javafx.scene.control.skin=pl.marcinchwedczuk.javafx.validation" />
+    </option>
+  </component>
 </project>
