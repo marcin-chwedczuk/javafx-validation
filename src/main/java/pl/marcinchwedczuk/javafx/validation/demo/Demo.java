@@ -7,7 +7,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.stage.Stage;
+import pl.marcinchwedczuk.javafx.validation.demo.registration.UserRegistration;
 import pl.marcinchwedczuk.javafx.validation.extra.UiBindings;
 import pl.marcinchwedczuk.javafx.validation.extra.ValidationDecorator;
 
@@ -25,8 +27,6 @@ public class Demo implements Initializable {
             Stage window = new Stage();
             window.setTitle("Validation Demo");
             window.setScene(new Scene(loader.load()));
-            window.setMinWidth(640);
-            window.setMinHeight(480);
             window.setResizable(true);
 
             Demo controller = (Demo) loader.getController();
@@ -41,31 +41,10 @@ public class Demo implements Initializable {
     }
 
     @FXML
-    private TextField usernameF;
-    @FXML
-    private Label modelUsernameF;
-    @FXML
-    private ValidationDecorator usernameE;
-
-    @FXML
-    private TextField passwordF;
-    @FXML
-    private Label modelPasswordF;
-
-    private final DemoViewModel viewModel = new DemoViewModel();
+    private TitledPane userRegistrationPane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        UiBindings.biBind(usernameF, viewModel.username);
-        usernameE.displayErrorsFor(viewModel.username);
-
-        modelUsernameF.textProperty()
-                .bind(viewModel.username.modelValueProperty());
-
-    }
-
-    @FXML
-    private void registerUser() {
-        viewModel.registerUser();
+        UserRegistration.installAt(userRegistrationPane.contentProperty());
     }
 }

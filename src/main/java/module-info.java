@@ -8,4 +8,5 @@ module pl.marcinchwedczuk.javafx.validation {
 
     // Allow @FXML injection to private fields.
     opens pl.marcinchwedczuk.javafx.validation.demo to javafx.fxml;
+    opens pl.marcinchwedczuk.javafx.validation.demo.registration to javafx.fxml;
 }

@@ -16,6 +16,6 @@ public class ConversionResult<UIV, MV> {
     }
 
     public boolean isSuccessful() {
-        return objections.isEmpty();
+        return !Objections.containsError(objections);
     }
 }

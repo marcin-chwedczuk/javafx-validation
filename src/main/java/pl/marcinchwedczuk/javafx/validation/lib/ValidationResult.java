@@ -15,13 +15,8 @@ public class ValidationResult<V> {
     }
 
     public boolean isValid() {
-        for (Objection ve: objections) {
-            if (ve.severity == ERROR) {
-                return false;
-            }
-        }
-
-        return true;
+        // TODO: Create objections List type
+        return !Objections.containsError(objections);
     }
 
     public static <V> ValidationResult<V> merge(List<ValidationResult<V>> results) {
