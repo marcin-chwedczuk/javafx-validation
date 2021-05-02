@@ -65,6 +65,12 @@
                 <version>0.0.6</version>
                 <configuration>
                     <mainClass>pl.marcinchwedczuk.javafx.validation.App</mainClass>
+                    <options>
+                        <!-- uncomment to enable debugger's "Attach to Process..." -->
+                        <!--
+                        <option>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=4444</option>
+                        -->
+                    </options>
                 </configuration>
             </plugin>
             <plugin>

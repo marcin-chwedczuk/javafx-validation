@@ -11,7 +11,10 @@ public class UserRegistrationViewModel {
             new Input<String, String>(Converters.identityConverter())
                     .withUiValidators(
                             StringValidators.required(),
-                            StringValidators.hasLength(6, 10)
+                            StringValidators.hasLength(2, 16),
+                            StringValidators.matchesRegex("[_a-z][_a-z0-9]+",
+                                    "Username can only consists of underscore, " +
+                                    "lower-case letters and digits and cannot start with a digit.")
                     );
     // TODO: Regex
 

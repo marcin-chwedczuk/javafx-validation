@@ -6,8 +6,11 @@ import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.SkinBase;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -29,18 +32,12 @@ class ValidationDecoratorSkin extends SkinBase<ValidationDecorator> {
         super(control);
 
         rootNode = new VBox();
-        rootNode.setPrefHeight(VBox.USE_COMPUTED_SIZE);
-        rootNode.setPrefWidth(VBox.USE_COMPUTED_SIZE);
         rootNode.getStyleClass().setAll("validation-decorator");
 
         componentContainer = new VBox();
-        componentContainer.setPrefHeight(VBox.USE_COMPUTED_SIZE);
-        componentContainer.setPrefWidth(VBox.USE_COMPUTED_SIZE);
         componentContainer.getStyleClass().setAll("component-container");
 
         objectionsContainer = new VBox();
-        objectionsContainer.setPrefHeight(VBox.USE_COMPUTED_SIZE);
-        objectionsContainer.setPrefWidth(VBox.USE_COMPUTED_SIZE);
         objectionsContainer.getStyleClass().setAll("objections-container");
 
         rootNode.getChildren().setAll(componentContainer, objectionsContainer);
@@ -121,7 +118,7 @@ class ValidationDecoratorSkin extends SkinBase<ValidationDecorator> {
 
     public static class ValidationMessageFx extends HBox {
         private final Circle circle;
-        private final Text text;
+        private final Label text;
 
         public ValidationMessageFx() {
             super.setSpacing(5);
@@ -130,7 +127,9 @@ class ValidationDecoratorSkin extends SkinBase<ValidationDecorator> {
             this.circle = new Circle(5.0, Color.BLACK);
             this.circle.getStyleClass().setAll("marker");
 
-            this.text = new Text();
+            this.text = new Label();
+            this.text.setWrapText(true);
+            this.text.setTooltip(new Tooltip(""));
             this.text.getStyleClass().setAll("message");
 
             this.getChildren().addAll(circle, text);
@@ -139,6 +138,7 @@ class ValidationDecoratorSkin extends SkinBase<ValidationDecorator> {
 
         public void setObjection(Objection e) {
             this.text.setText(e.userMessage);
+            this.text.getTooltip().setText(e.userMessage);
             this.getStyleClass().setAll("objection", "severity-" + e.severity.toString().toLowerCase());
         }
     }
