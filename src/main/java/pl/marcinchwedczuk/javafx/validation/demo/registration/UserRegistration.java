@@ -7,11 +7,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
-import pl.marcinchwedczuk.javafx.validation.demo.Demo;
 import pl.marcinchwedczuk.javafx.validation.extra.UiBindings;
 import pl.marcinchwedczuk.javafx.validation.extra.ValidationDecorator;
-import pl.marcinchwedczuk.javafx.validation.extra.ValidationDecorator2;
 
 import java.io.IOException;
 import java.net.URL;
@@ -38,7 +35,7 @@ public class UserRegistration implements Initializable {
     @FXML
     private TextField usernameF;
     @FXML
-    private ValidationDecorator2 usernameE;
+    private ValidationDecorator usernameE;
     @FXML
     private Label modelUsernameF;
 

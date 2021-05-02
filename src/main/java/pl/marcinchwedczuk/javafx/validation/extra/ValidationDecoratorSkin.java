@@ -5,7 +5,6 @@ import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.SkinBase;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -17,28 +16,28 @@ import pl.marcinchwedczuk.javafx.validation.lib.ObjectionSeverity;
 
 import java.util.List;
 
-class ValidationDecoratorSkin extends SkinBase<ValidationDecorator2> {
+class ValidationDecoratorSkin extends SkinBase<ValidationDecorator> {
     private final VBox root;
     private final VBox decoratedComponentsContainer;
     private final VBox validationMessagesContainer;
 
-    protected ValidationDecoratorSkin(ValidationDecorator2 control) {
+    protected ValidationDecoratorSkin(ValidationDecorator control) {
         super(control);
 
         root = new VBox();
         root.setPrefHeight(VBox.USE_COMPUTED_SIZE);
         root.setPrefWidth(VBox.USE_COMPUTED_SIZE);
+        root.getStyleClass().setAll("validation-decorator");
 
         decoratedComponentsContainer = new VBox();
         decoratedComponentsContainer.setPrefHeight(VBox.USE_COMPUTED_SIZE);
         decoratedComponentsContainer.setPrefWidth(VBox.USE_COMPUTED_SIZE);
-        decoratedComponentsContainer.getStyleClass().setAll("decorated");
+        decoratedComponentsContainer.getStyleClass().setAll("component-container");
 
         validationMessagesContainer = new VBox();
         validationMessagesContainer.setPrefHeight(VBox.USE_COMPUTED_SIZE);
         validationMessagesContainer.setPrefWidth(VBox.USE_COMPUTED_SIZE);
-        validationMessagesContainer.getStyleClass().setAll("validationMessages");
-        validationMessagesContainer.setSpacing(2);
+        validationMessagesContainer.getStyleClass().setAll("objections-container");
 
         root.getChildren().setAll(decoratedComponentsContainer, validationMessagesContainer);
         this.getChildren().add(root);
@@ -58,7 +57,6 @@ class ValidationDecoratorSkin extends SkinBase<ValidationDecorator2> {
             for (int i = 0; i < objections.size(); i++) {
                 ((ValidationMessageFx) messagesFx.get(i)).setObjection(objections.get(i));
             }
-
         });
 
         getSkinnable().contentProperty().addListener((observable, oldValue, newValue) -> {
@@ -121,16 +119,19 @@ class ValidationDecoratorSkin extends SkinBase<ValidationDecorator2> {
             super.setSpacing(5);
             super.setAlignment(Pos.BASELINE_LEFT);
 
-            this.circle = new Circle(5.0, Color.RED);
+            this.circle = new Circle(5.0, Color.BLACK);
+            this.circle.getStyleClass().setAll("marker");
+
             this.text = new Text();
+            this.text.getStyleClass().setAll("message");
 
             this.getChildren().addAll(circle, text);
+            this.getStyleClass().add("objection");
         }
 
         public void setObjection(Objection e) {
-            this.text.setText("!!!" + e.message);
-            // TODO: To styles
-            this.circle.setFill(e.severity == ObjectionSeverity.ERROR ? Color.RED : Color.ORANGE);
+            this.text.setText(e.userMessage);
+            this.getStyleClass().setAll("objection", "severity-" + e.severity.toString().toLowerCase());
         }
     }
 }

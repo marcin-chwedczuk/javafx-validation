@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import pl.marcinchwedczuk.javafx.validation.extra.ValidationDecorator?>
-<?import pl.marcinchwedczuk.javafx.validation.extra.ValidationDecorator2?>
+<?import pl.marcinchwedczuk.javafx.validation.extra.ValidationDecorator?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.marcinchwedczuk.javafx.validation.demo.registration.UserRegistration">
+<AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@UserRegistration.css" fx:controller="pl.marcinchwedczuk.javafx.validation.demo.registration.UserRegistration">
 
     <GridPane layoutX="27.0" layoutY="45.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -37,14 +37,14 @@
             <Label text="Model Password:" GridPane.rowIndex="4" />
             <Label fx:id="modelUsernameF" text="???" GridPane.columnIndex="2" GridPane.rowIndex="3" />
             <Label fx:id="modelPasswordF" text="???" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <ValidationDecorator2 fx:id="usernameE" GridPane.columnIndex="2">
+            <ValidationDecorator fx:id="usernameE" GridPane.columnIndex="2">
                 <content>
                     <TextField fx:id="usernameF" />
                 </content>
-            </ValidationDecorator2>
-            <ValidationDecorator2 fx:id="passwordE" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            </ValidationDecorator>
+            <ValidationDecorator fx:id="passwordE" GridPane.columnIndex="2" GridPane.rowIndex="2">
                     <TextField fx:id="passwordF" />
-            </ValidationDecorator2>
+            </ValidationDecorator>
 
         </children>
     </GridPane>

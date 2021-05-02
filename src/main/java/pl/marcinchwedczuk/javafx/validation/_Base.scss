@@ -1,0 +1,39 @@
+
+
+// Styles for validator
+
+$validation-color-error: red;
+$validation-color-warning: orange;
+
+.validation-decorator {
+    -fx-spacing: 2;
+
+    .component-container {
+    }
+
+    .objections-container {
+        -fx-spacing: 2;
+
+        .objection {
+            &.severity-error {
+                .marker {
+                    -fx-fill: $validation-color-error;
+                }
+
+                .message {
+                    -fx-fill: $validation-color-error;
+                }
+            }
+
+            &.severity-warning {
+                .marker {
+                    -fx-fill: $validation-color-warning;
+                }
+
+                .message {
+                    -fx-fill: $validation-color-warning;
+                }
+            }
+        }
+    }
+}

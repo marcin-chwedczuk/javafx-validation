@@ -94,6 +94,9 @@
                         </resource>
                     </resources>
                     <sassOptions>
+                        <!-- See for list of all options:
+                        https://github.com/sass/ruby-sass/blob/7a50eae567260a23d3bbf4d5aaf1a76db43dec32/doc-src/SASS_REFERENCE.md#options
+                        -->
                         <unix_newlines>true</unix_newlines>
                         <cache>true</cache>
                         <always_update>true</always_update>
@@ -110,7 +113,7 @@
                 <executions>
                     <execution>
                         <id>copy-resources-post-compile</id>
-                        <phase>prepare-package</phase>
+                        <phase>process-classes</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>

@@ -1,17 +1,12 @@
 package pl.marcinchwedczuk.javafx.validation.demo;
 
-import javafx.beans.InvalidationListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.stage.Stage;
 import pl.marcinchwedczuk.javafx.validation.demo.registration.UserRegistration;
-import pl.marcinchwedczuk.javafx.validation.extra.UiBindings;
-import pl.marcinchwedczuk.javafx.validation.extra.ValidationDecorator;
 
 import java.io.IOException;
 import java.net.URL;
