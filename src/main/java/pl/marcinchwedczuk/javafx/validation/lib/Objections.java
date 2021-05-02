@@ -7,6 +7,7 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 import static pl.marcinchwedczuk.javafx.validation.lib.ObjectionSeverity.ERROR;
+import static pl.marcinchwedczuk.javafx.validation.lib.ObjectionSeverity.WARNING;
 
 public class Objections {
     private Objections() { }
@@ -49,8 +50,16 @@ public class Objections {
     }
 
     public static boolean containsError(List<Objection> objections) {
-        for (Objection ve: objections) {
-            if (ve.severity == ERROR) {
+        return containsSeverity(objections, ERROR);
+    }
+
+    public static boolean containsWarning(List<Objection> objections) {
+        return containsSeverity(objections, WARNING);
+    }
+
+    public static boolean containsSeverity(List<Objection> objections, ObjectionSeverity severity) {
+        for (Objection ve : objections) {
+            if (ve.severity == severity) {
                 return true;
             }
         }
@@ -58,7 +67,7 @@ public class Objections {
         return false;
     }
 
-    public static Comparator<Objection> compareBySeverityDesc() {
+        public static Comparator<Objection> compareBySeverityDesc() {
         return Comparator.<Objection>comparingInt(o -> o.severity.priority).reversed();
     }
 }

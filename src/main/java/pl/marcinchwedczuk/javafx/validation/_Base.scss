@@ -9,6 +9,21 @@ $validation-color-warning: orange;
     -fx-spacing: 2;
 
     .component-container {
+        -fx-border-width: 3;
+
+        &:with-errors {
+            -fx-focus-color: $validation-color-error;
+            -fx-faint-focus-color: rgba($validation-color-error, 0.2);
+
+            -fx-text-box-border: $validation-color-error;
+        }
+
+        &:with-warnings {
+            -fx-focus-color: $validation-color-warning;
+            -fx-faint-focus-color: rgba($validation-color-warning, 0.2);
+
+            -fx-text-box-border: $validation-color-warning;
+        }
     }
 
     .objections-container {
