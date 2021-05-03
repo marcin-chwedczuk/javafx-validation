@@ -1,6 +1,10 @@
 package pl.marcinchwedczuk.javafx.validation.demo.registration;
 
 import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ReadOnlyBooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableIntegerValue;
 import pl.marcinchwedczuk.javafx.validation.demo.UiService;
 import pl.marcinchwedczuk.javafx.validation.lib.*;
 
@@ -37,13 +41,15 @@ public class UserRegistrationViewModel {
             username,
             password);
 
+    private final BooleanProperty showErrorBanner = new SimpleBooleanProperty(false);
+
     public UserRegistrationViewModel(UiService uiService) {
         this.uiService = Objects.requireNonNull(uiService);
     }
 
     public void registerUser() {
         if (!userRegistrationForm.validate()) {
-            // Errors should show up on the UI
+            showErrorBanner.set(true);
             return;
         }
 
@@ -52,11 +58,16 @@ public class UserRegistrationViewModel {
                 username.getModelValue(),
                 password.getModelValue()));
 
+        showErrorBanner.set(false);
         username.reset("foo");
         password.reset("abc");
     }
 
     public BooleanBinding registrationFormInvalid() {
         return userRegistrationForm.validationStateProperty().isEqualTo(INVALID);
+    }
+
+    public ReadOnlyBooleanProperty showErrorBannerProperty() {
+        return showErrorBanner;
     }
 }

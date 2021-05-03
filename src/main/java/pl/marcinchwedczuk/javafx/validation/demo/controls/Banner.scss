@@ -1,0 +1,39 @@
+
+@mixin banner($iconColor, $exclamationColor, $backgroundColor) {
+    -fx-spacing: 4;
+    -fx-alignment: CENTER_LEFT;
+    -fx-background-color: $backgroundColor;
+    -fx-padding: 10 5 10 5;
+    -fx-border-insets: 5 0 5 0;
+    -fx-background-insets: 5 0 5 0;
+
+    .icon {
+        .circle {
+            -fx-fill: $iconColor;
+        }
+
+        .exclamation {
+            -fx-fill: $exclamationColor;
+            -fx-font-size: 26;
+            -fx-font-family: monospace;
+        }
+    }
+
+    .message {
+
+    }
+}
+
+.banner {
+    &:type-info {
+        @include banner(#006ec2, white, #99efff);
+    }
+
+    &:type-warning {
+        @include banner(#ffd000, black, #fffdba);
+    }
+
+    &:type-error {
+        @include banner(#d10700, black, #ffa7a1);
+    }
+}

@@ -12,6 +12,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Text?>
 <?import pl.marcinchwedczuk.javafx.validation.extra.ValidationDecorator?>
+<?import pl.marcinchwedczuk.javafx.validation.demo.controls.Banner?>
 
 <AnchorPane stylesheets="@UserRegistration.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.marcinchwedczuk.javafx.validation.demo.registration.UserRegistration">
 
@@ -48,18 +49,7 @@
             <ValidationDecorator fx:id="passwordE" GridPane.columnIndex="2" GridPane.rowIndex="3">
                     <TextField fx:id="passwordF" />
             </ValidationDecorator>
-         <HBox fx:id="invalidBanner" alignment="CENTER_LEFT" GridPane.columnSpan="2147483647">
-            <children>
-               <StackPane>
-                  <children>
-                     <Circle fill="#ff1f1f" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="!" />
-                  </children>
-               </StackPane>
-               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            </children>
-         </HBox>
-
+         <Banner fx:id="invalidBanner" type="ERROR" GridPane.columnSpan="2147483647" />
         </children>
     </GridPane>
 </AnchorPane>

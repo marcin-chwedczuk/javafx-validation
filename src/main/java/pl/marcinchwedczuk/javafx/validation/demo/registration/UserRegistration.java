@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import pl.marcinchwedczuk.javafx.validation.demo.UiService;
+import pl.marcinchwedczuk.javafx.validation.demo.controls.Banner;
 import pl.marcinchwedczuk.javafx.validation.extra.UiBindings;
 import pl.marcinchwedczuk.javafx.validation.extra.ValidationDecorator;
 
@@ -51,7 +52,7 @@ public class UserRegistration implements Initializable {
     private Label modelPasswordF;
 
     @FXML
-    private HBox invalidBanner;
+    private Banner invalidBanner;
 
     @FXML
     private Button registerUserButton;
@@ -73,7 +74,9 @@ public class UserRegistration implements Initializable {
                         String.format("%s (pristine: %s)", modelValue, pristine)));
 
         invalidBanner.visibleProperty()
-                .bind(viewModel.registrationFormInvalid());
+                .bind(viewModel.showErrorBannerProperty());
+        invalidBanner.managedProperty()
+                .bind(viewModel.showErrorBannerProperty());
     }
 
     @FXML
