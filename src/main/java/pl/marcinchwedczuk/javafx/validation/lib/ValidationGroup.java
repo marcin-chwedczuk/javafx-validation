@@ -2,6 +2,7 @@ package pl.marcinchwedczuk.javafx.validation.lib;
 
 import javafx.beans.Observable;
 import javafx.beans.property.*;
+import pl.marcinchwedczuk.javafx.validation.demo.UiService;
 
 import java.util.ArrayList;
 import java.util.Arrays;

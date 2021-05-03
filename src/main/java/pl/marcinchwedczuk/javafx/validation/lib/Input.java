@@ -1,5 +1,6 @@
 package pl.marcinchwedczuk.javafx.validation.lib;
 
+import javafx.beans.Observable;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -64,6 +65,11 @@ public class Input<UIV,MV> {
         });
     }
 
+    public void reevaluateUiValue() {
+        pristine.set(false);
+        guardedPropagateUiValue(uiValue.getValue());
+    }
+
     private void guardedPropagateUiValue(UIV newValue) {
         if (updating) {
             return;
@@ -77,12 +83,7 @@ public class Input<UIV,MV> {
         }
     }
 
-    public void reevaluateUiValue() {
-        pristine.set(false);
-        guardedPropagateUiValue(uiValue.getValue());
-    }
-
-    private boolean propagateUiValue(UIV newValue) {
+    private void propagateUiValue(UIV newValue) {
         List<Objection> objections = new ArrayList<>();
 
         ValidationResult<UIV> uiValidationResult = runValidators(uiValidators, newValue);
@@ -91,7 +92,7 @@ public class Input<UIV,MV> {
             sortAndSetObjections(objections);
             validationState.setValue(INVALID);
             modelValue.setValue(null);
-            return true;
+            return;
         }
 
         ConversionResult<UIV, MV> conversionResult = converter.toModelValue(newValue);
@@ -100,7 +101,7 @@ public class Input<UIV,MV> {
             sortAndSetObjections(objections);
             validationState.setValue(INVALID);
             modelValue.setValue(null);
-            return true;
+            return;
         }
 
         MV newModelValue = conversionResult.modelValue;
@@ -111,12 +112,12 @@ public class Input<UIV,MV> {
             sortAndSetObjections(objections);
             validationState.setValue(INVALID);
             modelValue.setValue(null);
+            return;
         }
 
         sortAndSetObjections(objections);
         validationState.setValue(VALID);
         modelValue.setValue(newModelValue);
-        return false;
     }
 
     private void guardedPropagateModelValue(MV newValue) {
@@ -178,8 +179,10 @@ public class Input<UIV,MV> {
 
     public Input<UIV,MV> withUiValidator(Validator<UIV> validator) {
         this.uiValidators.add(validator);
+        addDependenciesListener(validator);
         return this;
     }
+
 
     @SafeVarargs
     public final Input<UIV,MV> withUiValidators(Validator<UIV>... validators) {
@@ -191,7 +194,20 @@ public class Input<UIV,MV> {
 
     public Input<UIV,MV> withModelValidator(Validator<MV> validator) {
         this.modelValidators.add(validator);
+        addDependenciesListener(validator);
         return this;
+    }
+
+    private void addDependenciesListener(Validator<?> validator) {
+        for (Observable dependency: validator.dependencies()) {
+            // TODO: Add deduper - maybe?
+            dependency.addListener(__ -> {
+                // Do not run if the field is pristine
+                if (isPristine()) return;
+                // TODO: Do not unset pristine
+                reevaluateUiValue();
+            });
+        }
     }
 
     public void reset() {
