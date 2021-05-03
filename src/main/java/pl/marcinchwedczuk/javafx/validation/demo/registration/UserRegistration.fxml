@@ -30,7 +30,7 @@
         <children>
             <Label text="Username:" />
             <Label text="Password:" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" onAction="#registerUser" text="Register User" GridPane.rowIndex="5" />
+            <Button fx:id="registerUserButton" mnemonicParsing="false" onAction="#registerUser" text="Register User" GridPane.rowIndex="5" />
             <Label text="Model Username:" GridPane.rowIndex="3" />
             <Label text="Model Password:" GridPane.rowIndex="4" />
             <Label fx:id="modelUsernameF" text="???" GridPane.columnIndex="2" GridPane.rowIndex="3" />

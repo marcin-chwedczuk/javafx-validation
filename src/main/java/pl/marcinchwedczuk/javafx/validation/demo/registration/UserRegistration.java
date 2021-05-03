@@ -5,8 +5,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import pl.marcinchwedczuk.javafx.validation.demo.UiService;
 import pl.marcinchwedczuk.javafx.validation.extra.UiBindings;
 import pl.marcinchwedczuk.javafx.validation.extra.ValidationDecorator;
 
@@ -22,15 +24,14 @@ public class UserRegistration implements Initializable {
             Node subView = loader.load();
             contentProperty.setValue(subView);
 
-            UserRegistration controller = (UserRegistration) loader.getController();
-            return controller;
+            return (UserRegistration) loader.getController();
         } catch (IOException e) {
             contentProperty.setValue(null);
             throw new RuntimeException(e);
         }
     }
 
-    private final UserRegistrationViewModel viewModel = new UserRegistrationViewModel();
+    private final UserRegistrationViewModel viewModel = new UserRegistrationViewModel(new UiService()); // Bieda DI
 
     @FXML
     private TextField usernameF;
@@ -42,15 +43,28 @@ public class UserRegistration implements Initializable {
     @FXML
     private TextField passwordF;
     @FXML
+    private ValidationDecorator passwordE;
+    @FXML
     private Label modelPasswordF;
+
+    @FXML
+    private Button registerUserButton;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         UiBindings.biBind(usernameF, viewModel.username);
         usernameE.displayErrorsFor(viewModel.username);
 
+        UiBindings.biBind(passwordF, viewModel.password);
+        passwordE.displayErrorsFor(viewModel.password);
+
+        registerUserButton.disableProperty()
+                .bind(viewModel.registrationButtonEnabledProperty().not());
+
         modelUsernameF.textProperty()
                 .bind(viewModel.username.modelValueProperty());
+        modelPasswordF.textProperty()
+                .bind(viewModel.password.modelValueProperty());
     }
 
     @FXML
