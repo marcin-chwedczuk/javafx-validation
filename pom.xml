@@ -66,6 +66,8 @@
                 <configuration>
                     <mainClass>pl.marcinchwedczuk.javafx.validation.App</mainClass>
                     <options>
+                        <!-- Enable assertions -->
+                        <option>-ea</option>
                         <!-- uncomment to enable debugger's "Attach to Process..." -->
                         <!--
                         <option>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=4444</option>

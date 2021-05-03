@@ -1,5 +1,6 @@
 package pl.marcinchwedczuk.javafx.validation.demo.registration;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +9,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import pl.marcinchwedczuk.javafx.validation.demo.UiService;
 import pl.marcinchwedczuk.javafx.validation.extra.UiBindings;
 import pl.marcinchwedczuk.javafx.validation.extra.ValidationDecorator;
@@ -48,6 +51,9 @@ public class UserRegistration implements Initializable {
     private Label modelPasswordF;
 
     @FXML
+    private HBox invalidBanner;
+
+    @FXML
     private Button registerUserButton;
 
     @Override
@@ -58,13 +64,16 @@ public class UserRegistration implements Initializable {
         UiBindings.biBind(passwordF, viewModel.password);
         passwordE.displayErrorsFor(viewModel.password);
 
-        registerUserButton.disableProperty()
-                .bind(viewModel.registrationButtonEnabledProperty().not());
+        modelUsernameF.textProperty().bind(
+                UiBindings.map2(viewModel.username.modelValueProperty(), viewModel.username.pristineProperty(), (modelValue, pristine) ->
+                        String.format("%s (pristine: %s)", modelValue, pristine)));
 
-        modelUsernameF.textProperty()
-                .bind(viewModel.username.modelValueProperty());
-        modelPasswordF.textProperty()
-                .bind(viewModel.password.modelValueProperty());
+        modelPasswordF.textProperty().bind(
+                UiBindings.map2(viewModel.password.modelValueProperty(), viewModel.password.pristineProperty(), (modelValue, pristine) ->
+                        String.format("%s (pristine: %s)", modelValue, pristine)));
+
+        invalidBanner.visibleProperty()
+                .bind(viewModel.registrationFormInvalid());
     }
 
     @FXML

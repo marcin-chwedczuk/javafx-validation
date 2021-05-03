@@ -44,25 +44,9 @@ class ValidationDecoratorSkin extends SkinBase<ValidationDecorator> {
         this.getChildren().add(rootNode);
 
         getSkinnable().objectionsProperty().addListener((InvalidationListener) observable -> {
-            List<Objection> objections = getSkinnable().objectionsProperty().getValue();
-
-            var messagesFx = objectionsContainer.getChildren();
-
-            if (messagesFx.size() > objections.size()) {
-                messagesFx.remove(objections.size(), messagesFx.size());
-            }
-            while (messagesFx.size() < objections.size()) {
-                messagesFx.add(new ValidationMessageFx());
-            }
-
-            for (int i = 0; i < objections.size(); i++) {
-                ((ValidationMessageFx) messagesFx.get(i)).setObjection(objections.get(i));
-            }
-
-            boolean containsErrors = Objections.containsError(objections);
-            componentContainer.pseudoClassStateChanged(CSS_WITH_ERRORS, containsErrors);
-            componentContainer.pseudoClassStateChanged(CSS_WITH_WARNINGS, Objections.containsWarning(objections) && !containsErrors);
+            updateObjections();
         });
+        updateObjections();
 
         getSkinnable().contentProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue == null) {
@@ -76,6 +60,33 @@ class ValidationDecoratorSkin extends SkinBase<ValidationDecorator> {
         if (content != null) {
             componentContainer.getChildren().setAll(content);
         }
+    }
+
+    private void updateObjections() {
+        List<Objection> objections = getSkinnable().objectionsProperty().getValue();
+
+        var messagesFx = objectionsContainer.getChildren();
+
+        if (messagesFx.size() > objections.size()) {
+            messagesFx.remove(objections.size(), messagesFx.size());
+        }
+        while (messagesFx.size() < objections.size()) {
+            messagesFx.add(new ValidationMessageFx());
+        }
+
+        for (int i = 0; i < objections.size(); i++) {
+            ((ValidationMessageFx) messagesFx.get(i)).setObjection(objections.get(i));
+        }
+
+        updateComponentCssPsuedoClasses();
+    }
+
+    private void updateComponentCssPsuedoClasses() {
+        List<Objection> objections = getSkinnable().getObjections();
+        boolean containsErrors = Objections.containsError(objections);
+
+        componentContainer.pseudoClassStateChanged(CSS_WITH_ERRORS, containsErrors);
+        componentContainer.pseudoClassStateChanged(CSS_WITH_WARNINGS, Objections.containsWarning(objections) && !containsErrors);
     }
 
     @Override

@@ -1,12 +1,20 @@
 package pl.marcinchwedczuk.javafx.validation.extra;
 
 import javafx.beans.InvalidationListener;
+import javafx.beans.binding.Binding;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.DoubleBinding;
+import javafx.beans.binding.StringBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.Property;
 import javafx.beans.property.ReadOnlyBooleanProperty;
+import javafx.beans.property.ReadOnlyProperty;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import pl.marcinchwedczuk.javafx.validation.lib.Input;
+
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 public class UiBindings {
     private UiBindings() { }
@@ -20,6 +28,16 @@ public class UiBindings {
                                   Input<T, ?> modelInput)
     {
         uiProperty.bindBidirectional(modelInput.uiValueProperty());
+    }
+
+    public static <A> DoubleBinding map(ReadOnlyProperty<A> input, Function<A, Double> mapping) {
+        return Bindings.createDoubleBinding(() -> mapping.apply(input.getValue()), input);
+    }
+
+    public static <A,B> StringBinding map2(ReadOnlyProperty<A> inputA, ReadOnlyProperty<B> inputB, BiFunction<A, B, String> mapping) {
+        return Bindings.createStringBinding(
+                () -> mapping.apply(inputA.getValue(), inputB.getValue()),
+                inputA, inputB);
     }
 
     public static <T> void triggerOnFocusLost(

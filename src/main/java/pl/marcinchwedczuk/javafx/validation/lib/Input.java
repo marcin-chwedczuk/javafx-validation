@@ -6,42 +6,61 @@ import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static java.util.stream.Collectors.toList;
+import static pl.marcinchwedczuk.javafx.validation.lib.ValidationState.*;
+
+/**
+ * Validation workflow:
+ * - Validated only on user action.
+ * - checkValid() must be called on ValidationGroup to display errors.
+ * - no isValid real-time property.
+ *
+ * @param <UIV>
+ * @param <MV>
+ */
 
 public class Input<UIV,MV> {
-    private final SimpleObjectProperty<UIV> uiValueProperty = new SimpleObjectProperty<>(null);
-    private final SimpleObjectProperty<MV> modelValueProperty = new SimpleObjectProperty<>(null);
-    private final SimpleBooleanProperty validProperty = new SimpleBooleanProperty(false);
+    private final ObjectProperty<UIV> uiValue = new SimpleObjectProperty<>(this, "uiValue", null);
+    private final ObjectProperty<MV> modelValue = new SimpleObjectProperty<>(this, "modelValue", null);
+
+    private final ObjectProperty<ValidationState> validationState =
+            // Ctor runs validation that sets proper value for this field.
+            new SimpleObjectProperty<>(this, "validationState", null);
 
     // Sorted by priority
     // TODO: check automatically sorted by JavaFX
-    private final SimpleListProperty<Objection> objectionsProperty =
-            new SimpleListProperty<>(FXCollections.observableArrayList());
+    private final ListProperty<Objection> objectionsProperty =
+            new SimpleListProperty<>(this, "objections", FXCollections.observableArrayList());
 
     private boolean updating = false;
-    private ValueDeduper<UIV> uiValueDeduper = new ValueDeduper<>();
-    private ValueDeduper<MV> modelValueDeduper = new ValueDeduper<>();
+    private final ValueDeduper<UIV> uiValueDeduper = new ValueDeduper<>();
+    private final ValueDeduper<MV> modelValueDeduper = new ValueDeduper<>();
 
     private final List<Validator<UIV>> uiValidators = new ArrayList<>();
     private final List<Validator<MV>> modelValidators = new ArrayList<>();
     private final ValidatingValueConverter<UIV, MV> converter;
 
-    public Input(ValidatingValueConverter<UIV, MV> converter) {
-        this.converter = converter;
+    private BooleanProperty pristine = new SimpleBooleanProperty(this, "pristine", true);
 
-        this.uiValueProperty.addListener(observable -> {
-            UIV newValue = uiValueProperty.get();
+    public Input(ValidatingValueConverter<UIV, MV> converter) {
+        this.converter = Objects.requireNonNull(converter);
+
+        this.uiValue.addListener(observable -> {
+            UIV newValue = uiValue.get();
             if (uiValueDeduper.checkNewValue(newValue)) {
                 guardedPropagateUiValue(newValue);
             }
+            pristine.set(false);
         });
 
-        this.modelValueProperty.addListener(observable -> {
-            MV newValue = modelValueProperty.getValue();
+        this.modelValue.addListener(observable -> {
+            MV newValue = modelValue.getValue();
             if (modelValueDeduper.checkNewValue(newValue)) {
                 guardedPropagateModelValue(newValue);
             }
+            pristine.set(false);
         });
     }
 
@@ -59,7 +78,8 @@ public class Input<UIV,MV> {
     }
 
     public void reevaluateUiValue() {
-        guardedPropagateUiValue(uiValueProperty.getValue());
+        pristine.set(false);
+        guardedPropagateUiValue(uiValue.getValue());
     }
 
     private boolean propagateUiValue(UIV newValue) {
@@ -69,8 +89,8 @@ public class Input<UIV,MV> {
         objections.addAll(uiValidationResult.objections);
         if (!uiValidationResult.isValid()) {
             sortAndSetObjections(objections);
-            validProperty.setValue(false);
-            modelValueProperty.setValue(null);
+            validationState.setValue(INVALID);
+            modelValue.setValue(null);
             return true;
         }
 
@@ -78,8 +98,8 @@ public class Input<UIV,MV> {
         objections.addAll(conversionResult.objections);
         if (!conversionResult.isSuccessful()) {
             sortAndSetObjections(objections);
-            validProperty.setValue(false);
-            modelValueProperty.setValue(null);
+            validationState.setValue(INVALID);
+            modelValue.setValue(null);
             return true;
         }
 
@@ -89,13 +109,13 @@ public class Input<UIV,MV> {
         objections.addAll(modelValidationResult.objections);
         if (!modelValidationResult.isValid()) {
             sortAndSetObjections(objections);
-            validProperty.setValue(false);
-            modelValueProperty.setValue(null);
+            validationState.setValue(INVALID);
+            modelValue.setValue(null);
         }
 
         sortAndSetObjections(objections);
-        validProperty.setValue(true);
-        modelValueProperty.setValue(newModelValue);
+        validationState.setValue(VALID);
+        modelValue.setValue(newModelValue);
         return false;
     }
 
@@ -114,7 +134,7 @@ public class Input<UIV,MV> {
 
     private void propagateModelValue(MV newValue) {
         UIV newUiValue = converter.toUiValue(newValue);
-        uiValueProperty.setValue(newUiValue);
+        uiValue.setValue(newUiValue);
 
         List<Objection> objections = new ArrayList<>();
 
@@ -122,7 +142,7 @@ public class Input<UIV,MV> {
         objections.addAll(modelVR.objections);
         if (!modelVR.isValid()) {
             sortAndSetObjections(modelVR.objections);
-            validProperty.setValue(false);
+            validationState.setValue(INVALID);
             return;
         }
 
@@ -130,12 +150,12 @@ public class Input<UIV,MV> {
         objections.addAll(uiVR.objections);
         if (!uiVR.isValid()) {
             sortAndSetObjections(uiVR.objections);
-            validProperty.setValue(false);
+            validationState.setValue(INVALID);
             return;
         }
 
         sortAndSetObjections(objections);
-        validProperty.setValue(true);
+        validationState.setValue(VALID);
     }
 
     private static <T> ValidationResult<T>
@@ -174,8 +194,21 @@ public class Input<UIV,MV> {
         return this;
     }
 
-    public SimpleObjectProperty<UIV> uiValueProperty() {
-        return uiValueProperty;
+    public void reset() {
+        reset(null);
+    }
+
+    public void reset(MV modelValue) {
+        modelValueProperty().setValue(modelValue);
+
+        // Clear validation
+        pristine.set(true);
+        validationState.set(NOT_RUN);
+        objectionsProperty.clear();
+    }
+
+    public ObjectProperty<UIV> uiValueProperty() {
+        return uiValue;
     }
     public UIV getUiValue() {
         return uiValueProperty().getValue();
@@ -184,8 +217,8 @@ public class Input<UIV,MV> {
         uiValueProperty().setValue(value);
     }
 
-    public SimpleObjectProperty<MV> modelValueProperty() {
-        return modelValueProperty;
+    public ObjectProperty<MV> modelValueProperty() {
+        return modelValue;
     }
     public MV getModelValue() {
         return modelValueProperty().getValue();
@@ -194,15 +227,24 @@ public class Input<UIV,MV> {
         modelValueProperty().setValue(value);
     }
 
-    public ReadOnlyBooleanProperty validProperty() {
-        return validProperty;
+    public ValidationState getValidationState() {
+        return validationState.get();
     }
-    public boolean isValid() { return validProperty.get(); }
+    public ObjectProperty<ValidationState> validationStateProperty() {
+        return validationState;
+    }
 
     public ReadOnlyListProperty<Objection> objectionsProperty() {
         return objectionsProperty;
     }
     public ObservableList<Objection> getObjections() {
         return objectionsProperty().get();
+    }
+
+    public boolean isPristine() {
+        return pristine.get();
+    }
+    public BooleanProperty pristineProperty() {
+        return pristine;
     }
 }

@@ -1,5 +1,6 @@
 package pl.marcinchwedczuk.javafx.validation.lib;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -11,7 +12,8 @@ public class ValidationResult<V> {
 
     public ValidationResult(V value, List<Objection> objections) {
         this.value = value;
-        this.objections = List.copyOf(objections);
+        // This list will be sorted by priority. We need a mutable collection.
+        this.objections = new ArrayList<>(objections);
     }
 
     public boolean isValid() {

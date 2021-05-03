@@ -1,25 +1,26 @@
 package pl.marcinchwedczuk.javafx.validation.lib;
 
 import javafx.beans.Observable;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.ReadOnlyBooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import static pl.marcinchwedczuk.javafx.validation.lib.ValidationState.NOT_RUN;
+import static pl.marcinchwedczuk.javafx.validation.lib.ValidationState.VALID;
+
 public class ValidationGroup {
     private final List<Input<?,?>> inputs;
-    private final BooleanProperty valid = new SimpleBooleanProperty(this, "isValid", false);
+    private final ObjectProperty<ValidationState> validationState = new SimpleObjectProperty<>(this, "validationState", null);
 
     public ValidationGroup(Input<?,?>... inputs) {
         Objects.requireNonNull(inputs);
         this.inputs = new ArrayList<>(Arrays.asList(inputs));
 
         for (Input<?,?> input: inputs) {
-            input.validProperty().addListener(this::reevaluate);
+            input.validationStateProperty().addListener(this::reevaluate);
         }
 
         reevaluate();
@@ -30,22 +31,31 @@ public class ValidationGroup {
     }
 
     private void reevaluate() {
-        boolean newIsValid = true;
+        ValidationState acc = VALID;
 
         for (Input<?,?> input: inputs) {
-            newIsValid &= input.isValid();
+            acc = ValidationState.combine(acc, input.getValidationState());
         }
 
-        if (newIsValid != valid.getValue()) {
-            valid.setValue(newIsValid);
+        if (acc != validationState.getValue()) {
+            validationState.setValue(acc);
         }
     }
 
-    public boolean isValid() {
-        return valid.get();
+    public boolean validate() {
+        for (Input<?,?> input: inputs) {
+            // TODO: change to performValidation
+            input.reevaluateUiValue();
+        }
+
+        assert (getValidationState() != NOT_RUN);
+        return (getValidationState() == VALID);
     }
 
-    public ReadOnlyBooleanProperty validProperty() {
-        return valid;
+    public ValidationState getValidationState() {
+        return validationState.get();
+    }
+    public ReadOnlyObjectProperty<ValidationState> validationStateProperty() {
+        return validationState;
     }
 }

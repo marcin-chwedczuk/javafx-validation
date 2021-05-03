@@ -18,10 +18,13 @@ import pl.marcinchwedczuk.javafx.validation.lib.Objection;
 @DefaultProperty("content")
 public class ValidationDecorator extends Control {
 
-    private final SimpleListProperty<Objection> objectionsProperty =
+    private final ListProperty<Objection> objectionsProperty =
             new SimpleListProperty<>(this, "objections", FXCollections.observableArrayList());
 
-    private ObjectProperty<Node> contentProperty =
+    private final BooleanProperty pristine =
+            new SimpleBooleanProperty(this, "pristine", true);
+
+    private final ObjectProperty<Node> contentProperty =
             new SimpleObjectProperty<Node>(this, "content", null);
 
     public ValidationDecorator() {
@@ -44,7 +47,7 @@ public class ValidationDecorator extends Control {
         return contentProperty().get();
     }
 
-    public final SimpleListProperty<Objection> objectionsProperty() {
+    public final ListProperty<Objection> objectionsProperty() {
         return objectionsProperty;
     }
     public final ObservableList<Objection> getObjections() {
@@ -54,7 +57,18 @@ public class ValidationDecorator extends Control {
         objectionsProperty.set(objections);
     }
 
+    public boolean isPristine() {
+        return pristine.get();
+    }
+    public BooleanProperty pristineProperty() {
+        return pristine;
+    }
+    public void setPristine(boolean pristine) {
+        this.pristine.set(pristine);
+    }
+
     public <UIV,MV> void displayErrorsFor(Input<UIV, MV> input) {
         this.objectionsProperty().bind(input.objectionsProperty());
+        this.pristineProperty().bind(input.pristineProperty());
     }
 }
