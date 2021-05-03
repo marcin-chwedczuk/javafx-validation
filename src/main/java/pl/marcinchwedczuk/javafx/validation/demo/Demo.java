@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.TitledPane;
 import javafx.stage.Stage;
+import pl.marcinchwedczuk.javafx.validation.demo.range.NumberRange;
 import pl.marcinchwedczuk.javafx.validation.demo.registration.UserRegistration;
 
 import java.io.IOException;
@@ -38,8 +39,12 @@ public class Demo implements Initializable {
     @FXML
     private TitledPane userRegistrationPane;
 
+    @FXML
+    private TitledPane numberRangePane;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         UserRegistration.installAt(userRegistrationPane.contentProperty());
+        NumberRange.installAt(numberRangePane.contentProperty());
     }
 }

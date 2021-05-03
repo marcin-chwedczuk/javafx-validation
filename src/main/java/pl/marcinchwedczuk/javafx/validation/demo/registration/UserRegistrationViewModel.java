@@ -24,18 +24,15 @@ public class UserRegistrationViewModel {
                                     "Username can only consists of underscore, " +
                                     "lower-case letters and digits and cannot start with a digit."));
 
-
     public final Input<String, String> password =
             new Input<String, String>(Converters.identityConverter())
                 .withUiValidators(
                         StringValidators.required(),
                         StringValidators.hasLength(8, Integer.MAX_VALUE, "Password must have at least 8 characters."),
-                        //StringValidators.matchesRegex("(?=.*[A-Z]).*", "Password must contain an upper-case letter."),
-                        StringValidators.matchesRegex("(?=.*[a-z]).*", "Password must contain a lower-case letter."));
-                        //StringValidators.matchesRegex("(?=.*[0-9]).*", "Password must contain a digit."),
-                        //StringValidators.matchesRegex("(?=.*[#?!@$%^&*-]).*", "Password must contain a special character.")
-                        // );
-
+                        StringValidators.matchesRegex("(?=.*[A-Z]).*", "Password must contain an upper-case letter."),
+                        StringValidators.matchesRegex("(?=.*[a-z]).*", "Password must contain a lower-case letter."),
+                        StringValidators.matchesRegex("(?=.*[0-9]).*", "Password must contain a digit."),
+                        StringValidators.matchesRegex("(?=.*[#?!@$%^&*-]).*", "Password must contain a special character."));
 
     private final ValidationGroup userRegistrationForm = new ValidationGroup(
             username,
@@ -59,8 +56,8 @@ public class UserRegistrationViewModel {
                 password.getModelValue()));
 
         showErrorBanner.set(false);
-        username.reset("foo");
-        password.reset("abc");
+        username.reset();
+        password.reset();
     }
 
     public BooleanBinding registrationFormInvalid() {

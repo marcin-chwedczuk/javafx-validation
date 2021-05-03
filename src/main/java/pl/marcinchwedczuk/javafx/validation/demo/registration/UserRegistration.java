@@ -2,6 +2,7 @@ package pl.marcinchwedczuk.javafx.validation.demo.registration;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -82,5 +83,9 @@ public class UserRegistration implements Initializable {
     @FXML
     private void registerUser() {
         viewModel.registerUser();
+    }
+
+    public void validate(ActionEvent actionEvent) {
+
     }
 }

@@ -2,9 +2,12 @@ package pl.marcinchwedczuk.javafx.validation.demo.controls;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.StringProperty;
 import javafx.css.PseudoClass;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 
@@ -14,6 +17,9 @@ public class Banner extends HBox {
     private static PseudoClass CSS_TYPE_ERROR = PseudoClass.getPseudoClass("type-error");
 
     private final ObjectProperty<Type> type = new SimpleObjectProperty<>(this, "type", Type.INFO);
+
+    @FXML
+    private Text message;
 
     public Banner() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
@@ -48,6 +54,16 @@ public class Banner extends HBox {
     }
     public void setType(Type type) {
         this.type.set(type);
+    }
+
+    public String getText() {
+        return textProperty().get();
+    }
+    public StringProperty textProperty() {
+        return message.textProperty();
+    }
+    public void setText(String s) {
+        textProperty().set(s);
     }
 
     public enum Type {

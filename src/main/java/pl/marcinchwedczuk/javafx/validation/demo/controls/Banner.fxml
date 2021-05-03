@@ -13,6 +13,6 @@
                 <Text styleClass="exclamation" text="!" />
             </children>
         </StackPane>
-        <Text styleClass="message" text="Simple message blah..." />
+        <Text fx:id="message" styleClass="message" />
     </children>
 </fx:root>
