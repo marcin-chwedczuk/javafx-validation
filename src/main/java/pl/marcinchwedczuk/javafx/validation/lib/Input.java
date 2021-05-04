@@ -43,7 +43,10 @@ public class Input<UIV,MV> {
     private final List<Validator<MV>> modelValidators = new ArrayList<>();
     private final ValidatingValueConverter<UIV, MV> converter;
 
-    private BooleanProperty pristine = new SimpleBooleanProperty(this, "pristine", true);
+    private final BooleanProperty pristine = new SimpleBooleanProperty(this, "pristine", true);
+
+    private final InvalidationListenerHandle validatorDependencyChangedLH =
+            new InvalidationListenerHandle(this::onValidatorDependencyChanged);
 
     public Input(ValidatingValueConverter<UIV, MV> converter) {
         this.converter = Objects.requireNonNull(converter);
@@ -200,14 +203,15 @@ public class Input<UIV,MV> {
 
     private void addDependenciesListener(Validator<?> validator) {
         for (Observable dependency: validator.dependencies()) {
-            // TODO: Add deduper - maybe?
-            dependency.addListener(__ -> {
-                // Do not run if the field is pristine
-                if (isPristine()) return;
-                // TODO: Do not unset pristine
-                reevaluateUiValue();
-            });
+            validatorDependencyChangedLH.attachTo(dependency);
         }
+    }
+
+    private void onValidatorDependencyChanged() {
+        // Do not run if the field is pristine
+        if (isPristine()) return;
+        // TODO: Do not unset pristine
+        reevaluateUiValue();
     }
 
     public void reset() {
