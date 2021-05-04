@@ -16,7 +16,7 @@ public class StringValidators {
 
         return new Validator<>() {
             @Override
-            public <TT extends String> ValidationResult<TT> validate(TT value) {
+            public <VALIDATED extends String> ValidationResult<VALIDATED> validate(VALIDATED value) {
                 boolean isValid = (value != null) && !value.isBlank();
                 return new ValidationResult<>(value, Objections.errorIf(!isValid, message));
             }
@@ -35,7 +35,7 @@ public class StringValidators {
 
         return new Validator<>() {
             @Override
-            public <TT extends String> ValidationResult<TT> validate(TT value) {
+            public <VALIDATED extends String> ValidationResult<VALIDATED> validate(VALIDATED value) {
                 int length = (value == null) ? 0 : value.length();
                 boolean isValid = (min <= length && length < maxExcluding);
                 return new ValidationResult<>(value,
@@ -52,7 +52,7 @@ public class StringValidators {
 
         return new Validator<>() {
             @Override
-            public <TT extends String> ValidationResult<TT> validate(TT value) {
+            public <VALIDATED extends String> ValidationResult<VALIDATED> validate(VALIDATED value) {
                 String safeValue = (value != null) ? value : "";
                 boolean isValid = pattern.matcher(safeValue).matches();
                 return new ValidationResult<>(value,

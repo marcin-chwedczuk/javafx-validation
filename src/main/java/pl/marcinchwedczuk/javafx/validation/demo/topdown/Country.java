@@ -6,6 +6,11 @@ public enum Country {
         String countryCode() {
             return "pl";
         }
+
+        @Override
+        String phonePrefix() {
+            return "+48";
+        }
     },
 
     RUSSIA {
@@ -13,7 +18,13 @@ public enum Country {
         String countryCode() {
             return "ru";
         }
+
+        @Override
+        String phonePrefix() {
+            return "+7";
+        }
     };
 
     abstract String countryCode();
+    abstract String phonePrefix();
 }

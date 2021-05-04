@@ -25,7 +25,7 @@ public class FaxNumber {
                 if (uiValue == null || uiValue.isBlank()) {
                     return new ConversionResult<>(uiValue, null, List.of());
                 } else {
-                    return new ConversionResult<>(uiValue, new FaxNumber(uiValue), List.of());
+                    return new ConversionResult<>(uiValue, new FaxNumber(uiValue.trim()), List.of());
                 }
             }
 

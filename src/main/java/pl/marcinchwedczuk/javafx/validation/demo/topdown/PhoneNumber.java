@@ -25,7 +25,7 @@ public class PhoneNumber {
                 if (uiValue == null || uiValue.isBlank()) {
                     return new ConversionResult<>(uiValue, null, List.of());
                 } else {
-                    return new ConversionResult<>(uiValue, new PhoneNumber(uiValue), List.of());
+                    return new ConversionResult<>(uiValue, new PhoneNumber(uiValue.trim()), List.of());
                 }
             }
 

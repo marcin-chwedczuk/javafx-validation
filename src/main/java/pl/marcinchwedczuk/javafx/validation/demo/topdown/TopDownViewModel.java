@@ -7,6 +7,8 @@ import pl.marcinchwedczuk.javafx.validation.lib.*;
 
 import java.util.Objects;
 
+import static pl.marcinchwedczuk.javafx.validation.demo.topdown.CustomValidators.faxHasCountryPrefix;
+import static pl.marcinchwedczuk.javafx.validation.demo.topdown.CustomValidators.phoneHasCountryPrefix;
 import static pl.marcinchwedczuk.javafx.validation.lib.ObjectValidators.required;
 import static pl.marcinchwedczuk.javafx.validation.lib.StringValidators.nonBlank;
 
@@ -20,10 +22,12 @@ public class TopDownViewModel {
             .withUiValidators(required());
 
     public final Input<String, PhoneNumber> mobilePhone = new Input<String, PhoneNumber>(PhoneNumber.converter())
-            .withUiValidators(nonBlank("Phone number is required."));
+            .withUiValidators(nonBlank("Phone number is required."))
+            .withModelValidator(phoneHasCountryPrefix(selectedCountry.modelValueProperty()));
 
     public final Input<String, FaxNumber> faxNumber = new Input<String, FaxNumber>(FaxNumber.converter())
-            .withUiValidators(nonBlank("Fax number is required."));
+            .withUiValidators(nonBlank("Fax number is required."))
+            .withModelValidator(faxHasCountryPrefix(selectedCountry.modelValueProperty()));
 
     private final ValidationGroup topDownDemoForm = new ValidationGroup(selectedCountry, mobilePhone, faxNumber);
     private final BooleanProperty showErrorBanner = new SimpleBooleanProperty(false);
@@ -38,7 +42,11 @@ public class TopDownViewModel {
             return;
         }
 
-        uiService.infoDialog("Works!");
+        showErrorBanner.set(false);
+        uiService.infoDialog(
+                "Mobile Phone: " + mobilePhone.getModelValue().toString() + "\n" +
+                "Fax: " + faxNumber.getModelValue().toString() + "\n" +
+                "Country: " + selectedCountry.getModelValue());
     }
 
     public ReadOnlyBooleanProperty showErrorBannerProperty() {
