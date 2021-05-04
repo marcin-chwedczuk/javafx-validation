@@ -2,12 +2,12 @@ package pl.marcinchwedczuk.javafx.validation.demo.topdown;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import pl.marcinchwedczuk.javafx.validation.demo.UiService;
 import pl.marcinchwedczuk.javafx.validation.lib.*;
 
 import java.util.Objects;
 
+import static pl.marcinchwedczuk.javafx.validation.lib.ObjectValidators.required;
 import static pl.marcinchwedczuk.javafx.validation.lib.StringValidators.nonBlank;
 
 public class TopDownViewModel {
@@ -17,7 +17,7 @@ public class TopDownViewModel {
             FXCollections.observableArrayList(Country.values()));
 
     public final Input<Country, Country> selectedCountry = new Input<Country, Country>(Converters.identityConverter())
-            .withUiValidators(ObjectValidators.required());
+            .withUiValidators(required());
 
     public final Input<String, PhoneNumber> mobilePhone = new Input<String, PhoneNumber>(PhoneNumber.converter())
             .withUiValidators(nonBlank("Phone number is required."));
@@ -25,7 +25,7 @@ public class TopDownViewModel {
     public final Input<String, FaxNumber> faxNumber = new Input<String, FaxNumber>(FaxNumber.converter())
             .withUiValidators(nonBlank("Fax number is required."));
 
-    private final ValidationGroup rangeForm = new ValidationGroup();
+    private final ValidationGroup topDownDemoForm = new ValidationGroup(selectedCountry, mobilePhone, faxNumber);
     private final BooleanProperty showErrorBanner = new SimpleBooleanProperty(false);
 
     public TopDownViewModel(UiService uiService) {
@@ -33,7 +33,7 @@ public class TopDownViewModel {
     }
 
     public void validate() {
-        if (!rangeForm.validate()) {
+        if (!topDownDemoForm.validate()) {
             showErrorBanner.set(true);
             return;
         }

@@ -61,6 +61,7 @@ public class TopDownView implements Initializable {
         countryF.setButtonCell(new CountryFlagCell());
         countryF.itemsProperty().bind(viewModel.countries);
         UiBindings.biBind(countryF.valueProperty(), viewModel.selectedCountry);
+        countryE.displayErrorsFor(viewModel.selectedCountry);
 
         UiBindings.biBind(mobileF, viewModel.mobilePhone);
         mobileE.displayErrorsFor(viewModel.mobilePhone);
