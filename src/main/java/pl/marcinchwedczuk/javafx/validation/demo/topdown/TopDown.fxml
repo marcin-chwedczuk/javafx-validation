@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,6 +21,8 @@
         </columnConstraints>
         <rowConstraints>
             <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+         <RowConstraints valignment="BASELINE" vgrow="SOMETIMES" />
+         <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" valignment="BASELINE" vgrow="SOMETIMES" />
             <RowConstraints valignment="BASELINE" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" valignment="BASELINE" vgrow="SOMETIMES" />
             <RowConstraints valignment="BASELINE" vgrow="SOMETIMES" />
@@ -31,21 +34,27 @@
         </rowConstraints>
         <children>
             <Banner fx:id="invalidBanner" text="Invalid data..." type="ERROR" GridPane.columnSpan="2147483647" />
-            <Label text="From:" GridPane.rowIndex="1" />
-            <Label text="To:" GridPane.rowIndex="3" />
-            <ValidationDecorator fx:id="fromE" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <Label text="Country:" GridPane.rowIndex="1" />
+         <ValidationDecorator fx:id="countryE" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <content>
+               <ComboBox fx:id="countryF" />
+            </content>
+         </ValidationDecorator>
+            <Label text="Mobile Phone:" GridPane.rowIndex="3" />
+            <ValidationDecorator fx:id="mobileE" GridPane.columnIndex="2" GridPane.rowIndex="3">
                 <content>
-                    <TextField fx:id="fromF" />
+                    <TextField fx:id="mobileF" />
                 </content>
             </ValidationDecorator>
-            <ValidationDecorator fx:id="toE" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <Label text="Fax:" GridPane.rowIndex="5" />
+            <ValidationDecorator fx:id="faxE" GridPane.columnIndex="2" GridPane.rowIndex="5">
                 <content>
-                    <TextField fx:id="toF" />
+                    <TextField fx:id="faxF" />
                 </content>
             </ValidationDecorator>
-            <Label fx:id="modelRange" text="???" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-            <Button fx:id="validateButton" minWidth="100.0" mnemonicParsing="false" onAction="#validate" text="Validate" GridPane.rowIndex="7" />
-         <Label text="Model Range:" GridPane.rowIndex="5" />
+         <Label text="Model Range:" GridPane.rowIndex="7" />
+            <Label fx:id="modelRange" text="???" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <Button fx:id="validateButton" minWidth="100.0" mnemonicParsing="false" onAction="#validate" text="Validate" GridPane.rowIndex="9" />
         </children>
     </GridPane>
 </AnchorPane>
