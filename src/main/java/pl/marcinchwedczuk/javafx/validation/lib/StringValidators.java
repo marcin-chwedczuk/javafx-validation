@@ -7,16 +7,19 @@ public class StringValidators {
     private StringValidators() {
     }
 
-    public static Validator<String> required() {
-        return required("Value is required.");
+    public static Validator<String> nonBlank() {
+        return nonBlank("Value is required.");
     }
 
-    public static Validator<String> required(String message) {
+    public static Validator<String> nonBlank(String message) {
         Objects.requireNonNull(message);
 
-        return (value) -> {
-            boolean isValid = (value != null) && !value.isBlank();
-            return new ValidationResult<>(value, Objections.errorIf(!isValid, message));
+        return new Validator<>() {
+            @Override
+            public <TT extends String> ValidationResult<TT> validate(TT value) {
+                boolean isValid = (value != null) && !value.isBlank();
+                return new ValidationResult<>(value, Objections.errorIf(!isValid, message));
+            }
         };
     }
 
@@ -30,11 +33,14 @@ public class StringValidators {
         Objects.requireNonNull(message);
         if (min < 0 || min >= maxExcluding) throw new IllegalArgumentException("min");
 
-        return (value) -> {
-            int length = (value == null) ? 0 : value.length();
-            boolean isValid = (min <= length && length < maxExcluding);
-            return new ValidationResult<>(value,
-                    Objections.errorIf(!isValid, message));
+        return new Validator<>() {
+            @Override
+            public <TT extends String> ValidationResult<TT> validate(TT value) {
+                int length = (value == null) ? 0 : value.length();
+                boolean isValid = (min <= length && length < maxExcluding);
+                return new ValidationResult<>(value,
+                        Objections.errorIf(!isValid, message));
+            }
         };
     }
 
@@ -43,11 +49,15 @@ public class StringValidators {
         Objects.requireNonNull(message);
 
         Pattern pattern = Pattern.compile(regex);
-        return (value) -> {
-            String safeValue = (value != null) ? value : "";
-            boolean isValid = pattern.matcher(safeValue).matches();
-            return new ValidationResult<>(value,
-                    Objections.errorIf(!isValid, message));
+
+        return new Validator<>() {
+            @Override
+            public <TT extends String> ValidationResult<TT> validate(TT value) {
+                String safeValue = (value != null) ? value : "";
+                boolean isValid = pattern.matcher(safeValue).matches();
+                return new ValidationResult<>(value,
+                        Objections.errorIf(!isValid, message));
+            }
         };
     }
 }

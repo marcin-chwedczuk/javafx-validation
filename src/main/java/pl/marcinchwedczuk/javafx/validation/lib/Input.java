@@ -39,8 +39,8 @@ public class Input<UIV,MV> {
     private final ValueDeduper<UIV> uiValueDeduper = new ValueDeduper<>();
     private final ValueDeduper<MV> modelValueDeduper = new ValueDeduper<>();
 
-    private final List<Validator<UIV>> uiValidators = new ArrayList<>();
-    private final List<Validator<MV>> modelValidators = new ArrayList<>();
+    private final List<Validator<? super UIV>> uiValidators = new ArrayList<>();
+    private final List<Validator<? super MV>> modelValidators = new ArrayList<>();
     private final ValidatingValueConverter<UIV, MV> converter;
 
     private final BooleanProperty pristine = new SimpleBooleanProperty(this, "pristine", true);
@@ -163,7 +163,7 @@ public class Input<UIV,MV> {
     }
 
     private static <T> ValidationResult<T>
-    runValidators(List<Validator<T>> validators, T value) {
+    runValidators(List<Validator<? super T>> validators, T value) {
         if (validators.isEmpty()) {
             return ValidationResult.success(value);
         }
@@ -180,7 +180,7 @@ public class Input<UIV,MV> {
         objectionsProperty.setAll(objections);
     }
 
-    public Input<UIV,MV> withUiValidator(Validator<UIV> validator) {
+    public Input<UIV,MV> withUiValidator(Validator<? super UIV> validator) {
         this.uiValidators.add(validator);
         addDependenciesListener(validator);
         return this;
@@ -188,14 +188,14 @@ public class Input<UIV,MV> {
 
 
     @SafeVarargs
-    public final Input<UIV,MV> withUiValidators(Validator<UIV>... validators) {
-        for (Validator<UIV> v : validators) {
+    public final Input<UIV,MV> withUiValidators(Validator<? super UIV>... validators) {
+        for (Validator<? super UIV> v : validators) {
             withUiValidator(v);
         }
         return this;
     }
 
-    public Input<UIV,MV> withModelValidator(Validator<MV> validator) {
+    public Input<UIV,MV> withModelValidator(Validator<? super MV> validator) {
         this.modelValidators.add(validator);
         addDependenciesListener(validator);
         return this;

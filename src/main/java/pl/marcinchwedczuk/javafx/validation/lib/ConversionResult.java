@@ -5,7 +5,7 @@ import java.util.List;
 public class ConversionResult<UIV, MV> {
     public static <UIV, MV>
     ConversionResult<UIV, MV> success(UIV uiValue, MV modelValue) {
-        return new ConversionResult<>(modelValue, uiValue, List.of());
+        return new ConversionResult<>(uiValue, modelValue, List.of());
     }
 
     public static <UIV, MV>
@@ -13,15 +13,14 @@ public class ConversionResult<UIV, MV> {
         if (!Objections.containsError(List.of(objections))) {
             throw new IllegalArgumentException("No error was reported!");
         }
-        return new ConversionResult<>(null, uiValue, List.of(objections));
+        return new ConversionResult<>(uiValue, null, List.of(objections));
     }
 
     public final MV modelValue;
     public final UIV uiValue;
     public final List<Objection> objections;
 
-    public ConversionResult(MV modelValue,
-                            UIV uiValue,
+    public ConversionResult(UIV uiValue, MV modelValue,
                             List<Objection> objections) {
         this.modelValue = modelValue;
         this.uiValue = uiValue;

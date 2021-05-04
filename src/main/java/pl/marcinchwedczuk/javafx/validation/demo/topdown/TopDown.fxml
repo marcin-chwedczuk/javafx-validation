@@ -11,7 +11,7 @@
 <?import pl.marcinchwedczuk.javafx.validation.controls.Banner?>
 <?import pl.marcinchwedczuk.javafx.validation.extra.ValidationDecorator?>
 
-<AnchorPane stylesheets="@TopDown.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.marcinchwedczuk.javafx.validation.demo.topdown.TopDown">
+<AnchorPane stylesheets="@TopDown.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.marcinchwedczuk.javafx.validation.demo.topdown.TopDownView">
 
     <GridPane layoutX="27.0" layoutY="45.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -52,8 +52,8 @@
                     <TextField fx:id="faxF" />
                 </content>
             </ValidationDecorator>
-         <Label text="Model Range:" GridPane.rowIndex="7" />
-            <Label fx:id="modelRange" text="???" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+         <Label text="Model Values:" GridPane.rowIndex="7" />
+            <Label fx:id="modelValues" text="???" GridPane.columnIndex="2" GridPane.rowIndex="7" />
             <Button fx:id="validateButton" minWidth="100.0" mnemonicParsing="false" onAction="#validate" text="Validate" GridPane.rowIndex="9" />
         </children>
     </GridPane>

@@ -4,7 +4,6 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ObservableIntegerValue;
 import pl.marcinchwedczuk.javafx.validation.demo.UiService;
 import pl.marcinchwedczuk.javafx.validation.lib.*;
 
@@ -18,7 +17,7 @@ public class UserRegistrationViewModel {
     public final Input<String, String> username =
             new Input<String, String>(Converters.identityConverter())
                     .withUiValidators(
-                            StringValidators.required(),
+                            StringValidators.nonBlank(),
                             StringValidators.hasLength(2, 16),
                             StringValidators.matchesRegex("[_a-z][_a-z0-9]+",
                                     "Username can only consists of underscore, " +
@@ -27,7 +26,7 @@ public class UserRegistrationViewModel {
     public final Input<String, String> password =
             new Input<String, String>(Converters.identityConverter())
                 .withUiValidators(
-                        StringValidators.required(),
+                        StringValidators.nonBlank(),
                         StringValidators.hasLength(8, Integer.MAX_VALUE, "Password must have at least 8 characters."),
                         StringValidators.matchesRegex("(?=.*[A-Z]).*", "Password must contain an upper-case letter."),
                         StringValidators.matchesRegex("(?=.*[a-z]).*", "Password must contain a lower-case letter."),

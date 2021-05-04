@@ -11,18 +11,18 @@ import java.util.Objects;
 import static pl.marcinchwedczuk.javafx.validation.lib.Converters.stringIntegerConverter;
 import static pl.marcinchwedczuk.javafx.validation.lib.IntegerValidators.RangeOptions.NON_EMPTY_RANGE;
 import static pl.marcinchwedczuk.javafx.validation.lib.IntegerValidators.validRangeWithStart;
-import static pl.marcinchwedczuk.javafx.validation.lib.StringValidators.required;
+import static pl.marcinchwedczuk.javafx.validation.lib.StringValidators.nonBlank;
 
 public class NumberRangeViewModel {
     private final UiService uiService;
 
     public final Input<String, Integer> from =
             new Input<String, Integer>(stringIntegerConverter())
-                    .withUiValidators(required());
+                    .withUiValidators(StringValidators.nonBlank());
 
     public final Input<String, Integer> to =
             new Input<String, Integer>(stringIntegerConverter())
-                .withUiValidators(required())
+                .withUiValidators(StringValidators.nonBlank())
                 .withModelValidator(validRangeWithStart(from.modelValueProperty(), NON_EMPTY_RANGE));
 
     private final ValidationGroup rangeForm = new ValidationGroup(from, to);

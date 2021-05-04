@@ -8,7 +8,7 @@ import javafx.scene.control.TitledPane;
 import javafx.stage.Stage;
 import pl.marcinchwedczuk.javafx.validation.demo.range.NumberRange;
 import pl.marcinchwedczuk.javafx.validation.demo.registration.UserRegistration;
-import pl.marcinchwedczuk.javafx.validation.demo.topdown.TopDown;
+import pl.marcinchwedczuk.javafx.validation.demo.topdown.TopDownView;
 
 import java.io.IOException;
 import java.net.URL;
@@ -50,6 +50,6 @@ public class Demo implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         UserRegistration.installAt(userRegistrationPane.contentProperty());
         NumberRange.installAt(numberRangePane.contentProperty());
-        TopDown.installAt(topDownPane.contentProperty());
+        TopDownView.installAt(topDownPane.contentProperty());
     }
 }
