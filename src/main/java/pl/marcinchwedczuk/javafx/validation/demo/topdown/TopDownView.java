@@ -58,6 +58,7 @@ public class TopDownView implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         countryF.setCellFactory(new CountryFlagCellFactory());
+        countryF.setButtonCell(new CountryFlagCell());
         countryF.itemsProperty().bind(viewModel.countries);
         UiBindings.biBind(countryF.valueProperty(), viewModel.selectedCountry);
 

@@ -37,7 +37,7 @@
          <Label text="Country:" GridPane.rowIndex="1" />
          <ValidationDecorator fx:id="countryE" GridPane.columnIndex="2" GridPane.rowIndex="1">
             <content>
-               <ComboBox fx:id="countryF" />
+               <ComboBox fx:id="countryF" styleClass="flags-combo-box" />
             </content>
          </ValidationDecorator>
             <Label text="Mobile Phone:" GridPane.rowIndex="3" />
