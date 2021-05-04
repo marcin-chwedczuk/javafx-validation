@@ -10,7 +10,7 @@
 <?import pl.marcinchwedczuk.javafx.validation.controls.Banner?>
 <?import pl.marcinchwedczuk.javafx.validation.extra.ValidationDecorator?>
 
-<AnchorPane stylesheets="@UserRegistration.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.marcinchwedczuk.javafx.validation.demo.registration.UserRegistration">
+<AnchorPane stylesheets="@TopDown.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.marcinchwedczuk.javafx.validation.demo.topdown.TopDown">
 
     <GridPane layoutX="27.0" layoutY="45.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -19,7 +19,7 @@
             <ColumnConstraints hgrow="SOMETIMES" />
         </columnConstraints>
         <rowConstraints>
-         <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
             <RowConstraints valignment="BASELINE" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" valignment="BASELINE" vgrow="SOMETIMES" />
             <RowConstraints valignment="BASELINE" vgrow="SOMETIMES" />
@@ -27,30 +27,25 @@
             <RowConstraints vgrow="SOMETIMES" />
          <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
             <RowConstraints vgrow="SOMETIMES" />
-         <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
-            <RowConstraints vgrow="SOMETIMES" />
             <RowConstraints vgrow="SOMETIMES" />
         </rowConstraints>
         <children>
-            <Label text="Username:" GridPane.rowIndex="1" />
-            <Label text="Password:" GridPane.rowIndex="3" />
-            <Button fx:id="registerUserButton" mnemonicParsing="false" onAction="#registerUser" text="Register User" GridPane.rowIndex="9" />
-            <Label text="Model Username:" GridPane.rowIndex="5" />
-            <Label text="Model Password:" GridPane.rowIndex="7" />
-            <Label fx:id="modelUsernameF" text="???" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-            <Label fx:id="modelPasswordF" text="???" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-            <ValidationDecorator fx:id="usernameE" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Banner fx:id="invalidBanner" text="Invalid data..." type="ERROR" GridPane.columnSpan="2147483647" />
+            <Label text="From:" GridPane.rowIndex="1" />
+            <Label text="To:" GridPane.rowIndex="3" />
+            <ValidationDecorator fx:id="fromE" GridPane.columnIndex="2" GridPane.rowIndex="1">
                 <content>
-                    <TextField fx:id="usernameF" />
+                    <TextField fx:id="fromF" />
                 </content>
             </ValidationDecorator>
-            <ValidationDecorator fx:id="passwordE" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <ValidationDecorator fx:id="toE" GridPane.columnIndex="2" GridPane.rowIndex="3">
                 <content>
-                    <TextField fx:id="passwordF" />
+                    <TextField fx:id="toF" />
                 </content>
             </ValidationDecorator>
-         <Banner fx:id="invalidBanner" type="ERROR" GridPane.columnSpan="2147483647"
-                 text="Invalid data..." />
+            <Label fx:id="modelRange" text="???" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <Button fx:id="validateButton" minWidth="100.0" mnemonicParsing="false" onAction="#validate" text="Validate" GridPane.rowIndex="7" />
+         <Label text="Model Range:" GridPane.rowIndex="5" />
         </children>
     </GridPane>
 </AnchorPane>

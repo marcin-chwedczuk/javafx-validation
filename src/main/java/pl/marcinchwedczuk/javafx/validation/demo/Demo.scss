@@ -1,8 +1,5 @@
-$font-stack:    Helvetica, sans-serif;
-$primary-color: #333;
 
-.red-label {
-    -fx-text-fill: red;
-    -fx-font-weight: bold;
-    -fx-font-size: 12;
+.parent {
+    -fx-spacing: 0.5em;
+    -fx-padding: 0.5em;
 }

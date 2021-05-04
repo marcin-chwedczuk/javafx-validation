@@ -6,10 +6,10 @@ $validation-color-error: red;
 $validation-color-warning: orange;
 
 .validation-decorator {
-    -fx-spacing: 2;
+    -fx-spacing: 0.2em;
 
     .component-container {
-        -fx-border-width: 3;
+        -fx-border-width: 0.3em;
 
         &:with-errors {
             -fx-focus-color: $validation-color-error;
@@ -27,7 +27,7 @@ $validation-color-warning: orange;
     }
 
     .objections-container {
-        -fx-spacing: 2;
+        -fx-spacing: 0.2em;
 
         .objection {
             &.severity-error {

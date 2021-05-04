@@ -1,4 +1,4 @@
-package pl.marcinchwedczuk.javafx.validation.demo.controls;
+package pl.marcinchwedczuk.javafx.validation.controls;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -32,6 +32,9 @@ public class Banner extends HBox implements Initializable {
                 "Banner.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
+
+        // Hack for scene builder "Banner.fxml file not found" error.
+        fxmlLoader.setClassLoader(getClass().getClassLoader());
 
         try {
             fxmlLoader.load();

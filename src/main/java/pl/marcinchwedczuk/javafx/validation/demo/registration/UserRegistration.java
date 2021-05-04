@@ -1,6 +1,5 @@
 package pl.marcinchwedczuk.javafx.validation.demo.registration;
 
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,10 +9,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import pl.marcinchwedczuk.javafx.validation.demo.UiService;
-import pl.marcinchwedczuk.javafx.validation.demo.controls.Banner;
+import pl.marcinchwedczuk.javafx.validation.controls.Banner;
 import pl.marcinchwedczuk.javafx.validation.extra.UiBindings;
 import pl.marcinchwedczuk.javafx.validation.extra.ValidationDecorator;
 
