@@ -8,7 +8,7 @@ import javafx.beans.property.Property;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.scene.control.TextField;
-import pl.marcinchwedczuk.javafx.validation.lib.Input;
+import pl.marcinchwedczuk.javafx.validation.Input;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;

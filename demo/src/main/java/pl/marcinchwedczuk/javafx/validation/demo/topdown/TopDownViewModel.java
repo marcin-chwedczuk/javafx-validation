@@ -2,15 +2,17 @@ package pl.marcinchwedczuk.javafx.validation.demo.topdown;
 
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
-import pl.marcinchwedczuk.javafx.validation.demo.UiService;
-import pl.marcinchwedczuk.javafx.validation.lib.*;
+import pl.marcinchwedczuk.javafx.validation.Converters;
+import pl.marcinchwedczuk.javafx.validation.Input;
+import pl.marcinchwedczuk.javafx.validation.ValidationGroup;
+import pl.marcinchwedczuk.javafx.validation.ObjectValidators;
+import pl.marcinchwedczuk.javafx.validation.StringValidators;
+import pl.marcinchwedczuk.javafx.validation.demo.mainwindow.UiService;
 
 import java.util.Objects;
 
-import static pl.marcinchwedczuk.javafx.validation.demo.topdown.CustomValidators.faxHasCountryPrefix;
-import static pl.marcinchwedczuk.javafx.validation.demo.topdown.CustomValidators.phoneHasCountryPrefix;
-import static pl.marcinchwedczuk.javafx.validation.lib.ObjectValidators.required;
-import static pl.marcinchwedczuk.javafx.validation.lib.StringValidators.nonBlank;
+import static pl.marcinchwedczuk.javafx.validation.ObjectValidators.required;
+import static pl.marcinchwedczuk.javafx.validation.StringValidators.nonBlank;
 
 public class TopDownViewModel {
     private final UiService uiService;
@@ -19,15 +21,15 @@ public class TopDownViewModel {
             FXCollections.observableArrayList(Country.values()));
 
     public final Input<Country, Country> selectedCountry = new Input<Country, Country>(Converters.identityConverter())
-            .withUiValidators(required());
+            .withUiValidators(ObjectValidators.required());
 
     public final Input<String, PhoneNumber> mobilePhone = new Input<String, PhoneNumber>(PhoneNumber.converter())
-            .withUiValidators(nonBlank("Phone number is required."))
-            .withModelValidator(phoneHasCountryPrefix(selectedCountry.modelValueProperty()));
+            .withUiValidators(StringValidators.nonBlank("Phone number is required."))
+            .withModelValidator(CustomValidators.phoneHasCountryPrefix(selectedCountry.modelValueProperty()));
 
     public final Input<String, FaxNumber> faxNumber = new Input<String, FaxNumber>(FaxNumber.converter())
-            .withUiValidators(nonBlank("Fax number is required."))
-            .withModelValidator(faxHasCountryPrefix(selectedCountry.modelValueProperty()));
+            .withUiValidators(StringValidators.nonBlank("Fax number is required."))
+            .withModelValidator(CustomValidators.faxHasCountryPrefix(selectedCountry.modelValueProperty()));
 
     private final ValidationGroup topDownDemoForm = new ValidationGroup(selectedCountry, mobilePhone, faxNumber);
     private final BooleanProperty showErrorBanner = new SimpleBooleanProperty(false);

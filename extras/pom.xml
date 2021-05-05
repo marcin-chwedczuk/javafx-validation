@@ -11,9 +11,6 @@
   <artifactId>extras</artifactId>
   <packaging>jar</packaging>
 
-  <name>extras</name>
-  <url>http://www.example.com</url>
-
   <properties>
   </properties>
 

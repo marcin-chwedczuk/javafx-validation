@@ -4,12 +4,15 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import pl.marcinchwedczuk.javafx.validation.demo.UiService;
-import pl.marcinchwedczuk.javafx.validation.lib.*;
+import pl.marcinchwedczuk.javafx.validation.Converters;
+import pl.marcinchwedczuk.javafx.validation.Input;
+import pl.marcinchwedczuk.javafx.validation.StringValidators;
+import pl.marcinchwedczuk.javafx.validation.ValidationGroup;
+import pl.marcinchwedczuk.javafx.validation.demo.mainwindow.UiService;
 
 import java.util.Objects;
 
-import static pl.marcinchwedczuk.javafx.validation.lib.ValidationState.INVALID;
+import static pl.marcinchwedczuk.javafx.validation.ValidationState.INVALID;
 
 public class UserRegistrationViewModel {
     private final UiService uiService;

@@ -1,7 +1,7 @@
 package pl.marcinchwedczuk.javafx.validation.demo.topdown;
 
-import pl.marcinchwedczuk.javafx.validation.lib.ConversionResult;
-import pl.marcinchwedczuk.javafx.validation.lib.ValidatingValueConverter;
+import pl.marcinchwedczuk.javafx.validation.ConversionResult;
+import pl.marcinchwedczuk.javafx.validation.ValidatingValueConverter;
 
 import java.util.List;
 import java.util.Objects;

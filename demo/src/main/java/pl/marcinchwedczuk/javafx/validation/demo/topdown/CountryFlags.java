@@ -1,7 +1,5 @@
 package pl.marcinchwedczuk.javafx.validation.demo.topdown;
 
-import javafx.css.Size;
-import javafx.css.SizeUnits;
 import javafx.scene.image.Image;
 
 import java.io.InputStream;

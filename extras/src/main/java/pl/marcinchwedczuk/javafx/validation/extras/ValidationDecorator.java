@@ -8,8 +8,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Control;
 import javafx.scene.control.Skin;
 import javafx.scene.layout.Region;
-import pl.marcinchwedczuk.javafx.validation.lib.Input;
-import pl.marcinchwedczuk.javafx.validation.lib.Objection;
+import pl.marcinchwedczuk.javafx.validation.Input;
+import pl.marcinchwedczuk.javafx.validation.Objection;
 
 @DefaultProperty("content")
 public class ValidationDecorator extends Control {

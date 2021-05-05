@@ -11,9 +11,6 @@
     <artifactId>demo</artifactId>
     <packaging>jar</packaging>
 
-    <name>Demo for Simple validation library</name>
-    <description></description>
-
     <properties>
     </properties>
 
@@ -136,7 +133,7 @@
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>pl.marcinchwedczuk.javafx.validation.App</mainClass>
+                    <mainClass>pl.marcinchwedczuk.javafx.validation.demo.App</mainClass>
                     <options>
                         <!-- Enable assertions -->
                         <option>-ea</option>

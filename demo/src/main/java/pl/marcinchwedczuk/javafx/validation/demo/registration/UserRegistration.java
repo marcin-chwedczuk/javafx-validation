@@ -9,8 +9,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import pl.marcinchwedczuk.javafx.validation.demo.UiService;
-import pl.marcinchwedczuk.javafx.validation.controls.Banner;
+import pl.marcinchwedczuk.javafx.validation.demo.mainwindow.UiService;
+import pl.marcinchwedczuk.javafx.validation.demo.controls.Banner;
 import pl.marcinchwedczuk.javafx.validation.extras.UiBindings;
 import pl.marcinchwedczuk.javafx.validation.extras.ValidationDecorator;
 

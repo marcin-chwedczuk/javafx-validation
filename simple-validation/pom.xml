@@ -12,9 +12,6 @@
     <artifactId>simple-validation</artifactId>
     <packaging>jar</packaging>
 
-    <name>Simple validation library for JavaFX</name>
-    <description></description>
-
     <properties>
     </properties>
 
