@@ -10,7 +10,7 @@ public class ConvertersTest {
     public void test() {
         // Check accessible
         Converters.identityConverter().toModelValue("foo");
-
+        ConvertersTest.class.toString();
         assertThat(1).isEqualTo(1);
     }
 }
