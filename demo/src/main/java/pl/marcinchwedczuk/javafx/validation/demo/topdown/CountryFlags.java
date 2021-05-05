@@ -24,7 +24,7 @@ public class CountryFlags {
 
     private static Image loadFlagFromResources(String countryCode) {
         try (InputStream tmp = CountryFlags.class.getResourceAsStream(
-                "/pl/marcinchwedczuk/javafx/validation/flags/" + countryCode + ".png")) {
+                "/flags/" + countryCode + ".png")) {
             Image img = new Image(tmp);
             flagImagesCache.put(countryCode, img);
             return img;
