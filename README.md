@@ -42,4 +42,5 @@ Generate `jlink` image (in `demo/target` directory):
 
 ./demo/target/validation-demo/bin/validation-demo
 ```
+You can now send `./demo/target/validation-demo.zip` to your friends :tada:
 
