@@ -2,7 +2,6 @@ package pl.marcinchwedczuk.javafx.validation.demo.topdown;
 
 import javafx.beans.Observable;
 import javafx.beans.property.ObjectProperty;
-import javafx.scene.control.ListCell;
 import pl.marcinchwedczuk.javafx.validation.lib.Objections;
 import pl.marcinchwedczuk.javafx.validation.lib.ValidationResult;
 import pl.marcinchwedczuk.javafx.validation.lib.Validator;

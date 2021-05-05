@@ -7,12 +7,19 @@
     <groupId>pl.marcinchwedczuk.javafx.validation</groupId>
     <artifactId>parent-project</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>parent-project</name>
 
+    <name>parent-project</name>
     <url>https://github.com/marcin-chwedczuk/javafx-validation-demo</url>
+
+    <modules>
+        <module>simple-validation</module>
+        <module>demo</module>
+        <module>extras</module>
+    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
         <!-- Java version -->
         <maven.compiler.release>11</maven.compiler.release>
 
@@ -22,7 +29,7 @@
         <assertj.version>3.16.1</assertj.version>
 
         <!-- Versions of maven plugins -->
-        <maven-compiler.plugin.version>3.8.0</maven-compiler.plugin.version>
+        <maven-compiler.plugin.version>3.8.1</maven-compiler.plugin.version>
         <maven-resources.plugin.version>3.0.2</maven-resources.plugin.version>
         <maven-surefire.plugin.version>3.0.0-M5</maven-surefire.plugin.version>
         <javafx.plugin.version>0.0.6</javafx.plugin.version>
@@ -34,6 +41,11 @@
             <dependency>
                 <groupId>pl.marcinchwedczuk.javafx.validation</groupId>
                 <artifactId>simple-validation</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pl.marcinchwedczuk.javafx.validation</groupId>
+                <artifactId>extras</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -51,6 +63,11 @@
             <dependency>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-fxml</artifactId>
+                <version>${javafx.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-base</artifactId>
                 <version>${javafx.version}</version>
             </dependency>
 
@@ -76,25 +93,21 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven-compiler.plugin.version}</version>
                 </plugin>
-
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>${maven-resources.plugin.version}</version>
                 </plugin>
-
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${maven-surefire.plugin.version}</version>
                 </plugin>
-
                 <plugin>
                     <groupId>org.openjfx</groupId>
                     <artifactId>javafx-maven-plugin</artifactId>
                     <version>${javafx.plugin.version}</version>
                 </plugin>
-
                 <plugin>
                     <groupId>nl.geodienstencentrum.maven</groupId>
                     <artifactId>sass-maven-plugin</artifactId>
@@ -103,8 +116,5 @@
             </plugins>
         </pluginManagement>
     </build>
-    <modules>
-        <module>simple-validation</module>
-        <module>demo</module>
-    </modules>
+
 </project>

@@ -22,7 +22,12 @@
             <groupId>pl.marcinchwedczuk.javafx.validation</groupId>
             <artifactId>simple-validation</artifactId>
         </dependency>
+        <dependency>
+            <groupId>pl.marcinchwedczuk.javafx.validation</groupId>
+            <artifactId>extras</artifactId>
+        </dependency>
 
+        <!-- External -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>

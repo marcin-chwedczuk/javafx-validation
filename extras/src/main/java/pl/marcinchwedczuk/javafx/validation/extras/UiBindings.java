@@ -1,16 +1,13 @@
-package pl.marcinchwedczuk.javafx.validation.extra;
+package pl.marcinchwedczuk.javafx.validation.extras;
 
 import javafx.beans.InvalidationListener;
-import javafx.beans.binding.Binding;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.binding.StringBinding;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.Property;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import pl.marcinchwedczuk.javafx.validation.lib.Input;
 
 import java.util.function.BiFunction;

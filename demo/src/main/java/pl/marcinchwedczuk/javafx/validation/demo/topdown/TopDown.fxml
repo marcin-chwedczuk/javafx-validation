@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import pl.marcinchwedczuk.javafx.validation.controls.Banner?>
-<?import pl.marcinchwedczuk.javafx.validation.extra.ValidationDecorator?>
+<?import pl.marcinchwedczuk.javafx.validation.extras.ValidationDecorator?>
 
 <AnchorPane stylesheets="@TopDown.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.marcinchwedczuk.javafx.validation.demo.topdown.TopDownView">
 

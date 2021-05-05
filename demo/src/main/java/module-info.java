@@ -1,11 +1,11 @@
-module pl.marcinchwedczuk.javafx.validation {
+module pl.marcinchwedczuk.javafx.validation.demo {
     requires javafx.controls;
     requires javafx.fxml;
 
+    requires pl.marcinchwedczuk.javafx.validation.extras;
+    requires pl.marcinchwedczuk.javafx.validation;
+
     exports pl.marcinchwedczuk.javafx.validation;
-    exports pl.marcinchwedczuk.javafx.validation.extra;
-    exports pl.marcinchwedczuk.javafx.validation.lib;
-    exports pl.marcinchwedczuk.javafx.validation.controls;
 
     // Allow @FXML injection to private fields.
     opens pl.marcinchwedczuk.javafx.validation.controls to javafx.fxml;

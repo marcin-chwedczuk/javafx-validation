@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
-import static pl.marcinchwedczuk.javafx.validation.lib.ObjectionSeverity.ERROR;
 
 public class ValidationResult<V> {
     public final V value;

@@ -6,9 +6,6 @@ import javafx.beans.value.ObservableValue;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.function.ToIntBiFunction;
 
 import static pl.marcinchwedczuk.javafx.validation.lib.IntegerValidators.RangeOptions.ALLOW_EMPTY_RANGE;
 import static pl.marcinchwedczuk.javafx.validation.lib.IntegerValidators.RangeOptions.NON_EMPTY_RANGE;

@@ -1,17 +1,13 @@
-package pl.marcinchwedczuk.javafx.validation.extra;
+package pl.marcinchwedczuk.javafx.validation.extras;
 
 import javafx.beans.DefaultProperty;
-import javafx.beans.InvalidationListener;
 import javafx.beans.property.*;
-import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.AccessibleAttribute;
-import javafx.scene.AccessibleRole;
 import javafx.scene.Node;
 import javafx.scene.control.Control;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Skin;
+import javafx.scene.layout.Region;
 import pl.marcinchwedczuk.javafx.validation.lib.Input;
 import pl.marcinchwedczuk.javafx.validation.lib.Objection;
 
@@ -28,8 +24,8 @@ public class ValidationDecorator extends Control {
             new SimpleObjectProperty<Node>(this, "content", null);
 
     public ValidationDecorator() {
-        this.setPrefHeight(USE_COMPUTED_SIZE);
-        this.setPrefWidth(USE_COMPUTED_SIZE);
+        this.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        this.setPrefWidth(Region.USE_COMPUTED_SIZE);
     }
 
     @Override

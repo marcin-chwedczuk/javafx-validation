@@ -1,4 +1,4 @@
-package pl.marcinchwedczuk.javafx.validation.extra;
+package pl.marcinchwedczuk.javafx.validation.extras;
 
 import javafx.beans.InvalidationListener;
 import javafx.css.PseudoClass;
@@ -10,11 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.SkinBase;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
 import pl.marcinchwedczuk.javafx.validation.lib.Objection;
 import pl.marcinchwedczuk.javafx.validation.lib.Objections;
 
