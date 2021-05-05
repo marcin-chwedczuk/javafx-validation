@@ -12,7 +12,7 @@
     <url>https://github.com/marcin-chwedczuk/javafx-validation-demo</url>
 
     <modules>
-        <module>simple-validation</module>
+        <module>validation</module>
         <module>demo</module>
         <module>extras</module>
     </modules>
@@ -40,7 +40,7 @@
         <dependencies>
             <dependency>
                 <groupId>pl.marcinchwedczuk.javafx.validation</groupId>
-                <artifactId>simple-validation</artifactId>
+                <artifactId>validation</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

@@ -17,7 +17,7 @@
   <dependencies>
     <dependency>
       <groupId>pl.marcinchwedczuk.javafx.validation</groupId>
-      <artifactId>simple-validation</artifactId>
+      <artifactId>validation</artifactId>
     </dependency>
 
     <!-- External -->

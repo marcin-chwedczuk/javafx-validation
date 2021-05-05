@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>simple-validation</artifactId>
+    <artifactId>validation</artifactId>
     <packaging>jar</packaging>
 
     <properties>
