@@ -6,7 +6,7 @@ By "simple", I mean that both debouncing and async-validators are not supported.
 Support for them can be added with a bit of effort, 
 but if you need them, then you will 
 probably be better 
-of using more advanced validation frameworks. In that case I can recommend checking
+of using more advanced validation frameworks. In that case I can recommend checking out
 [controlsfx](https://github.com/jinghai/controlsfx/blob/master/controlsfx-samples/src/main/java/org/controlsfx/samples/HelloValidation.java)
 and [mvvmFX](https://github.com/sialcasa/mvvmFX/wiki/Validation) libraries.
 
