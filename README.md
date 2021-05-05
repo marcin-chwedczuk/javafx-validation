@@ -20,18 +20,18 @@ the library:
 
 Run application:
 ```
-./mvnw javafx:run
+./mvnw javafx:run -pl demo
 ```
 
 Regenerate scss styles:
 ```
-./mvnw nl.geodienstencentrum.maven:sass-maven-plugin:update-stylesheets
+./mvnw nl.geodienstencentrum.maven:sass-maven-plugin:update-stylesheets -pl demo
 ```
 
 Watch for SCSS changes and regenerate them:
 ```
 fswatch --exclude='.*' --include='.*[.]scss$' --print0 . | while read -d "" event; do
-    ./mvnw nl.geodienstencentrum.maven:sass-maven-plugin:update-stylesheets
+    ./mvnw nl.geodienstencentrum.maven:sass-maven-plugin:update-stylesheets -pl demo
 done
 ```
 You need to install `fswatch` for this to work.

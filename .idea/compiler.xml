@@ -7,10 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="demo" />
+        <module name="simple-validation" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="demo" target="11" />
+      <module name="parent-project" target="11" />
+      <module name="simple-validation" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

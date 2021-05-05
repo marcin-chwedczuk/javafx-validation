@@ -1,150 +1,110 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+
     <groupId>pl.marcinchwedczuk.javafx.validation</groupId>
-    <artifactId>demo</artifactId>
-    <version>1.0.0</version>
+    <artifactId>parent-project</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>parent-project</name>
+
+    <url>https://github.com/marcin-chwedczuk/javafx-validation-demo</url>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <!-- Java version -->
+        <maven.compiler.release>11</maven.compiler.release>
 
+        <!-- Versions of dependencies -->
         <javafx.version>16</javafx.version>
         <junit.version>5.6.2</junit.version>
         <assertj.version>3.16.1</assertj.version>
+
+        <!-- Versions of maven plugins -->
+        <maven-compiler.plugin.version>3.8.0</maven-compiler.plugin.version>
+        <maven-resources.plugin.version>3.0.2</maven-resources.plugin.version>
+        <maven-surefire.plugin.version>3.0.0-M5</maven-surefire.plugin.version>
+        <javafx.plugin.version>0.0.6</javafx.plugin.version>
+        <sass.plugin.version>3.7.2</sass.plugin.version>
     </properties>
-    <dependencies>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
-            <version>${javafx.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>${javafx.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <scope>test</scope>
-            <version>${junit.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>${assertj.version}</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-    <build>
-        <resources>
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.fxml</include>
-                    <include>**/*.css</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-        </resources>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
-                <configuration>
-                    <release>11</release>
-                </configuration>
-            </plugin>
-            <plugin>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>pl.marcinchwedczuk.javafx.validation</groupId>
+                <artifactId>simple-validation</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pl.marcinchwedczuk.javafx.validation</groupId>
+                <artifactId>demo</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- External -->
+            <dependency>
                 <groupId>org.openjfx</groupId>
-                <artifactId>javafx-maven-plugin</artifactId>
-                <version>0.0.6</version>
-                <configuration>
-                    <mainClass>pl.marcinchwedczuk.javafx.validation.App</mainClass>
-                    <options>
-                        <!-- Enable assertions -->
-                        <option>-ea</option>
-                        <!-- uncomment to enable debugger's "Attach to Process..." -->
-                        <!--
-                        <option>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=4444</option>
-                        -->
-                    </options>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>nl.geodienstencentrum.maven</groupId>
-                <artifactId>sass-maven-plugin</artifactId>
-                <version>3.7.2</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>update-stylesheets</goal>
-                            <!-- Disabled because takes too much time
-                            <goal>scss-lint</goal>
-                            -->
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <resources>
-                        <resource>
-                            <source>
-                                <directory>${project.build.sourceDirectory}</directory>
-                                <includes>
-                                    <include>**/*.scss</include>
-                                </includes>
-                            </source>
-                            <destination>${project.build.directory}/generated-resources/sass</destination>
-                        </resource>
-                    </resources>
-                    <sassOptions>
-                        <!-- See for list of all options:
-                        https://github.com/sass/ruby-sass/blob/7a50eae567260a23d3bbf4d5aaf1a76db43dec32/doc-src/SASS_REFERENCE.md#options
-                        -->
-                        <unix_newlines>true</unix_newlines>
-                        <cache>true</cache>
-                        <always_update>true</always_update>
-                        <style>:expanded</style>
-                        <debug_info>false</debug_info>
-                        <sourcemap>:none</sourcemap>
-                    </sassOptions>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.0.2</version>
-                <executions>
-                    <execution>
-                        <id>copy-resources-post-compile</id>
-                        <phase>process-classes</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>${project.build.directory}/generated-resources/sass</directory>
-                                    <includes>
-                                        <include>**/*.css</include>
-                                    </includes>
-                                    <filtering>false</filtering>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
-            </plugin>
-        </plugins>
+                <artifactId>javafx-controls</artifactId>
+                <version>${javafx.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-fxml</artifactId>
+                <version>${javafx.version}</version>
+            </dependency>
+
+            <!-- Test dependencies -->
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>${junit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertj.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler.plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven-resources.plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire.plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-maven-plugin</artifactId>
+                    <version>${javafx.plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>nl.geodienstencentrum.maven</groupId>
+                    <artifactId>sass-maven-plugin</artifactId>
+                    <version>${sass.plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
+    <modules>
+        <module>simple-validation</module>
+        <module>demo</module>
+    </modules>
 </project>
