@@ -36,3 +36,10 @@ done
 ```
 You need to install `fswatch` for this to work.
 
+Generate `jlink` image (in `demo/target` directory):
+```
+./mvnw javafx:jlink -pl demo
+
+./demo/target/validation-demo/bin/validation-demo
+```
+

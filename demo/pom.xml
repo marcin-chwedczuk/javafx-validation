@@ -143,7 +143,13 @@
                         <option>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=4444</option>
                         -->
                     </options>
-                </configuration>
+                    <stripDebug>false</stripDebug>
+                    <noHeaderFiles>true</noHeaderFiles>
+                    <noManPages>true</noManPages>
+                    <launcher>validation-demo</launcher>
+                    <jlinkImageName>validation-demo</jlinkImageName>
+                    <jlinkZipName>validation-demo</jlinkZipName>
+            </configuration>
             </plugin>
         </plugins>
     </build>
