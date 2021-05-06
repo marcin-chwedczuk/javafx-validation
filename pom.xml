@@ -46,6 +46,7 @@
         <maven-jrx.plugin.version>2.3</maven-jrx.plugin.version>
         <maven-jcoco.plugin.version>0.8.5</maven-jcoco.plugin.version>
         <maven-source.plugin.version>3.2.0</maven-source.plugin.version>
+        <maven-javadoc.plugin.version>3.2.0</maven-javadoc.plugin.version>
 
         <javafx.plugin.version>0.0.6</javafx.plugin.version>
         <sass.plugin.version>3.7.2</sass.plugin.version>
@@ -151,6 +152,15 @@
                     <version>${maven-source.plugin.version}</version>
                 </plugin>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${maven-javadoc.plugin.version}</version>
+                    <configuration>
+                        <show>private</show>
+                        <nohelp>true</nohelp>
+                    </configuration>
+                </plugin>
+                <plugin>
                     <groupId>nl.geodienstencentrum.maven</groupId>
                     <artifactId>sass-maven-plugin</artifactId>
                     <version>${sass.plugin.version}</version>
@@ -243,6 +253,19 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
 
     </build>
@@ -261,6 +284,17 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>javadoc</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
             </plugin>
         </plugins>
     </reporting>
