@@ -53,6 +53,7 @@
         <javafx.version>16</javafx.version>
         <junit.version>5.6.2</junit.version>
         <assertj.version>3.16.1</assertj.version>
+        <testfx.version>4.0.16-alpha</testfx.version>
 
         <!-- Versions of maven plugins -->
         <maven-compiler.plugin.version>3.8.1</maven-compiler.plugin.version>
@@ -126,6 +127,16 @@
                 <groupId>org.apache.maven.skins</groupId>
                 <artifactId>maven-fluido-skin</artifactId>
                 <version>${maven-fluido.skin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.testfx</groupId>
+                <artifactId>testfx-core</artifactId>
+                <version>${testfx.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.testfx</groupId>
+                <artifactId>testfx-junit5</artifactId>
+                <version>${testfx.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -213,6 +224,15 @@
 
         <plugins>
             <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>**/*IT</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
                 <configuration>
@@ -297,6 +317,35 @@
         </plugins>
 
     </build>
+
+    <profiles>
+        <profile>
+            <id>integrationTests</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>integration-test</phase>
+                                <goals>
+                                    <goal>test</goal>
+                                </goals>
+                                <configuration>
+                                    <excludes>
+                                        <exclude>none</exclude>
+                                    </excludes>
+                                    <includes>
+                                        <include>**/*IT</include>
+                                    </includes>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <reporting>
         <plugins>

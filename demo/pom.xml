@@ -48,6 +48,16 @@
             <artifactId>assertj-core</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.testfx</groupId>
+            <artifactId>testfx-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testfx</groupId>
+            <artifactId>testfx-junit5</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -152,7 +162,7 @@
                     <launcher>validation-demo</launcher>
                     <jlinkImageName>validation-demo</jlinkImageName>
                     <jlinkZipName>validation-demo</jlinkZipName>
-            </configuration>
+                </configuration>
             </plugin>
         </plugins>
     </build>

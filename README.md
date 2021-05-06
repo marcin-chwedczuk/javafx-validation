@@ -53,3 +53,7 @@ Generate code quality reports:
 ./mvnw site:run -pl validation # or choose other module
 ```
 
+Run integration tests:
+```
+./mvnw verify -pl demo -PintegrationTests
+```
