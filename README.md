@@ -1,4 +1,7 @@
 
+
+![Build Status](https://github.com/marcin-chwedczuk/javafx-validation-demo/actions/workflows/basic-ci.yaml/badge.svg)
+
 # JavaFX Validation Demo
 
 This application shows how to implement simple validation in JavaFX from scratch.
