@@ -32,6 +32,8 @@
         <maven-compiler.plugin.version>3.8.1</maven-compiler.plugin.version>
         <maven-resources.plugin.version>3.0.2</maven-resources.plugin.version>
         <maven-surefire.plugin.version>3.0.0-M5</maven-surefire.plugin.version>
+        <maven-site.plugin.version>3.8.2</maven-site.plugin.version>
+        <maven-reporting.plugin.version>3.1.0</maven-reporting.plugin.version>
         <spotbugs.plugin.version>4.2.0</spotbugs.plugin.version>
         <javafx.plugin.version>0.0.6</javafx.plugin.version>
         <sass.plugin.version>3.7.2</sass.plugin.version>
@@ -90,36 +92,6 @@
     </dependencyManagement>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>com.github.spotbugs</groupId>
-                <artifactId>spotbugs-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>spotbugs</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.8.2</version>
-                <configuration>
-                    <locales>en</locales>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.1.0</version>
-            </plugin>
-        </plugins>
-
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -143,42 +115,41 @@
                     <version>${javafx.plugin.version}</version>
                 </plugin>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>${maven-site.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-project-info-reports-plugin</artifactId>
+                    <version>${maven-reporting.plugin.version}</version>
+                </plugin>
+                <plugin>
                     <groupId>nl.geodienstencentrum.maven</groupId>
                     <artifactId>sass-maven-plugin</artifactId>
                     <version>${sass.plugin.version}</version>
                 </plugin>
-                <plugin>
-                    <groupId>com.github.spotbugs</groupId>
-                    <artifactId>spotbugs-maven-plugin</artifactId>
-                    <version>${spotbugs.plugin.version}</version>
-                    <dependencies>
-                        <dependency>
-                            <groupId>com.github.spotbugs</groupId>
-                            <artifactId>spotbugs</artifactId>
-                            <version>${spotbugs.version}</version>
-                        </dependency>
-                    </dependencies>
-                    <configuration>
-                        <!-- https://spotbugs.readthedocs.io/en/stable/ant.html?highlight=threshold#parameters -->
-                        <excludeFilterFile>${project.parent.basedir}/config/spotbugs-exclusions.xml</excludeFilterFile>
-                        <includeTests>true</includeTests>
-                        <effort>max</effort>
-                        <threshold>medium</threshold>
-                        <failOnError>false</failOnError>
-                        <xmlOutput>true</xmlOutput>
-                        <spotbugsXmlOutput>true</spotbugsXmlOutput>
-                    </configuration>
-                </plugin>
             </plugins>
         </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <configuration>
+                    <locales>en</locales>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+            </plugin>
+        </plugins>
+
     </build>
 
     <reporting>
         <plugins>
-            <plugin>
-                <groupId>com.github.spotbugs</groupId>
-                <artifactId>spotbugs-maven-plugin</artifactId>
-            </plugin>
         </plugins>
     </reporting>
 </project>
