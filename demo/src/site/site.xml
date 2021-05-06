@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="${project.name}" xmlns="http://maven.apache.org/DECORATION/1.8.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 https://maven.apache.org/xsd/decoration-1.8.0.xsd">
+    <skin>
+        <groupId>org.apache.maven.skins</groupId>
+        <artifactId>maven-fluido-skin</artifactId>
+        <version>${maven-fluido.skin.version}</version>
+    </skin>
+    <custom>
+        <fluidoSkin>
+            <sideBarEnabled>true</sideBarEnabled>
+        </fluidoSkin>
+    </custom>
+    <body>
+        <menu name="Overview">
+            <item name="Introduction" href="index.html" />
+            <!--
+            <item name="JavaDoc" href="apidocs" />
+            -->
+            <item name="PMD Report" href="pmd.html" />
+            <item name="CPD Report" href="cpd.html" />
+        </menu>
+        <menu ref="modules" />
+        <menu ref="reports" />
+    </body>
+</project>
