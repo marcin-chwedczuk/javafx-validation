@@ -12,6 +12,10 @@
     <artifactId>validation</artifactId>
     <packaging>jar</packaging>
 
+    <name>JavaFX Validation Library</name>
+    <description>Simple JavaFX Validation Library</description>
+
+
     <properties>
     </properties>
 
