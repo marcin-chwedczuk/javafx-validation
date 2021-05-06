@@ -44,3 +44,9 @@ Generate `jlink` image (in `demo/target` directory):
 ```
 You can now send `./demo/target/validation-demo.zip` to your friends :tada:
 
+Generate code quality reports:
+```
+./mvnw verify site
+./mvnw site:run -pl validation # or choose other module
+```
+
