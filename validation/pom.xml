@@ -12,9 +12,8 @@
     <artifactId>validation</artifactId>
     <packaging>jar</packaging>
 
-    <name>JavaFX Validation Library</name>
+    <name>${project.groupId}:${project.artifactId}</name>
     <description>Simple JavaFX Validation Library</description>
-
 
     <properties>
     </properties>
@@ -41,7 +40,10 @@
 
     <build>
         <plugins>
-
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 </project>

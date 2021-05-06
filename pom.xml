@@ -8,7 +8,7 @@
     <artifactId>parent-project</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>parent-project</name>
+    <name>${project.groupId}:${project.artifactId}</name>
     <url>https://github.com/marcin-chwedczuk/javafx-validation-demo</url>
     <licenses>
         <license>
@@ -17,8 +17,25 @@
         </license>
     </licenses>
     <scm>
-        <url>https://github.com/marcin-chwedczuk/javafx-validation-demo</url>
+        <connection>scm:git:git://github.com/marcin-chwedczuk/javafx-validation-demo.git</connection>
+        <developerConnection>scm:git:ssh://github.com:marcin-chwedczuk/javafx-validation-demo.git</developerConnection>
+        <url>http://github.com/marcin-chwedczuk/javafx-validation-demo/tree/master</url>
     </scm>
+    <developers>
+        <developer>
+            <name>0xmarcin</name>
+            <email>0xmarcin+jfx@gmail.com</email>
+            <organization>0xmarcin</organization>
+            <organizationUrl>https://marcinchwedczuk.pl/</organizationUrl>
+        </developer>
+    </developers>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <modules>
         <module>validation</module>
@@ -179,6 +196,17 @@
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>${maven-jcoco.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.sonatype.plugins</groupId>
+                    <artifactId>nexus-staging-maven-plugin</artifactId>
+                    <version>1.6.7</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <serverId>ossrh</serverId>
+                        <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                        <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>

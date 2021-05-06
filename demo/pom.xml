@@ -11,6 +11,9 @@
     <artifactId>demo</artifactId>
     <packaging>jar</packaging>
 
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>JavaFX Demo Application</description>
+
     <properties>
     </properties>
 
