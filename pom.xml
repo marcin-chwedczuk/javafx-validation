@@ -229,7 +229,20 @@
                     <excludes>
                         <exclude>**/*IT</exclude>
                     </excludes>
-                </configuration>
+
+                    <!-- Make modules accessible -->
+                    <argLine>
+                        <!-- demo module -->
+                        --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
+                        --add-opens pl.marcinchwedczuk.javafx.validation.demo/pl.marcinchwedczuk.javafx.validation.demo=ALL-UNNAMED
+
+                        <!-- extras demo -->
+                        --add-opens pl.marcinchwedczuk.javafx.validation.extras/pl.marcinchwedczuk.javafx.validation.extras=ALL-UNNAMED
+
+                        <!-- validation module -->
+                        --add-opens pl.marcinchwedczuk.javafx.validation/pl.marcinchwedczuk.javafx.validation=ALL-UNNAMED
+                    </argLine>
+            </configuration>
             </plugin>
 
             <plugin>

@@ -164,6 +164,7 @@
                     <jlinkZipName>validation-demo</jlinkZipName>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 </project>
