@@ -11,22 +11,26 @@
     <!-- Exclude target folder that may contain generated sources -->
     <exclude-pattern>.*/target/.*</exclude-pattern>
 
-    <rule ref="category/java/bestpractices.xml">
+
+    <!--
+    <rule ref="category/java/bestpractices.xml"> -->
         <!-- How to disable a rule:
         <exclude name="RuleName here e.g. UselessParentheses"/>
-        -->
     </rule>
+    -->
 
+    <!--
     <rule ref="category/java/codestyle.xml" />
-    <rule ref="category/java/design.xml" />
+    <rule ref="category/java/design.xml" /> -->
 
     <!-- I hate this rule, disabled on the spot:
     <rule ref="category/java/documentation.xml" />
     -->
 
+    <!--
     <rule ref="category/java/errorprone.xml" />
     <rule ref="category/java/multithreading.xml" />
     <rule ref="category/java/performance.xml" />
-
+     -->
     <!-- many more rules are available at https://pmd.github.io/pmd-6.29.0/pmd_rules_java.html -->
 </ruleset>

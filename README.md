@@ -55,7 +55,7 @@ Generate code quality reports:
 
 Run integration tests:
 ```
-./mvnw verify -pl demo -PintegrationTests
+./mvnw verify -Dskip.integration.tests=false
 ```
 
 Generate aggregated Javadoc:

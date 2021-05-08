@@ -59,12 +59,12 @@
         <maven-compiler.plugin.version>3.8.1</maven-compiler.plugin.version>
         <maven-resources.plugin.version>3.0.2</maven-resources.plugin.version>
         <maven-surefire.plugin.version>3.0.0-M5</maven-surefire.plugin.version>
+        <maven-failsafe.plugin.version>3.0.0-M5</maven-failsafe.plugin.version>
         <maven-site.plugin.version>3.8.2</maven-site.plugin.version>
         <maven-reporting.plugin.version>3.1.0</maven-reporting.plugin.version>
         <maven-jrx.plugin.version>2.3</maven-jrx.plugin.version>
         <maven-jcoco.plugin.version>0.8.5</maven-jcoco.plugin.version>
         <maven-source.plugin.version>3.2.0</maven-source.plugin.version>
-
         <maven-javadoc.plugin.version>3.2.0</maven-javadoc.plugin.version>
 
         <javafx.plugin.version>0.0.6</javafx.plugin.version>
@@ -76,6 +76,10 @@
 
         <!-- Shortcuts -->
         <buildConfigDirectory>${maven.multiModuleProjectDirectory}/build-config</buildConfigDirectory>
+
+
+        <!-- TODO: Move to profile -->
+        <skip.integration.tests>true</skip.integration.tests>
     </properties>
 
     <dependencyManagement>
@@ -125,11 +129,6 @@
                 <version>${assertj.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.apache.maven.skins</groupId>
-                <artifactId>maven-fluido-skin</artifactId>
-                <version>${maven-fluido.skin.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.testfx</groupId>
                 <artifactId>testfx-core</artifactId>
                 <version>${testfx.version}</version>
@@ -138,6 +137,13 @@
                 <groupId>org.testfx</groupId>
                 <artifactId>testfx-junit5</artifactId>
                 <version>${testfx.version}</version>
+            </dependency>
+
+            <!-- TODO: Skin for site plugin, should it be here? -->
+            <dependency>
+                <groupId>org.apache.maven.skins</groupId>
+                <artifactId>maven-fluido-skin</artifactId>
+                <version>${maven-fluido.skin.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -159,6 +165,11 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${maven-surefire.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>${maven-failsafe.plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.openjfx</groupId>
@@ -209,6 +220,13 @@
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>${maven-jcoco.plugin.version}</version>
                 </plugin>
+
+                <!-- TODO: Move versions to properties -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>3.2.0</version>
+                </plugin>
                 <plugin>
                     <groupId>org.sonatype.plugins</groupId>
                     <artifactId>nexus-staging-maven-plugin</artifactId>
@@ -220,6 +238,7 @@
                         <autoReleaseAfterClose>true</autoReleaseAfterClose>
                     </configuration>
                 </plugin>
+
             </plugins>
         </pluginManagement>
 
