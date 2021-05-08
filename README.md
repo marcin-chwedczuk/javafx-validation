@@ -1,6 +1,6 @@
 
 
-![Build Status](https://github.com/marcin-chwedczuk/javafx-validation-demo/actions/workflows/basic-ci.yaml/badge.svg)
+![Build Status](https://github.com/marcin-chwedczuk/javafx-validation/actions/workflows/basic-ci.yaml/badge.svg)
 
 # JavaFX Validation Demo
 
