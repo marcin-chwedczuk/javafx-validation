@@ -16,6 +16,11 @@
     <description>Simple JavaFX Validation Library</description>
 
     <properties>
+        <extra-jvm-options-when-running-tests>
+        --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
+        --add-opens pl.marcinchwedczuk.javafx.validation.extras/pl.marcinchwedczuk.javafx.validation.extras=ALL-UNNAMED
+        --add-opens pl.marcinchwedczuk.javafx.validation/pl.marcinchwedczuk.javafx.validation=ALL-UNNAMED
+        </extra-jvm-options-when-running-tests>
     </properties>
 
     <dependencies>
@@ -39,28 +44,5 @@
     </dependencies>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>**/*IT</exclude>
-                    </excludes>
-
-                    <!-- Make modules accessible -->
-                    <argLine>
-                        --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
-                        --add-opens pl.marcinchwedczuk.javafx.validation/pl.marcinchwedczuk.javafx.validation=ALL-UNNAMED
-                    </argLine>
-                </configuration>
-            </plugin>
-
-
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
     </build>
 </project>
