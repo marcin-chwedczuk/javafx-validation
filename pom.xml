@@ -62,7 +62,7 @@
         <maven-failsafe.plugin.version>3.0.0-M5</maven-failsafe.plugin.version>
         <maven-site.plugin.version>3.8.2</maven-site.plugin.version>
         <maven-reporting.plugin.version>3.1.0</maven-reporting.plugin.version>
-        <maven-jrx.plugin.version>2.3</maven-jrx.plugin.version>
+        <maven-jxr.plugin.version>3.1.1</maven-jxr.plugin.version>
         <maven-jcoco.plugin.version>0.8.5</maven-jcoco.plugin.version>
         <maven-source.plugin.version>3.2.0</maven-source.plugin.version>
         <maven-javadoc.plugin.version>3.2.0</maven-javadoc.plugin.version>
@@ -80,9 +80,11 @@
         <!-- Placeholders to be customized by child projects -->
         <extra-jvm-options-when-running-tests></extra-jvm-options-when-running-tests>
 
-        <!-- TODO: Move to profile -->
+        <!-- Customize build -->
         <skip.unit.tests>false</skip.unit.tests>
         <skip.integration.tests>true</skip.integration.tests>
+
+
     </properties>
 
     <dependencyManagement>
@@ -216,7 +218,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jxr-plugin</artifactId>
-                    <version>${maven-jrx.plugin.version}</version>
+                    <version>${maven-jxr.plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.jacoco</groupId>
@@ -339,31 +341,6 @@
             </plugin>
 
             <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <executions>
-                    <!-- prepare the agent -->
-                    <execution>
-                        <id>prepare-agent</id>
-                        <phase>process-test-classes</phase>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-
-                    <!-- If you have integration tests run with the `failsafe-maven-plugin`
-                           use `prepare-agent-integration` -->
-                    <execution>
-                        <id>prepare-agent-integration</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>prepare-agent-integration</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <executions>
@@ -393,38 +370,46 @@
                 <artifactId>maven-site-plugin</artifactId>
                 <configuration>
                     <locales>en</locales>
+                    <skip>true</skip>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <inherited>false</inherited>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-resource-one</id>
+                        <phase>site</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/site/jacoco-aggregate</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/report/target/site/jacoco-aggregate</directory>
+                                    <includes>
+                                        <include>**/*</include>
+                                    </includes>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                            <overwrite>true</overwrite>
+                            <skip>true</skip>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
-
     </build>
-
-    <profiles>
-        <profile>
-            <id>dev</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <build.profile.id>dev</build.profile.id>
-                <skip.integration.tests>true</skip.integration.tests>
-                <skip.unit.tests>false</skip.unit.tests>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>integration-test</id>
-            <properties>
-                <build.profile.id>integration-test</build.profile.id>
-                <skip.integration.tests>false</skip.integration.tests>
-                <skip.unit.tests>true</skip.unit.tests>
-            </properties>
-        </profile>
-    </profiles>
 
     <reporting>
         <plugins>
@@ -436,19 +421,31 @@
                 <!-- cross linking with source code -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
+                <reportSets>
+                    <reportSet>
+                        <id>aggregate</id>
+                        <reports>
+                            <report>aggregate</report>
+                            <report>test-aggregate</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
+                <reportSets>
+                    <reportSet>
+                        <id>aggregate</id>
+                        <reports>
+                            <report>report-aggregate</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <!--
-                    <detectJavaApiLink>false</detectJavaApiLink>
-                    <source>8</source> -->
-                </configuration>
                 <reportSets>
                     <reportSet>
                         <id>aggregate</id>
@@ -469,6 +466,11 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
                 <version>3.0.0-M5</version>
+                <configuration>
+                    <aggregate>true</aggregate>
+                    <!--also set this to link to generated source reports-->
+                    <linkXRef>true</linkXRef>
+                </configuration>
             </plugin>
         </plugins>
     </reporting>
