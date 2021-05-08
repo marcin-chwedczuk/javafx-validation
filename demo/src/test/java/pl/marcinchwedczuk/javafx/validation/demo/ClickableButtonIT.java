@@ -15,7 +15,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 @ExtendWith(ApplicationExtension.class)
-public class ClickableButtonTest {
+public class ClickableButtonIT {
 
     private Button button;
 
@@ -37,7 +37,6 @@ public class ClickableButtonTest {
      * @param robot - Will be injected by the test runner.
      */
     @Test
-    @Disabled
     public void should_contain_button_with_text(FxRobot robot) {
         Assertions.assertThat(button).hasText("click me!");
         // or (lookup by css id):
@@ -52,7 +51,6 @@ public class ClickableButtonTest {
      * @param robot - Will be injected by the test runner.
      */
     @Test
-    @Disabled
     public void when_button_is_clicked_text_changes(FxRobot robot) throws InterruptedException {
         // when:
         robot.clickOn(".button");

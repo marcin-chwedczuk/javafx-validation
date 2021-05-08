@@ -57,3 +57,8 @@ Run integration tests:
 ```
 ./mvnw verify -pl demo -PintegrationTests
 ```
+
+Generate aggregated Javadoc:
+```
+./mvnw clean package javadoc:aggregate
+```
