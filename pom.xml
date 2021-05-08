@@ -10,6 +10,7 @@
 
     <name>${project.groupId}:${project.artifactId}</name>
     <url>https://github.com/marcin-chwedczuk/javafx-validation-demo</url>
+
     <licenses>
         <license>
             <name>MIT License</name>
@@ -21,12 +22,15 @@
         <developerConnection>scm:git:ssh://github.com:marcin-chwedczuk/javafx-validation-demo.git</developerConnection>
         <url>http://github.com/marcin-chwedczuk/javafx-validation-demo/tree/master</url>
     </scm>
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/marcin-chwedczuk/javafx-validation-demo/issues</url>
+    </issueManagement>
     <developers>
         <developer>
             <name>0xmarcin</name>
-            <email>0xmarcin+jfx@gmail.com</email>
-            <organization>0xmarcin</organization>
-            <organizationUrl>https://marcinchwedczuk.pl/</organizationUrl>
+            <email>0xmarcin+oss@gmail.com</email>
+            <url>https://marcinchwedczuk.pl/</url>
         </developer>
     </developers>
 
@@ -71,6 +75,8 @@
         <javafx.plugin.version>0.0.6</javafx.plugin.version>
         <sass.plugin.version>3.7.2</sass.plugin.version>
         <pmd.plugin.version>3.13.0</pmd.plugin.version>
+        <maven-build-helper.plugin.version>3.2.0</maven-build-helper.plugin.version>
+        <nexus-staging.plugin.version>1.6.7</nexus-staging.plugin.version>
 
         <!-- Skins -->
         <maven-fluido.skin.version>1.9</maven-fluido.skin.version>
@@ -84,7 +90,6 @@
         <!-- Customize build -->
         <skip.unit.tests>false</skip.unit.tests>
         <skip.integration.tests>true</skip.integration.tests>
-
     </properties>
 
     <dependencyManagement>
@@ -142,13 +147,6 @@
                 <groupId>org.testfx</groupId>
                 <artifactId>testfx-junit5</artifactId>
                 <version>${testfx.version}</version>
-            </dependency>
-
-            <!-- TODO: Skin for site plugin, should it be here? -->
-            <dependency>
-                <groupId>org.apache.maven.skins</groupId>
-                <artifactId>maven-fluido-skin</artifactId>
-                <version>${maven-fluido.skin.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -235,16 +233,15 @@
                     <version>${maven-jcoco.plugin.version}</version>
                 </plugin>
 
-                <!-- TODO: Move versions to properties -->
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>${maven-build-helper.plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.sonatype.plugins</groupId>
                     <artifactId>nexus-staging-maven-plugin</artifactId>
-                    <version>1.6.7</version>
+                    <version>${nexus-staging.plugin.version}</version>
                     <extensions>true</extensions>
                     <configuration>
                         <serverId>ossrh</serverId>
@@ -252,7 +249,6 @@
                         <autoReleaseAfterClose>true</autoReleaseAfterClose>
                     </configuration>
                 </plugin>
-
             </plugins>
         </pluginManagement>
 
@@ -263,11 +259,9 @@
                 <configuration>
                     <skipTests>${skip.unit.tests}</skipTests>
                     <trimStackTrace>false</trimStackTrace>
-
                     <excludes>
                         <exclude>**/*IT</exclude>
                     </excludes>
-
                     <argLine>${extra-jvm-options-when-running-tests}</argLine>
                 </configuration>
             </plugin>
@@ -409,7 +403,6 @@
 
         <profile>
             <id>static-analysis</id>
-
             <build>
                 <plugins>
                     <plugin>
@@ -425,7 +418,6 @@
                             </execution>
                         </executions>
                     </plugin>
-
                     <!-- copy jacoco report from fake 'report' module to the root site. -->
                     <plugin>
                         <artifactId>maven-resources-plugin</artifactId>
@@ -454,17 +446,12 @@
                     </plugin>
                 </plugins>
             </build>
-
             <reporting>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-pmd-plugin</artifactId>
-                        <configuration>
-
-                        </configuration>
                     </plugin>
-
                     <plugin>
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
@@ -498,7 +485,6 @@
                     </reportSet>
                 </reportSets>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>

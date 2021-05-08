@@ -17,9 +17,7 @@
 
     <properties>
         <extra-jvm-options-when-running-tests>
-        --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
-        --add-opens pl.marcinchwedczuk.javafx.validation.extras/pl.marcinchwedczuk.javafx.validation.extras=ALL-UNNAMED
-        --add-opens pl.marcinchwedczuk.javafx.validation/pl.marcinchwedczuk.javafx.validation=ALL-UNNAMED
+            --add-opens pl.marcinchwedczuk.javafx.validation/pl.marcinchwedczuk.javafx.validation=ALL-UNNAMED
         </extra-jvm-options-when-running-tests>
     </properties>
 

@@ -19,27 +19,29 @@ validation patterns, that demonstrate how to use
 the library:
 ![demo app main window](docs/demo.png)
 
-## How to?
+## Contributors Guide
 
-Run application:
+### How to?
+
+#### Run application
 ```
 ./mvnw javafx:run -pl demo
 ```
 
-Regenerate scss styles:
+#### Regenerate scss styles
 ```
 ./mvnw nl.geodienstencentrum.maven:sass-maven-plugin:update-stylesheets -pl demo
 ```
 
-Watch for SCSS changes and regenerate them:
+#### Watch for SCSS changes and regenerate them
 ```
 fswatch --exclude='.*' --include='.*[.]scss$' --print0 . | while read -d "" event; do
     ./mvnw nl.geodienstencentrum.maven:sass-maven-plugin:update-stylesheets -pl demo
 done
 ```
-You need to install `fswatch` for this to work.
+You need to install `fswatch` command for this to work.
 
-Generate `jlink` image (in `demo/target` directory):
+#### Generate `jlink` image (in `demo/target` directory):
 ```
 ./mvnw javafx:jlink -pl demo
 
@@ -47,18 +49,18 @@ Generate `jlink` image (in `demo/target` directory):
 ```
 You can now send `./demo/target/validation-demo.zip` to your friends :tada:
 
-Generate code quality reports:
+#### Generate code quality reports
 ```
-./mvnw verify site
-./mvnw site:run -pl validation # or choose other module
+./mvnw clean verify site -Pstatic-analysis
 ```
+Then open `./target/site/index.html` to see full report.
 
-Run integration tests:
+#### Run integration tests
 ```
 ./mvnw verify -Dskip.integration.tests=false
 ```
 
-Generate aggregated Javadoc:
+#### Generate aggregated Javadoc and Sources Jars
 ```
-./mvnw clean package javadoc:aggregate
+./mvnw clean package -Prelease-build
 ```

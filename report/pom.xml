@@ -33,8 +33,6 @@
         </dependency>
     </dependencies>
 
-
-
     <profiles>
         <profile>
             <id>static-analysis</id>
