@@ -47,7 +47,7 @@ public class UserRegistrationIT {
         FxAssert.verifyThat("#info-dialog .content", LabeledMatchers.hasText(new BaseMatcher<String>() {
                                                                     @Override
                                                                     public boolean matches(Object item) {
-                                                                        return ((String)item).contains("Registering user");
+                                                                        return ((String)item).contains("xRegistering user");
                                                                     }
 
                                                                     @Override

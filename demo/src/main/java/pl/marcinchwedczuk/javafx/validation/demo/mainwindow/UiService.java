@@ -14,7 +14,8 @@ public class UiService {
     }
 
     public void infoDialog(String message) {
-        Alert alert = new Alert(Alert.AlertType.WARNING, message);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, message);
+        // ID for tests
         alert.getDialogPane().setId("info-dialog");
         alert.showAndWait();
     }
