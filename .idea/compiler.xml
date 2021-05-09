@@ -15,6 +15,7 @@
       <module name="demo" target="11" />
       <module name="extras" target="11" />
       <module name="parent-project" target="11" />
+      <module name="report" target="11" />
       <module name="validation" target="11" />
     </bytecodeTargetLevel>
   </component>

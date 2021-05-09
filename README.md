@@ -64,3 +64,47 @@ Then open `./target/site/index.html` to see full report.
 ```
 ./mvnw clean package -Prelease-build
 ```
+
+#### Publish artifact to MavenCentral
+
+Set version:
+```
+mvn versions:set -DnewVersion=0.1-alpha-1
+```
+TODO: Create a branch and a tag.
+
+Deploy:
+```
+./mvnw clean package deploy -Prelease-build
+```
+
+GPG Signing requires that you generated a GPG key and published it.
+For more details see: https://central.sonatype.org/publish/requirements/gpg/.
+
+I used the following `~/.m2/settings.xml` configuration:
+```xml
+<settings>
+  <servers>
+    <server>
+      <id>ossrh</id>
+      <username>sonatype-jira-user</username>
+      <password>sonatype-jira-pass</password>
+    </server>
+  </servers>
+
+  <profiles>
+    <profile>
+      <id>default</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <!-- on macOS -->
+        <gpg.executable>/usr/local/bin/gpg</gpg.executable>
+        <gpg.keyname>keyId</gpg.keyname>
+        <gpg.passphrase>keyPass</gpg.passphrase>
+      </properties>
+    </profile>
+  </profiles>
+</settings>
+```

@@ -6,7 +6,7 @@
     <parent>
         <artifactId>parent-project</artifactId>
         <groupId>pl.marcinchwedczuk.javafx.validation</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>0.1.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>validation</artifactId>
@@ -41,6 +41,18 @@
         </dependency>
     </dependencies>
 
-    <build>
-    </build>
+    <profiles>
+        <profile>
+            <id>release-build</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>${nexus-staging.plugin.version}</version>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
