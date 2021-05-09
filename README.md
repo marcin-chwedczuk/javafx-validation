@@ -55,9 +55,18 @@ You can now send `./demo/target/validation-demo.zip` to your friends :tada:
 ```
 Then open `./target/site/index.html` to see full report.
 
-#### Run integration tests
+#### Run integration tests (TestFX)
 ```
 ./mvnw verify -Dskip.integration.tests=false
+```
+
+Run in the headless mode (with screenshots):
+```
+_JAVA_OPTIONS="-Djava.awt.headless=true \
+-Dtestfx.robot=glass \
+-Dtestfx.headless=true \
+-Dprism.order=sw \
+-Dprism.verbose=true" ./mvnw verify -Dskip.integration.tests=false -pl demo
 ```
 
 On macOS you must allow IntelliJ or the terminal app that you are using
