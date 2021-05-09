@@ -19,5 +19,7 @@
     <orderEntry type="module" module-name="demo" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:16" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:mac:16" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-swing:16" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-swing:mac:16" level="project" />
   </component>
 </module>

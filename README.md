@@ -60,6 +60,11 @@ Then open `./target/site/index.html` to see full report.
 ./mvnw verify -Dskip.integration.tests=false
 ```
 
+On macOS you must allow IntelliJ or the terminal app that you are using
+to "take over your computer":
+![macOS settings needed for IT](docs/macOS-it-perm.png)
+
+
 #### Generate aggregated Javadoc and Sources Jars
 ```
 ./mvnw clean package -Prelease-build
