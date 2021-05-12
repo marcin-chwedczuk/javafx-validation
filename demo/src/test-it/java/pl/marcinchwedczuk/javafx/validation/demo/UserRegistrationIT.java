@@ -1,16 +1,11 @@
 package pl.marcinchwedczuk.javafx.validation.demo;
 
 import javafx.scene.control.Alert;
-import org.hamcrest.BaseMatcher;
-import org.hamcrest.Description;
 import org.junit.jupiter.api.Test;
-import org.testfx.api.FxAssert;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.Start;
-import org.testfx.matcher.control.LabeledMatchers;
 
 import javafx.stage.Stage;
-import org.testfx.util.DebugUtils;
 
 
 public class UserRegistrationIT extends BaseJavaFXTest {
@@ -32,8 +27,8 @@ public class UserRegistrationIT extends BaseJavaFXTest {
         userRegistrationPO.clickRegisterButton();
 
         new AlertInspector(robot, Alert.AlertType.INFORMATION)
-                .assertContainsText("XRegistering user");
-
-                robot.clickOn("OK");
+                .assertAlertWindowVisible()
+                .assertHasText("Registering user 'mike87' with password 'aBcD3fGh1@'!")
+                .closeByClickingOK();
     }
 }

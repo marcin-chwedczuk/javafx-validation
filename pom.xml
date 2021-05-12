@@ -275,6 +275,7 @@
                             <goal>verify</goal>
                         </goals>
                         <configuration>
+                            <trimStackTrace>false</trimStackTrace>
                             <skipTests>${skip.integration.tests}</skipTests>
                             <includes>
                                 <include>**/*IT</include>

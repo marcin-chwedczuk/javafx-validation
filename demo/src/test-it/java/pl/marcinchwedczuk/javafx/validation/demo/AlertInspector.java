@@ -9,11 +9,15 @@ import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.testfx.api.FxAssert;
 import org.testfx.api.FxRobot;
+import org.testfx.assertions.api.Assertions;
 import org.testfx.matcher.base.GeneralMatchers;
 import org.testfx.matcher.control.LabeledMatchers;
 
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.regex.Pattern;
+
+import static org.testfx.assertions.api.Assertions.assertThat;
 
 public class AlertInspector {
     private final FxRobot robot;
@@ -24,7 +28,7 @@ public class AlertInspector {
         this.type = Objects.requireNonNull(type);
     }
 
-    private Scene alertWindow() {
+    public AlertInspector assertAlertWindowVisible() {
         String windowTitle =
                 type == Alert.AlertType.INFORMATION ? "Information" :
                 type == Alert.AlertType.WARNING ? "Warning" :
@@ -32,24 +36,35 @@ public class AlertInspector {
                 "";
 
         // Convert name to regex
-        Window alertWindow = robot.window("^" + Pattern.quote(windowTitle) + "$");
-        if (alertWindow == null) throw new RuntimeException("Dialog window is not visible");
-        return alertWindow.getScene();
+        try {
+            robot.window("^" + Pattern.quote(windowTitle) + "$");
+        } catch (NoSuchElementException e) {
+            org.assertj.core.api.Assertions.fail("Alert window not visible " +
+                    "(cannot find window with title: " + windowTitle + ").");
+        }
+
+        return this;
     }
 
-    public AlertInspector assertContainsText(String text) {
-        Label l = (Label)alertWindow().lookup("#info-dialog .content");
-        FxAssert.verifyThat(l, LabeledMatchers.hasText(new BaseMatcher<String>() {
-            @Override
-            public boolean matches(Object item) {
-                return ((String)item).contains(text);
-            }
-
-            @Override
-            public void describeTo(Description description) {
-                description.appendText("contains '" + text + "'");
-            }
-        }));
+    public AlertInspector assertHasText(String text) {
+        assertThat(robot.lookup(dialogSelector(".content")).queryLabeled())
+                .hasText(text);
         return this;
+    }
+
+    public void closeByClickingOK() {
+        // TODO: Find OK Button
+        robot.clickOn(robot.lookup(dialogSelector(".button")).queryButton());
+    }
+
+    private String dialogSelector(String selector) {
+        return dialogId() + " " + selector;
+    }
+
+    private String dialogId() {
+        return
+                type == Alert.AlertType.INFORMATION ? "#info-dialog" :
+                type == Alert.AlertType.WARNING ? "#warning-dialog" :
+                "";
     }
 }
