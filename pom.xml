@@ -280,10 +280,13 @@
                             <includes>
                                 <include>**/*IT</include>
                             </includes>
-                            <argLine>
-                                -DscreenshotDirectory="${project.build.directory}/failsafe-reports/screenshots"
-                                ${extra-jvm-options-when-running-tests}
-                            </argLine>
+                            <systemProperties>
+                                <property>
+                                    <name>screenshotDirectory</name>
+                                    <value>${project.build.directory}/failsafe-reports/screenshots</value>
+                                </property>
+                            </systemProperties>
+                            <argLine>${extra-jvm-options-when-running-tests}</argLine>
                         </configuration>
                     </execution>
                 </executions>

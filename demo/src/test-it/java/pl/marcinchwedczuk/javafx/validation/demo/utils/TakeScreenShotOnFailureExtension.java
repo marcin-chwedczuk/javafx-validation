@@ -8,6 +8,7 @@ import org.testfx.util.DebugUtils;
 import java.io.File;
 import java.io.FileReader;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -19,24 +20,34 @@ public class TakeScreenShotOnFailureExtension implements TestExecutionExceptionH
     public void handleTestExecutionException(ExtensionContext context,
                                              Throwable throwable) throws Throwable {
         try {
-            String dir = System.getProperty("screenshotDirectory");
-            if (dir == null) {
+            String screenshotsDirProperty = System.getProperty("screenshotDirectory");
+            if (screenshotsDirProperty == null) {
                 System.err.println("screenshotDirectory property is not set, skipping taking screenshot!");
                 return;
             }
 
-            Files.createDirectories(Paths.get(dir));
+            Path screenshotsDir = Paths.get(screenshotsDirProperty);
+            Files.createDirectories(screenshotsDir);
 
-            // TODO: Test name should be part of the screenshot
-            StringBuilder info = DebugUtils.saveWindow(() ->
-                    Paths.get(dir, "screen_" + nextId.getAndIncrement() + ".png"), ""
-            ).apply(new StringBuilder());
+            String screenshotName = getScreenshotName(context);
+            Path fullScreenshotPath = screenshotsDir.resolve(screenshotName);
 
+            // Use the original method from TestFX, looks weird...
+            StringBuilder info = DebugUtils
+                    .saveWindow(() -> fullScreenshotPath, "")
+                    .apply(new StringBuilder());
+            // Print screenshot filename
             System.out.println(info.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         throw throwable;
+    }
+
+    private String getScreenshotName(ExtensionContext context) {
+        String testClass = context.getRequiredTestClass().getName();
+        String testMethod = context.getRequiredTestMethod().getName();
+        return String.format("%s-%s.png", testClass, testMethod);
     }
 }
