@@ -20,6 +20,9 @@
             --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
             --add-opens javafx.graphics/com.sun.glass.ui=ALL-UNNAMED
             --add-opens pl.marcinchwedczuk.javafx.validation.demo/pl.marcinchwedczuk.javafx.validation.demo=ALL-UNNAMED
+
+            <!-- Looks like other packages in test must be exported too... -->
+            --add-exports pl.marcinchwedczuk.javafx.validation.demo/pl.marcinchwedczuk.javafx.validation.demo.utils=ALL-UNNAMED
         </extra-jvm-options-when-running-tests>
     </properties>
 
