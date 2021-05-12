@@ -1,22 +1,17 @@
-package pl.marcinchwedczuk.javafx.validation.demo;
+package pl.marcinchwedczuk.javafx.validation.demo.inspectors;
 
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.stage.Window;
-import org.assertj.core.internal.bytebuddy.matcher.ElementMatchers;
-import org.hamcrest.BaseMatcher;
-import org.hamcrest.Description;
-import org.testfx.api.FxAssert;
+import javafx.scene.control.Button;
 import org.testfx.api.FxRobot;
-import org.testfx.assertions.api.Assertions;
-import org.testfx.matcher.base.GeneralMatchers;
-import org.testfx.matcher.control.LabeledMatchers;
 
 import java.util.NoSuchElementException;
 import java.util.Objects;
+import java.util.Set;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
 import static org.testfx.assertions.api.Assertions.assertThat;
 
 public class AlertInspector {
@@ -35,8 +30,8 @@ public class AlertInspector {
                 type == Alert.AlertType.ERROR ? "Error" :
                 "";
 
-        // Convert name to regex
         try {
+            // Convert name to regex
             robot.window("^" + Pattern.quote(windowTitle) + "$");
         } catch (NoSuchElementException e) {
             org.assertj.core.api.Assertions.fail("Alert window not visible " +
@@ -53,8 +48,19 @@ public class AlertInspector {
     }
 
     public void closeByClickingOK() {
-        // TODO: Find OK Button
-        robot.clickOn(robot.lookup(dialogSelector(".button")).queryButton());
+        Set<Button> buttons = robot.lookup(dialogSelector(".button")).queryAll();
+        System.out.println("Found buttons: " + buttons.size());
+
+        Set<Button> okButtons = buttons.stream()
+                .filter(b -> "ok".equalsIgnoreCase(b.getText()))
+                .collect(toSet());
+
+        assertThat(okButtons.size())
+                .as("number of ok buttons")
+                .isEqualTo(1);
+
+        // Click on the only button
+        robot.clickOn(okButtons.iterator().next());
     }
 
     private String dialogSelector(String selector) {

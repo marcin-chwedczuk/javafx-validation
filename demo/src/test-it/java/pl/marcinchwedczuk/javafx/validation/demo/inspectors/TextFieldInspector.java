@@ -1,4 +1,4 @@
-package pl.marcinchwedczuk.javafx.validation.demo;
+package pl.marcinchwedczuk.javafx.validation.demo.inspectors;
 
 import javafx.scene.input.MouseButton;
 import org.testfx.api.FxRobot;
