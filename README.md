@@ -57,7 +57,7 @@ Then open `./target/site/index.html` to see full report.
 
 #### Run integration tests (TestFX)
 ```
-./mvnw verify -Dskip.integration.tests=false
+./mvnw verify -Dskip.integration.tests=false -Dskip.unit.tests=true
 ```
 
 Run in the headless mode (with screenshots):
