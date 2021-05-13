@@ -14,8 +14,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class TakeScreenShotOnFailureExtension implements TestExecutionExceptionHandler {
-    private AtomicInteger nextId = new AtomicInteger(1000);
-
     @Override
     public void handleTestExecutionException(ExtensionContext context,
                                              Throwable throwable) throws Throwable {
@@ -36,6 +34,7 @@ public class TakeScreenShotOnFailureExtension implements TestExecutionExceptionH
             StringBuilder info = DebugUtils
                     .saveWindow(() -> fullScreenshotPath, "")
                     .apply(new StringBuilder());
+
             // Print screenshot filename
             System.out.println(info.toString());
         } catch (Exception e) {

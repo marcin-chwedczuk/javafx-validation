@@ -16,14 +16,21 @@ public class BannerInspector {
         this.fxid = Objects.requireNonNull(fxid);
     }
 
-    public void assertNotVisible() {
+    public void assertIsVisible() {
+        assertVisible(true);
+    }
+
+    public void assertIsHidden() {
+        assertVisible(false);
+    }
+
+    public void assertVisible(boolean visible) {
         boolean bannerVisible = robot.lookup(fxid + ".banner")
                 .query()
                 .isVisible();
 
         assertThat(bannerVisible)
-                .as("banner " + fxid + " is visible")
-                .isFalse();
+                .as("Banner[" + fxid + "] should be " + (visible ? "visible" : "hidden") + ".")
+                .isEqualTo(visible);
     }
-
 }
