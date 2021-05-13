@@ -16,17 +16,15 @@ import java.util.Objects;
 
 import static org.testfx.assertions.api.Assertions.assertThat;
 
-public class TextFieldInspector {
-    private final FxRobot robot;
-    private final String selector;
-
-    public TextFieldInspector(FxRobot robot, String selector) {
-        this.robot = Objects.requireNonNull(robot);
-        this.selector = Objects.requireNonNull(selector);
+public class TextFieldInspector extends BaseControlInspector {
+    public TextFieldInspector(FxRobot robot, String fxid) {
+        super(robot, fxid);
     }
 
     private TextField control() {
-        return robot.lookup(selector).queryAs(TextField.class);
+        return robot
+                .lookup(idSelector())
+                .queryAs(TextField.class);
     }
 
     public TextFieldInspector setText(String text) {
@@ -39,8 +37,9 @@ public class TextFieldInspector {
 
     public TextFieldInspector assertEmpty() {
         assertThat(control().getText())
-            .as("TextField[" + selector + "] should be empty.")
+            .as("TextField[#" + fxid + "] should be empty.")
             .isNullOrEmpty();
+
         return this;
     }
 }

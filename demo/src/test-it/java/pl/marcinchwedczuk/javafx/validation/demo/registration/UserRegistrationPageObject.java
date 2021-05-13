@@ -1,4 +1,4 @@
-package pl.marcinchwedczuk.javafx.validation.demo;
+package pl.marcinchwedczuk.javafx.validation.demo.registration;
 
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
@@ -8,15 +8,12 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import org.testfx.api.FxRobot;
+import pl.marcinchwedczuk.javafx.validation.demo.BaseJavaFXPageObject;
 import pl.marcinchwedczuk.javafx.validation.demo.inspectors.*;
-import pl.marcinchwedczuk.javafx.validation.demo.registration.UserRegistration;
-import pl.marcinchwedczuk.javafx.validation.extras.ValidationDecorator;
 
 import java.util.Objects;
 
-public class UserRegistrationPageObject {
-    private final FxRobot robot;
-
+public class UserRegistrationPageObject extends BaseJavaFXPageObject<UserRegistrationPageObject> {
     private final BannerInspector invalidBanner;
     private final TextFieldInspector usernameF;
     private final ValidationDecoratorInspector usernameE;
@@ -25,17 +22,20 @@ public class UserRegistrationPageObject {
     private final ButtonInspector registerUserButton;
 
     public UserRegistrationPageObject(FxRobot robot) {
-        this.robot = Objects.requireNonNull(robot);
+        super(robot, "userRegistrationView");
 
-        invalidBanner = new BannerInspector(robot, "#invalidBanner");
+        invalidBanner = new BannerInspector(robot, "invalidBanner");
 
-        usernameF = new TextFieldInspector(robot, "#usernameF");
-        usernameE = new ValidationDecoratorInspector(robot, "#usernameE");
-        passwordF = new TextFieldInspector(robot, "#passwordF");
-        passwordE = new ValidationDecoratorInspector(robot, "#passwordE");
+        usernameF = new TextFieldInspector(robot, "usernameF");
+        usernameE = new ValidationDecoratorInspector(robot, "usernameE");
+        passwordF = new TextFieldInspector(robot, "passwordF");
+        passwordE = new ValidationDecoratorInspector(robot, "passwordE");
 
-        registerUserButton = new ButtonInspector(robot, "#registerUserButton");
+        registerUserButton = new ButtonInspector(robot, "registerUserButton");
     }
+
+    @Override
+    protected UserRegistrationPageObject self() { return this; }
 
     public BannerInspector invalidBanner() {
         return invalidBanner;
@@ -62,23 +62,13 @@ public class UserRegistrationPageObject {
         return this;
     }
 
-    public UserRegistrationPageObject moveFocusToWindow() {
-        // We will click in the top-left pixel to move focus from
-        // controls back to the window.
-        Node banner = robot.lookup("#userRegistrationView").query();
-
-        // Why so complicated?
-        Bounds b = banner.getBoundsInLocal();
-        Bounds sb = banner.localToScreen(b);
-        robot.clickOn(new Point2D(sb.getMinX(), sb.getMinY()));
-
-        return this;
-    }
-
     public void setupView(Stage stage) {
         TitledPane pane = new TitledPane();
         pane.setCollapsible(false);
         UserRegistration.installAt(pane.contentProperty());
+
+        // Set "synthetic id", for better selectors
+        pane.getContent().setId(fxid);
 
         // Wrap in HBox to avoid sizing issues
         HBox hbox = new HBox();
@@ -87,5 +77,4 @@ public class UserRegistrationPageObject {
         stage.setScene(new Scene(hbox, 500, 500));
         stage.show();
     }
-
 }

@@ -10,7 +10,7 @@
 <?import pl.marcinchwedczuk.javafx.validation.demo.controls.Banner?>
 <?import pl.marcinchwedczuk.javafx.validation.extras.ValidationDecorator?>
 
-<AnchorPane fx:id="userRegistrationView" stylesheets="@UserRegistration.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.marcinchwedczuk.javafx.validation.demo.registration.UserRegistration">
+<AnchorPane stylesheets="@UserRegistration.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.marcinchwedczuk.javafx.validation.demo.registration.UserRegistration">
 
     <GridPane layoutX="27.0" layoutY="45.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>

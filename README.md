@@ -60,6 +60,12 @@ Then open `./target/site/index.html` to see full report.
 ./mvnw verify -Dskip.integration.tests=false -Dskip.unit.tests=true
 ```
 
+Run single test:
+```
+./mvnw clean verify -Dskip.integration.tests=false -Dskip.unit.tests=true \
+    -pl demo -Dit.test=NumberRangeIT
+```
+
 Run in the headless mode (with screenshots):
 ```
 _JAVA_OPTIONS="-Djava.awt.headless=true \

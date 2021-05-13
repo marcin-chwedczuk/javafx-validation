@@ -23,6 +23,8 @@
 
             <!-- Looks like other packages in test must be exported too... -->
             --add-opens pl.marcinchwedczuk.javafx.validation.demo/pl.marcinchwedczuk.javafx.validation.demo.utils=ALL-UNNAMED
+            --add-opens pl.marcinchwedczuk.javafx.validation.demo/pl.marcinchwedczuk.javafx.validation.demo.registration=ALL-UNNAMED
+            --add-opens pl.marcinchwedczuk.javafx.validation.demo/pl.marcinchwedczuk.javafx.validation.demo.range=ALL-UNNAMED
         </extra-jvm-options-when-running-tests>
     </properties>
 

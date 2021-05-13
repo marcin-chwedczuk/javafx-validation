@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
+import static org.assertj.core.api.Assertions.fail;
 import static org.testfx.assertions.api.Assertions.assertThat;
 
 public class AlertInspector {
@@ -42,29 +43,47 @@ public class AlertInspector {
     }
 
     public AlertInspector assertHasText(String text) {
-        assertThat(robot.lookup(dialogSelector(".content")).queryLabeled())
-                .hasText(text);
+        assertThat(getDialogContent())
+                .as("Alert dialog box content")
+                .isEqualTo(text);
+
         return this;
     }
 
-    public void closeByClickingOK() {
-        Set<Button> buttons = robot.lookup(dialogSelector(".button")).queryAll();
-        System.out.println("Found buttons: " + buttons.size());
+    public AlertInspector closeByClickingOK() {
+        Button okButton = findButtonWithText("Ok");
+        robot.clickOn(okButton);
 
-        Set<Button> okButtons = buttons.stream()
-                .filter(b -> "ok".equalsIgnoreCase(b.getText()))
+        return this;
+    }
+
+    private String getDialogContent() {
+        return robot.lookup(dialogSelector(".content"))
+                .queryLabeled()
+                .getText();
+    }
+
+    private Button findButtonWithText(String text) {
+        Set<Button> buttons = robot
+                .lookup(dialogSelector(".button"))
+                .queryAllAs(Button.class);
+
+        Set<Button> matchingButtons = buttons.stream()
+                .filter(b -> text.equalsIgnoreCase(b.getText()))
                 .collect(toSet());
 
-        assertThat(okButtons.size())
-                .as("number of ok buttons")
-                .isEqualTo(1);
+        if (matchingButtons.size() > 1) {
+            fail("Found more than one button matching '%s' on dialog box.", text);
+        }
+        else if (matchingButtons.isEmpty()) {
+            fail("No button matching text '%s' found on dialog box.", text);
+        }
 
-        // Click on the only button
-        robot.clickOn(okButtons.iterator().next());
+        return matchingButtons.iterator().next();
     }
 
     private String dialogSelector(String selector) {
-        return dialogId() + " " + selector;
+        return String.format("%s %s", dialogId(), selector);
     }
 
     private String dialogId() {

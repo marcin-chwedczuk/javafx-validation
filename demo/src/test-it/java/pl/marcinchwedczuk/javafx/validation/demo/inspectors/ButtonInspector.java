@@ -4,17 +4,13 @@ import org.testfx.api.FxRobot;
 
 import java.util.Objects;
 
-public class ButtonInspector {
-    private final FxRobot robot;
-    private final String selector;
-
-    public ButtonInspector(FxRobot robot, String selector) {
-        this.robot = Objects.requireNonNull(robot);
-        this.selector = Objects.requireNonNull(selector);
+public class ButtonInspector extends BaseControlInspector {
+    public ButtonInspector(FxRobot robot, String fxid) {
+        super(robot, fxid);
     }
 
     public ButtonInspector click() {
-        robot.clickOn(selector);
+        robot.clickOn(idSelector());
         return this;
     }
 }

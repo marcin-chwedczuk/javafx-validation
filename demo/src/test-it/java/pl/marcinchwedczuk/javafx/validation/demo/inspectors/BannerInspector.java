@@ -9,13 +9,9 @@ import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class BannerInspector {
-    private final FxRobot robot;
-    private final String fxid;
-
+public class BannerInspector extends BaseControlInspector {
     public BannerInspector(FxRobot robot, String fxid) {
-        this.robot = Objects.requireNonNull(robot);
-        this.fxid = Objects.requireNonNull(fxid);
+        super(robot, fxid);
     }
 
     public BannerInspector assertIsVisible() {
@@ -27,7 +23,7 @@ public class BannerInspector {
     }
 
     public BannerInspector assertVisible(boolean visible) {
-        boolean bannerVisible = robot.lookup(fxid + ".banner")
+        boolean bannerVisible = robot.lookup(idSelector())
                 .query()
                 .isVisible();
 
@@ -39,7 +35,9 @@ public class BannerInspector {
     }
 
     public void assertHasText(String text) {
-        Banner banner = robot.lookup(fxid + ".banner").queryAs(Banner.class);
+        Banner banner = robot.lookup(idSelector())
+                .queryAs(Banner.class);
+
         assertThat(banner)
                 .as("Banner[" + fxid + "] with text '" + banner.getText() + "'")
                 .has(new Condition<>(b -> text.equals(b.getText()), "text '%s'", text));

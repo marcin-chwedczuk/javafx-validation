@@ -1,4 +1,4 @@
-package pl.marcinchwedczuk.javafx.validation.demo;
+package pl.marcinchwedczuk.javafx.validation.demo.registration;
 
 import javafx.scene.control.Alert;
 import org.junit.jupiter.api.*;
@@ -6,8 +6,8 @@ import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.Start;
 
 import javafx.stage.Stage;
+import pl.marcinchwedczuk.javafx.validation.demo.BaseSequentialJavaFXTest;
 import pl.marcinchwedczuk.javafx.validation.demo.inspectors.AlertInspector;
-import pl.marcinchwedczuk.javafx.validation.demo.utils.StopOnFirstFailure;
 
 public class UserRegistrationIT extends BaseSequentialJavaFXTest {
     private final UserRegistrationPageObject userRegistrationPO;

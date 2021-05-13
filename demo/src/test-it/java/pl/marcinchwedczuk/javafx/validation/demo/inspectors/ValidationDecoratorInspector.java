@@ -13,18 +13,14 @@ import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
-public class ValidationDecoratorInspector {
-    private final FxRobot robot;
-    private final String fxid;
-
+public class ValidationDecoratorInspector extends BaseControlInspector {
     public ValidationDecoratorInspector(FxRobot robot, String fxid) {
-        this.robot = Objects.requireNonNull(robot);
-        this.fxid = Objects.requireNonNull(fxid);
+        super(robot, fxid);
     }
 
     private List<Objection> getObjections() {
         ValidationDecorator control = robot
-                .lookup(fxid)
+                .lookup(idSelector())
                 .queryAs(ValidationDecorator.class);
 
         return control.getObjections();
