@@ -11,11 +11,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@ExtendWith({
-        ApplicationExtension.class,
-        TakeScreenShotOnFailureExtension.class
-})
+@ExtendWith(TakeScreenShotOnFailureExtension.class)
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface JavaFXTest { }
+public @interface TakeScreenshotOnFailure { }

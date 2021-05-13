@@ -30,7 +30,7 @@ public class UserRegistrationIT extends BaseSequentialJavaFXTest {
 
     @Order(10)
     @Test
-    void user_enters_valid_data(FxRobot robot) throws InterruptedException {
+    void user_enters_valid_data(FxRobot robot) {
         userRegistrationPO.username().setText("mike87");
         userRegistrationPO.password().setText("aBcD3fGh1@");
 
@@ -97,7 +97,7 @@ public class UserRegistrationIT extends BaseSequentialJavaFXTest {
 
     @Order(50)
     @Test
-    void entering_valid_data_hides_errors() throws InterruptedException {
+    void entering_valid_data_hides_errors() {
         userRegistrationPO.username().setText("mike87");
         userRegistrationPO.password().setText("aBcD3fGh1@");
 
