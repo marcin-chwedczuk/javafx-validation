@@ -1,7 +1,9 @@
 package pl.marcinchwedczuk.javafx.validation.demo.inspectors;
 
+import org.assertj.core.api.Condition;
 import org.testfx.api.FxRobot;
 import org.testfx.assertions.api.Assertions;
+import pl.marcinchwedczuk.javafx.validation.demo.controls.Banner;
 
 import java.util.Objects;
 
@@ -16,15 +18,15 @@ public class BannerInspector {
         this.fxid = Objects.requireNonNull(fxid);
     }
 
-    public void assertIsVisible() {
-        assertVisible(true);
+    public BannerInspector assertIsVisible() {
+        return assertVisible(true);
     }
 
-    public void assertIsHidden() {
-        assertVisible(false);
+    public BannerInspector assertIsHidden() {
+        return assertVisible(false);
     }
 
-    public void assertVisible(boolean visible) {
+    public BannerInspector assertVisible(boolean visible) {
         boolean bannerVisible = robot.lookup(fxid + ".banner")
                 .query()
                 .isVisible();
@@ -32,5 +34,14 @@ public class BannerInspector {
         assertThat(bannerVisible)
                 .as("Banner[" + fxid + "] should be " + (visible ? "visible" : "hidden") + ".")
                 .isEqualTo(visible);
+
+        return this;
+    }
+
+    public void assertHasText(String text) {
+        Banner banner = robot.lookup(fxid + ".banner").queryAs(Banner.class);
+        assertThat(banner)
+                .as("Banner[" + fxid + "] with text '" + banner.getText() + "'")
+                .has(new Condition<>(b -> text.equals(b.getText()), "text '%s'", text));
     }
 }

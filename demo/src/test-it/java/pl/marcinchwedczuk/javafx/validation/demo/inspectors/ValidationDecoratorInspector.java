@@ -42,4 +42,17 @@ public class ValidationDecoratorInspector {
 
         return this;
     }
+
+    public ValidationDecoratorInspector assertNoErrorVisible() {
+        List<Objection> errors = getObjections().stream()
+                .filter(o -> o.severity == ObjectionSeverity.ERROR)
+                .collect(toList());
+
+        Assertions.assertThat(errors)
+                .as("ValidationDecorator[" + fxid + "] errors")
+                .extracting(x -> x.userMessage)
+                .isEmpty();
+
+        return this;
+    }
 }

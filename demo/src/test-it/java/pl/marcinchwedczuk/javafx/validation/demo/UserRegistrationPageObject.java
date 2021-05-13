@@ -32,7 +32,7 @@ public class UserRegistrationPageObject {
         usernameF = new TextFieldInspector(robot, "#usernameF");
         usernameE = new ValidationDecoratorInspector(robot, "#usernameE");
         passwordF = new TextFieldInspector(robot, "#passwordF");
-        passwordE = new ValidationDecoratorInspector(robot, "passwordE");
+        passwordE = new ValidationDecoratorInspector(robot, "#passwordE");
 
         registerUserButton = new ButtonInspector(robot, "#registerUserButton");
     }

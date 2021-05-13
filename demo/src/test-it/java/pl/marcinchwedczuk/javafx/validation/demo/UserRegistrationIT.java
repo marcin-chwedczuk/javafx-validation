@@ -9,8 +9,7 @@ import javafx.stage.Stage;
 import pl.marcinchwedczuk.javafx.validation.demo.inspectors.AlertInspector;
 import pl.marcinchwedczuk.javafx.validation.demo.utils.StopOnFirstFailure;
 
-@StopOnFirstFailure
-public class UserRegistrationIT extends BaseJavaFXTest {
+public class UserRegistrationIT extends BaseSequentialJavaFXTest {
     private final UserRegistrationPageObject userRegistrationPO;
 
     public UserRegistrationIT(FxRobot robot) {
@@ -37,9 +36,6 @@ public class UserRegistrationIT extends BaseJavaFXTest {
 
         // Trigger validation by moving focus from the password textfield
         userRegistrationPO.moveFocusToWindow();
-
-        userRegistrationPO.invalidBanner()
-                .assertIsHidden();
 
         userRegistrationPO.clickRegisterButton();
 
@@ -72,5 +68,43 @@ public class UserRegistrationIT extends BaseJavaFXTest {
             .assertShowsError("Value is required.")
             .assertShowsError("Value must be at least 2 and at most 15 characters long.")
             .assertShowsError("Username can only consists of underscore, lower-case letters and digits and cannot start with a digit.");
+    }
+
+    @Order(40)
+    @Test
+    void leaving_empty_password_triggers_errors() {
+        userRegistrationPO.password().setText("");
+        userRegistrationPO.moveFocusToWindow();
+
+        userRegistrationPO.passwordErrors()
+                .assertShowsError("Value is required.")
+                .assertShowsError("Password must have at least 8 characters.")
+                .assertShowsError("Password must contain an upper-case letter.")
+                .assertShowsError("Password must contain a lower-case letter.")
+                .assertShowsError("Password must contain a digit.")
+                .assertShowsError("Password must contain a special character.");
+    }
+
+    @Order(50)
+    @Test
+    void clicking_register_with_invalid_data_shows_error_banner() {
+        userRegistrationPO.clickRegisterButton();
+
+        userRegistrationPO.invalidBanner()
+                .assertIsVisible()
+                .assertHasText("Invalid data...");
+    }
+
+    @Order(50)
+    @Test
+    void entering_valid_data_hides_errors() throws InterruptedException {
+        userRegistrationPO.username().setText("mike87");
+        userRegistrationPO.password().setText("aBcD3fGh1@");
+
+        userRegistrationPO.usernameErrors()
+                .assertNoErrorVisible();
+
+        userRegistrationPO.passwordErrors()
+                .assertNoErrorVisible();
     }
 }
