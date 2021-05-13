@@ -68,9 +68,9 @@ public class UserRegistrationIT extends BaseJavaFXTest {
         userRegistrationPO.username().setText("");
         userRegistrationPO.moveFocusToWindow();
 
-        /*
-        userRegistrationPO.invalidBanner()
-                .assertIsVisible();
-         */
+        userRegistrationPO.usernameErrors()
+            .assertShowsError("Value is required.")
+            .assertShowsError("Value must be at least 2 and at most 15 characters long.")
+            .assertShowsError("Username can only consists of underscore, lower-case letters and digits and cannot start with a digit.");
     }
 }

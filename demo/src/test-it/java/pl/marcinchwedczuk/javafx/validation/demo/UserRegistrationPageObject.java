@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import org.testfx.api.FxRobot;
 import pl.marcinchwedczuk.javafx.validation.demo.inspectors.*;
 import pl.marcinchwedczuk.javafx.validation.demo.registration.UserRegistration;
+import pl.marcinchwedczuk.javafx.validation.extras.ValidationDecorator;
 
 import java.util.Objects;
 
@@ -18,15 +19,21 @@ public class UserRegistrationPageObject {
 
     private final BannerInspector invalidBanner;
     private final TextFieldInspector usernameF;
+    private final ValidationDecoratorInspector usernameE;
     private final TextFieldInspector passwordF;
+    private final ValidationDecoratorInspector passwordE;
     private final ButtonInspector registerUserButton;
 
     public UserRegistrationPageObject(FxRobot robot) {
         this.robot = Objects.requireNonNull(robot);
 
         invalidBanner = new BannerInspector(robot, "#invalidBanner");
+
         usernameF = new TextFieldInspector(robot, "#usernameF");
+        usernameE = new ValidationDecoratorInspector(robot, "#usernameE");
         passwordF = new TextFieldInspector(robot, "#passwordF");
+        passwordE = new ValidationDecoratorInspector(robot, "passwordE");
+
         registerUserButton = new ButtonInspector(robot, "#registerUserButton");
     }
 
@@ -38,8 +45,16 @@ public class UserRegistrationPageObject {
         return usernameF;
     }
 
+    public ValidationDecoratorInspector usernameErrors() {
+        return usernameE;
+    }
+
     public TextFieldInspector password() {
         return passwordF;
+    }
+
+    public ValidationDecoratorInspector passwordErrors() {
+        return passwordE;
     }
 
     public UserRegistrationPageObject clickRegisterButton() {
