@@ -3,6 +3,7 @@ package pl.marcinchwedczuk.javafx.validation.demo.inspectors;
 import javafx.scene.control.ListCell;
 import org.testfx.api.FxRobot;
 import org.testfx.assertions.api.Assertions;
+import org.testfx.util.WaitForAsyncUtils;
 import pl.marcinchwedczuk.javafx.validation.Objection;
 import pl.marcinchwedczuk.javafx.validation.ObjectionSeverity;
 import pl.marcinchwedczuk.javafx.validation.extras.ValidationDecorator;
@@ -23,6 +24,10 @@ public class ValidationDecoratorInspector extends BaseControlInspector {
                 .lookup(idSelector())
                 .queryAs(ValidationDecorator.class);
 
+        // TODO: This is very fishy - the control lives on
+        // JavaFX thread, so here we have access from
+        // multiple threads.
+        // Reported as: https://github.com/TestFX/TestFX/issues/727
         return control.getObjections();
     }
 

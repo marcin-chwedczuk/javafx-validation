@@ -14,11 +14,11 @@ public class BannerInspector extends BaseControlInspector {
         super(robot, fxid);
     }
 
-    public BannerInspector assertIsVisible() {
+    public BannerInspector assertVisible() {
         return assertVisible(true);
     }
 
-    public BannerInspector assertIsHidden() {
+    public BannerInspector assertHidden() {
         return assertVisible(false);
     }
 

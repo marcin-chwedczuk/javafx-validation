@@ -25,7 +25,7 @@ public class UserRegistrationIT extends BaseSequentialJavaFXTest {
     @Test
     void error_banner_not_visible_on_start() {
         userRegistrationPO.invalidBanner()
-                .assertIsHidden();
+                .assertHidden();
     }
 
     @Order(10)
@@ -55,7 +55,7 @@ public class UserRegistrationIT extends BaseSequentialJavaFXTest {
                 .assertEmpty();
 
         userRegistrationPO.invalidBanner()
-                .assertIsHidden();
+                .assertHidden();
     }
 
     @Order(30)
@@ -91,7 +91,7 @@ public class UserRegistrationIT extends BaseSequentialJavaFXTest {
         userRegistrationPO.clickRegisterButton();
 
         userRegistrationPO.invalidBanner()
-                .assertIsVisible()
+                .assertVisible()
                 .assertHasText("Invalid data...");
     }
 

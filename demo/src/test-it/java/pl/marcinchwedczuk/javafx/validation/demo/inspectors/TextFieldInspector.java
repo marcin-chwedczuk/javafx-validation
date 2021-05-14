@@ -1,5 +1,6 @@
 package pl.marcinchwedczuk.javafx.validation.demo.inspectors;
 
+import javafx.application.Platform;
 import javafx.css.Styleable;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputControl;
@@ -11,6 +12,7 @@ import org.hamcrest.SelfDescribing;
 import org.testfx.api.FxRobot;
 import org.testfx.api.FxRobotInterface;
 import org.testfx.assertions.api.Assertions;
+import org.testfx.util.WaitForAsyncUtils;
 
 import java.util.Objects;
 
@@ -28,9 +30,12 @@ public class TextFieldInspector extends BaseControlInspector {
     }
 
     public TextFieldInspector setText(String text) {
+        TextField control = control();
+
         robot
-                .clickOn(control(), MouseButton.PRIMARY)
-                .write(text);
+            .interact(() -> control.clear())
+            .clickOn(control, MouseButton.PRIMARY)
+            .write(text);
 
         return this;
     }
