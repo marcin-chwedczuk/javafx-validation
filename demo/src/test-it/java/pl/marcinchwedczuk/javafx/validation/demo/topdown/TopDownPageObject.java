@@ -6,15 +6,75 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import org.testfx.api.FxRobot;
 import pl.marcinchwedczuk.javafx.validation.demo.BaseJavaFXPageObject;
+import pl.marcinchwedczuk.javafx.validation.demo.inspectors.*;
 import pl.marcinchwedczuk.javafx.validation.demo.range.NumberRange;
+import pl.marcinchwedczuk.javafx.validation.extras.ValidationDecorator;
 
 public class TopDownPageObject extends BaseJavaFXPageObject<TopDownPageObject> {
+    private final BannerInspector invalidBanner;
+
+    private final ComboBoxInspector<Country> countryF;
+    private final ValidationDecoratorInspector countryE;
+
+    private final TextFieldInspector mobileF;
+    private final ValidationDecoratorInspector mobileE;
+
+    private final TextFieldInspector faxF;
+    private final ValidationDecoratorInspector faxE;
+
+    private final ButtonInspector validateButton;
+
     public TopDownPageObject(FxRobot robot) {
         super(robot, "topDownView");
+
+        invalidBanner = new BannerInspector(robot, "invalidBanner");
+
+        countryF = new ComboBoxInspector<>(robot, "countryF");
+        countryE = new ValidationDecoratorInspector(robot, "countryE");
+
+        mobileF = new TextFieldInspector(robot, "mobileF");
+        mobileE = new ValidationDecoratorInspector(robot, "mobileE");
+
+        faxF = new TextFieldInspector(robot, "faxF");
+        faxE = new ValidationDecoratorInspector(robot, "faxE");
+
+        validateButton = new ButtonInspector(robot, "validateButton");
     }
 
     @Override
     protected TopDownPageObject self() { return this; }
+
+    public BannerInspector invalidBanner() {
+        return invalidBanner;
+    }
+
+    public ComboBoxInspector<Country> country() {
+        return countryF;
+    }
+
+    public ValidationDecoratorInspector countryErrors() {
+        return countryE;
+    }
+
+    public TextFieldInspector mobile() {
+        return mobileF;
+    }
+
+    public ValidationDecoratorInspector mobileErrors() {
+        return mobileE;
+    }
+
+    public TextFieldInspector fax() {
+        return faxF;
+    }
+
+    public ValidationDecoratorInspector faxErrors() {
+        return faxE;
+    }
+
+    public void clickValidateButton() {
+        validateButton.click();
+    }
 
     public void setupView(Stage stage) {
         TitledPane pane = new TitledPane();
