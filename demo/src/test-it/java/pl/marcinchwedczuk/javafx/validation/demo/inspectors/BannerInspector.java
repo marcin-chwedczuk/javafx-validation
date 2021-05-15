@@ -28,7 +28,7 @@ public class BannerInspector extends BaseControlInspector {
                 .isVisible();
 
         assertThat(bannerVisible)
-                .as("Banner[" + fxid + "] should be " + (visible ? "visible" : "hidden") + ".")
+                .as(makeDescription("isVisible"))
                 .isEqualTo(visible);
 
         return this;
@@ -39,7 +39,11 @@ public class BannerInspector extends BaseControlInspector {
                 .queryAs(Banner.class);
 
         assertThat(banner)
-                .as("Banner[" + fxid + "] with text '" + banner.getText() + "'")
+                .as(makeDescription("text '" + banner.getText() + "'"))
                 .has(new Condition<>(b -> text.equals(b.getText()), "text '%s'", text));
+    }
+
+    private String makeDescription(String property) {
+        return "Banner(id=" + fxid + ") " + property;
     }
 }

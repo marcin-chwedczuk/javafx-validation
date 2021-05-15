@@ -1,11 +1,10 @@
 package pl.marcinchwedczuk.javafx.validation;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toUnmodifiableList;
 
 public class Objections {
     private Objections() { }
@@ -65,7 +64,16 @@ public class Objections {
         return false;
     }
 
-        public static Comparator<Objection> compareBySeverityDesc() {
+    public static Comparator<Objection> compareBySeverityDesc() {
         return Comparator.<Objection>comparingInt(o -> o.severity.priority).reversed();
+    }
+
+    public static List<Objection> onlyOfSeverity(List<Objection> objections,
+                                                 ObjectionSeverity first, ObjectionSeverity... rest) {
+        EnumSet<ObjectionSeverity> severities = EnumSet.of(first, rest);
+
+        return objections.stream()
+                .filter(o -> severities.contains(o.severity))
+                .collect(toUnmodifiableList());
     }
 }

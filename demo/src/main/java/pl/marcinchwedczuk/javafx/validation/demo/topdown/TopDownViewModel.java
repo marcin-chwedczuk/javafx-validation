@@ -49,6 +49,10 @@ public class TopDownViewModel {
                 "Mobile Phone: " + mobilePhone.getModelValue().toString() + "\n" +
                 "Fax: " + faxNumber.getModelValue().toString() + "\n" +
                 "Country: " + selectedCountry.getModelValue());
+
+        selectedCountry.reset();
+        mobilePhone.reset();
+        faxNumber.reset();
     }
 
     public ReadOnlyBooleanProperty showErrorBannerProperty() {

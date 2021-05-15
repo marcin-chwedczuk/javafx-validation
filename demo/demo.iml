@@ -34,8 +34,7 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.testfx:testfx-junit5:4.0.16-alpha" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.testfx:openjfx-monocle:jdk-12.0.1+2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest:2.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-swing:16" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-swing:mac:16" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.openjfx:javafx-swing:16" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.openjfx:javafx-swing:mac:16" level="project" />
   </component>
 </module>

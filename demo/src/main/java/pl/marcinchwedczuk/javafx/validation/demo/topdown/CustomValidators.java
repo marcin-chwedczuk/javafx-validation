@@ -22,11 +22,11 @@ public class CustomValidators {
                 Country country = countryProperty.get();
 
                 boolean isValid =
-                        (country != null) &&
-                        (value != null) &&
+                        (country == null) ||
+                        (value == null) ||
                         value.toString().startsWith(country.phonePrefix());
 
-                return new ValidationResult<>(value, Objections.errorIf(!isValid, "Wrong country code prefix"));
+                return new ValidationResult<>(value, Objections.errorIf(!isValid, "Wrong country code prefix."));
             }
 
             @Override
@@ -46,11 +46,11 @@ public class CustomValidators {
                 Country country = countryProperty.get();
 
                 boolean isValid =
-                        (country != null) &&
-                        (value != null) &&
+                        (country == null) ||
+                        (value == null) ||
                         value.toString().startsWith(country.phonePrefix());
 
-                return new ValidationResult<>(value, Objections.errorIf(!isValid, "Wrong country code prefix"));
+                return new ValidationResult<>(value, Objections.errorIf(!isValid, "Wrong country code prefix."));
             }
 
             @Override

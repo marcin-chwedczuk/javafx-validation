@@ -8,9 +8,13 @@ import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.Start;
 import pl.marcinchwedczuk.javafx.validation.demo.BaseSequentialJavaFXTest;
 import pl.marcinchwedczuk.javafx.validation.demo.inspectors.AlertInspector;
-import pl.marcinchwedczuk.javafx.validation.demo.range.NumberRangePageObject;
 
 public class TopDownIT extends BaseSequentialJavaFXTest {
+    private static final String PHONE_REQUIRED_MSG = "Phone number is required.";
+    private static final String FAX_REQUIRED_MSG = "Fax number is required.";
+    private static final String WRONG_COUNTRY_CODE_MSG = "Wrong country code prefix.";
+
+
     private final TopDownPageObject topDownPO;
 
     public TopDownIT(FxRobot robot) {
@@ -31,7 +35,7 @@ public class TopDownIT extends BaseSequentialJavaFXTest {
 
     @Order(10)
     @Test
-    void works(FxRobot robot) {
+    void entering_valid_data_results_in_ok_alert(FxRobot robot) {
         topDownPO.country()
                 .selectValue(Country.POLAND);
 
@@ -50,5 +54,85 @@ public class TopDownIT extends BaseSequentialJavaFXTest {
                         "Fax: +48 111 222 333\n" +
                         "Country: POLAND")
                 .closeByClickingOK();
+    }
+
+    @Order(20)
+    @Test
+    void after_clicking_validate_fields_are_empty() {
+        topDownPO.country()
+                .assertNoValueSelected();
+
+        topDownPO.mobile()
+                .assertEmpty();
+
+        topDownPO.fax()
+                .assertEmpty();
+    }
+
+    @Order(30)
+    @Test
+    void leaving_fields_empty_triggers_simple_validation() {
+        topDownPO.mobile().setText("");
+        topDownPO.fax().setText("");
+        topDownPO.moveFocusToWindow();
+
+        topDownPO.mobileErrors()
+                .assertShowsError(PHONE_REQUIRED_MSG);
+
+        topDownPO.faxErrors()
+                .assertShowsError(FAX_REQUIRED_MSG);
+    }
+
+    @Order(40)
+    @Test
+    void pushing_validate_buttons_shows_invalid_banner() {
+        topDownPO.clickValidateButton();
+
+        topDownPO.invalidBanner()
+                .assertVisible();
+    }
+
+    @Order(50)
+    @Test
+    void after_selecting_country_there_are_still_only_required_errors() {
+        topDownPO.country()
+                .selectValue(Country.RUSSIA);
+
+        topDownPO.mobileErrors()
+                .assertShowsError(PHONE_REQUIRED_MSG)
+                .assertDoesNotShowError(WRONG_COUNTRY_CODE_MSG);
+
+        topDownPO.faxErrors()
+                .assertShowsError(FAX_REQUIRED_MSG)
+                .assertDoesNotShowError(WRONG_COUNTRY_CODE_MSG);
+    }
+
+    @Order(60)
+    @Test
+    void after_putting_wrong_numbers_now_there_are_wrong_country_code_errors() {
+        topDownPO.mobile().setText("123");
+        topDownPO.fax().setText("123");
+        topDownPO.moveFocusToWindow();
+
+        topDownPO.mobileErrors()
+                .assertShowsError(WRONG_COUNTRY_CODE_MSG)
+                .assertDoesNotShowError(PHONE_REQUIRED_MSG);
+
+        topDownPO.faxErrors()
+                .assertShowsError(WRONG_COUNTRY_CODE_MSG)
+                .assertDoesNotShowError(FAX_REQUIRED_MSG);
+    }
+
+    @Order(70)
+    @Test
+    void after_putting_right_numbers_errors_disappear() {
+        topDownPO.mobile().setText("+7 123");
+        topDownPO.fax().setText("+7 123");
+        topDownPO.moveFocusToWindow();
+
+        topDownPO.mobileErrors()
+                .assertNoErrorVisible();
+        topDownPO.faxErrors()
+                .assertNoErrorVisible();
     }
 }
