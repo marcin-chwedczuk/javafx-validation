@@ -40,7 +40,7 @@ public class BannerInspector extends BaseControlInspector {
 
         assertThat(banner)
                 .as(makeDescription("text '" + banner.getText() + "'"))
-                .has(new Condition<>(b -> text.equals(b.getText()), "text '%s'", text));
+                .has(new Condition<>(b -> Objects.equals(text, b.getText()), "text '%s'", text));
     }
 
     private String makeDescription(String property) {

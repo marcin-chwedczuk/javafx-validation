@@ -14,7 +14,6 @@ public class TopDownIT extends BaseSequentialJavaFXTest {
     private static final String FAX_REQUIRED_MSG = "Fax number is required.";
     private static final String WRONG_COUNTRY_CODE_MSG = "Wrong country code prefix.";
 
-
     private final TopDownPageObject topDownPO;
 
     public TopDownIT(FxRobot robot) {
