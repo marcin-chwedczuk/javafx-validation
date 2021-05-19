@@ -5,10 +5,9 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import org.testfx.api.FxRobot;
-import pl.marcinchwedczuk.javafx.validation.demo.BaseJavaFXPageObject;
-import pl.marcinchwedczuk.javafx.validation.demo.inspectors.*;
-import pl.marcinchwedczuk.javafx.validation.demo.range.NumberRange;
-import pl.marcinchwedczuk.javafx.validation.extras.ValidationDecorator;
+import pl.marcinchwedczuk.javafx.validation.demo.inspectors.BannerInspector;
+import pl.marcinchwedczuk.javafx.validation.testutils.BaseJavaFXPageObject;
+import pl.marcinchwedczuk.javafx.validation.testutils.inspectors.*;
 
 public class TopDownPageObject extends BaseJavaFXPageObject<TopDownPageObject> {
     private final BannerInspector invalidBanner;

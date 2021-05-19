@@ -1,4 +1,4 @@
-package pl.marcinchwedczuk.javafx.validation.demo.utils;
+package pl.marcinchwedczuk.javafx.validation.testutils.utils;
 
 import org.junit.jupiter.api.extension.AfterAllCallback;
 import org.junit.jupiter.api.extension.BeforeAllCallback;

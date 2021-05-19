@@ -6,8 +6,8 @@ import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.Start;
 
 import javafx.stage.Stage;
-import pl.marcinchwedczuk.javafx.validation.demo.BaseSequentialJavaFXTest;
-import pl.marcinchwedczuk.javafx.validation.demo.inspectors.AlertInspector;
+import pl.marcinchwedczuk.javafx.validation.testutils.BaseSequentialJavaFXTest;
+import pl.marcinchwedczuk.javafx.validation.testutils.inspectors.AlertInspector;
 
 public class UserRegistrationIT extends BaseSequentialJavaFXTest {
     private final UserRegistrationPageObject userRegistrationPO;

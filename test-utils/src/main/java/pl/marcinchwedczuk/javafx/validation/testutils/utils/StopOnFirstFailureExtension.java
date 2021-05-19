@@ -1,4 +1,4 @@
-package pl.marcinchwedczuk.javafx.validation.demo.utils;
+package pl.marcinchwedczuk.javafx.validation.testutils.utils;
 
 import org.junit.jupiter.api.extension.ConditionEvaluationResult;
 import org.junit.jupiter.api.extension.ExecutionCondition;

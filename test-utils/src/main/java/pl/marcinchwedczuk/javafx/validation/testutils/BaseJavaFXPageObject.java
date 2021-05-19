@@ -1,10 +1,9 @@
-package pl.marcinchwedczuk.javafx.validation.demo;
+package pl.marcinchwedczuk.javafx.validation.testutils;
 
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import org.testfx.api.FxRobot;
-import pl.marcinchwedczuk.javafx.validation.demo.registration.UserRegistrationPageObject;
 
 import java.util.Objects;
 

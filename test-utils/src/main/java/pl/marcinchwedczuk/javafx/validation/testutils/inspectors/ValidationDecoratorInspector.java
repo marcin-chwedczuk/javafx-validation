@@ -1,4 +1,4 @@
-package pl.marcinchwedczuk.javafx.validation.demo.inspectors;
+package pl.marcinchwedczuk.javafx.validation.testutils.inspectors;
 
 import org.testfx.api.FxRobot;
 import org.testfx.assertions.api.Assertions;
@@ -9,7 +9,6 @@ import pl.marcinchwedczuk.javafx.validation.extras.ValidationDecorator;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
 import static pl.marcinchwedczuk.javafx.validation.ObjectionSeverity.ERROR;
 
 public class ValidationDecoratorInspector extends BaseControlInspector {

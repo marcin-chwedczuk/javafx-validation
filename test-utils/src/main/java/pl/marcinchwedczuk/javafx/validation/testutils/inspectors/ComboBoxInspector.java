@@ -1,11 +1,8 @@
-package pl.marcinchwedczuk.javafx.validation.demo.inspectors;
+package pl.marcinchwedczuk.javafx.validation.testutils.inspectors;
 
 import javafx.scene.control.ComboBox;
-import org.assertj.core.api.Condition;
 import org.testfx.api.FxRobot;
-import org.testfx.assertions.api.ComboBoxAssert;
 
-import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.assertj.core.api.Assertions.fail;

@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.Start;
-import pl.marcinchwedczuk.javafx.validation.demo.BaseSequentialJavaFXTest;
-import pl.marcinchwedczuk.javafx.validation.demo.inspectors.AlertInspector;
+import pl.marcinchwedczuk.javafx.validation.testutils.BaseSequentialJavaFXTest;
+import pl.marcinchwedczuk.javafx.validation.testutils.inspectors.AlertInspector;
 
 public class NumberRangeIT extends BaseSequentialJavaFXTest {
     private final NumberRangePageObject numberRangePO;

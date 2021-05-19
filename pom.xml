@@ -40,6 +40,7 @@
         <module>demo</module>
         <module>extras</module>
         <module>report</module>
+        <module>test-utils</module>
     </modules>
 
     <properties>
@@ -107,6 +108,11 @@
             <dependency>
                 <groupId>pl.marcinchwedczuk.javafx.validation</groupId>
                 <artifactId>demo</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pl.marcinchwedczuk.javafx.validation</groupId>
+                <artifactId>test-utils</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

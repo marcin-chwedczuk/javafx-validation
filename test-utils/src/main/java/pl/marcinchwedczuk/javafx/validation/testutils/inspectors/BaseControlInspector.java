@@ -1,4 +1,4 @@
-package pl.marcinchwedczuk.javafx.validation.demo.inspectors;
+package pl.marcinchwedczuk.javafx.validation.testutils.inspectors;
 
 import org.testfx.api.FxRobot;
 

@@ -1,4 +1,4 @@
-package pl.marcinchwedczuk.javafx.validation.demo.inspectors;
+package pl.marcinchwedczuk.javafx.validation.testutils.inspectors;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -8,9 +8,7 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 import static org.assertj.core.api.Assertions.fail;
 import static org.testfx.assertions.api.Assertions.assertThat;

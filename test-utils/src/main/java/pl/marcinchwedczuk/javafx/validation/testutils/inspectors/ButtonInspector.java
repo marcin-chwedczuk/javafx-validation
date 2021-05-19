@@ -1,8 +1,6 @@
-package pl.marcinchwedczuk.javafx.validation.demo.inspectors;
+package pl.marcinchwedczuk.javafx.validation.testutils.inspectors;
 
 import org.testfx.api.FxRobot;
-
-import java.util.Objects;
 
 public class ButtonInspector extends BaseControlInspector {
     public ButtonInspector(FxRobot robot, String fxid) {

@@ -1,17 +1,13 @@
 package pl.marcinchwedczuk.javafx.validation.demo.registration;
 
-import javafx.geometry.Bounds;
-import javafx.geometry.Point2D;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import org.testfx.api.FxRobot;
-import pl.marcinchwedczuk.javafx.validation.demo.BaseJavaFXPageObject;
-import pl.marcinchwedczuk.javafx.validation.demo.inspectors.*;
-
-import java.util.Objects;
+import pl.marcinchwedczuk.javafx.validation.demo.inspectors.BannerInspector;
+import pl.marcinchwedczuk.javafx.validation.testutils.BaseJavaFXPageObject;
+import pl.marcinchwedczuk.javafx.validation.testutils.inspectors.*;
 
 public class UserRegistrationPageObject extends BaseJavaFXPageObject<UserRegistrationPageObject> {
     private final BannerInspector invalidBanner;

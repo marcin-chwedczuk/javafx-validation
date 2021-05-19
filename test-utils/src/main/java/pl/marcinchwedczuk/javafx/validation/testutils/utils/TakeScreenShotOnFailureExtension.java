@@ -1,16 +1,12 @@
-package pl.marcinchwedczuk.javafx.validation.demo.utils;
+package pl.marcinchwedczuk.javafx.validation.testutils.utils;
 
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestExecutionExceptionHandler;
-import org.testfx.api.FxRobot;
 import org.testfx.util.DebugUtils;
 
-import java.io.File;
-import java.io.FileReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class TakeScreenShotOnFailureExtension implements TestExecutionExceptionHandler {

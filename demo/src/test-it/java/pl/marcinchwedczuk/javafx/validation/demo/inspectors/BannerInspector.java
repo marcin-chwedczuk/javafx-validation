@@ -2,8 +2,8 @@ package pl.marcinchwedczuk.javafx.validation.demo.inspectors;
 
 import org.assertj.core.api.Condition;
 import org.testfx.api.FxRobot;
-import org.testfx.assertions.api.Assertions;
 import pl.marcinchwedczuk.javafx.validation.demo.controls.Banner;
+import pl.marcinchwedczuk.javafx.validation.testutils.inspectors.BaseControlInspector;
 
 import java.util.Objects;
 

@@ -1,6 +1,5 @@
-package pl.marcinchwedczuk.javafx.validation.demo.utils;
+package pl.marcinchwedczuk.javafx.validation.testutils.utils;
 
-import org.assertj.core.internal.bytebuddy.implementation.attribute.AnnotationRetention;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestMethodOrder;

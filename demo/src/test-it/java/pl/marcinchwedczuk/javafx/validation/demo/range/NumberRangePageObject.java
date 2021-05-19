@@ -5,12 +5,11 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import org.testfx.api.FxRobot;
-import pl.marcinchwedczuk.javafx.validation.demo.BaseJavaFXPageObject;
 import pl.marcinchwedczuk.javafx.validation.demo.inspectors.BannerInspector;
-import pl.marcinchwedczuk.javafx.validation.demo.inspectors.ButtonInspector;
-import pl.marcinchwedczuk.javafx.validation.demo.inspectors.TextFieldInspector;
-import pl.marcinchwedczuk.javafx.validation.demo.inspectors.ValidationDecoratorInspector;
-import pl.marcinchwedczuk.javafx.validation.demo.registration.UserRegistration;
+import pl.marcinchwedczuk.javafx.validation.testutils.BaseJavaFXPageObject;
+import pl.marcinchwedczuk.javafx.validation.testutils.inspectors.ButtonInspector;
+import pl.marcinchwedczuk.javafx.validation.testutils.inspectors.TextFieldInspector;
+import pl.marcinchwedczuk.javafx.validation.testutils.inspectors.ValidationDecoratorInspector;
 
 public class NumberRangePageObject extends BaseJavaFXPageObject<NumberRangePageObject> {
     private final BannerInspector invalidBanner;

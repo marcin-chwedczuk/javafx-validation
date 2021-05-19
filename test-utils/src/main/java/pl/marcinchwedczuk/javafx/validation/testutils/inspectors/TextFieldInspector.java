@@ -1,20 +1,9 @@
-package pl.marcinchwedczuk.javafx.validation.demo.inspectors;
+package pl.marcinchwedczuk.javafx.validation.testutils.inspectors;
 
-import javafx.application.Platform;
-import javafx.css.Styleable;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.MouseButton;
-import org.assertj.core.api.Condition;
-import org.hamcrest.BaseMatcher;
-import org.hamcrest.Description;
-import org.hamcrest.SelfDescribing;
 import org.testfx.api.FxRobot;
-import org.testfx.api.FxRobotInterface;
-import org.testfx.assertions.api.Assertions;
-import org.testfx.util.WaitForAsyncUtils;
-
-import java.util.Objects;
 
 import static org.testfx.assertions.api.Assertions.assertThat;
 

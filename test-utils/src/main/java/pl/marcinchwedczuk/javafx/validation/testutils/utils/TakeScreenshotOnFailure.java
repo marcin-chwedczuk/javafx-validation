@@ -1,10 +1,6 @@
-package pl.marcinchwedczuk.javafx.validation.demo.utils;
+package pl.marcinchwedczuk.javafx.validation.testutils.utils;
 
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.testfx.framework.junit5.ApplicationExtension;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
