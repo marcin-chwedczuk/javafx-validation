@@ -1,11 +1,18 @@
 name: Build and run tests (CI)
 
-on: [push]
+on:
+  push:
+    # On which branch
+    branches: ["master"]
+    # On which files
+    # paths: ["scripts/scripts.js", "styles/styles.scss"]
+  schedule:
+    # Every Tuesday at 1PM UTC
+    - cron: "0 13 * * 2"
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 11
@@ -13,5 +20,12 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-      - name: Build with Maven
-        run: mvn --batch-mode --update-snapshots verify
+      - name: "Build and run unit-tests with Maven"
+        run: ./mvnw --batch-mode --update-snapshots clean verify
+      - name: "Run integration tests with Maven"
+        run: ./mvnw --batch-mode --update-snapshots verify -Dskip.integration.tests=false -Dskip.unit.tests=true
+        env:
+          _JAVA_OPTIONS: "-Djava.awt.headless=true -Dtestfx.robot=glass -Dtestfx.headless=true -Dprism.order=sw"
+      - name: "Perform release build and create package"
+        run: ./mvnw --batch-mode --update-snapshots clean package -Prelease-build
+
