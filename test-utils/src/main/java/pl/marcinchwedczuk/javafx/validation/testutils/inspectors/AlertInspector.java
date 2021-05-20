@@ -25,9 +25,9 @@ public class AlertInspector {
     public AlertInspector assertAlertWindowVisible() {
         String windowTitle =
                 type == Alert.AlertType.INFORMATION ? "Information" :
-                type == Alert.AlertType.WARNING ? "Warning" :
-                type == Alert.AlertType.ERROR ? "Error" :
-                "";
+                        type == Alert.AlertType.WARNING ? "Warning" :
+                                type == Alert.AlertType.ERROR ? "Error" :
+                                        "";
 
         try {
             // Convert name to regex
@@ -72,8 +72,7 @@ public class AlertInspector {
 
         if (matchingButtons.size() > 1) {
             fail("Found more than one button matching '%s' on dialog box.", text);
-        }
-        else if (matchingButtons.isEmpty()) {
+        } else if (matchingButtons.isEmpty()) {
             fail("No button matching text '%s' found on dialog box.", text);
         }
 
@@ -87,7 +86,7 @@ public class AlertInspector {
     private String dialogId() {
         return
                 type == Alert.AlertType.INFORMATION ? "#info-dialog" :
-                type == Alert.AlertType.WARNING ? "#warning-dialog" :
-                "";
+                        type == Alert.AlertType.WARNING ? "#warning-dialog" :
+                                "";
     }
 }

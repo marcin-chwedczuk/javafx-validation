@@ -1,7 +1,6 @@
 package pl.marcinchwedczuk.javafx.validation.extras;
 
 import org.junit.jupiter.api.Test;
-import pl.marcinchwedczuk.javafx.validation.extras.UiBindings;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

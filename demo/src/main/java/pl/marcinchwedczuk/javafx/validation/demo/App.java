@@ -10,7 +10,7 @@ import pl.marcinchwedczuk.javafx.validation.demo.mainwindow.Demo;
 public class App extends Application {
     @Override
     public void start(Stage stage) {
-        Demo.show();
+        Demo.showOn(stage);
     }
 
     public static void main(String[] args) {

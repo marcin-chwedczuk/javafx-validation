@@ -50,8 +50,8 @@ public class TopDownIT extends BaseSequentialJavaFXTest {
                 .assertAlertWindowVisible()
                 .assertHasText(
                         "Mobile Phone: +48 666 777 888\n" +
-                        "Fax: +48 111 222 333\n" +
-                        "Country: POLAND")
+                                "Fax: +48 111 222 333\n" +
+                                "Country: POLAND")
                 .closeByClickingOK();
     }
 

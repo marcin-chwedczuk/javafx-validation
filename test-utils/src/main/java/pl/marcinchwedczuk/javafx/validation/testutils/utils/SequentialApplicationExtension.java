@@ -11,7 +11,7 @@ import org.testfx.util.WaitForAsyncUtils;
  * executed in order, reusing current Stage state.
  */
 public class SequentialApplicationExtension extends ApplicationExtension
-    implements BeforeAllCallback, AfterAllCallback {
+        implements BeforeAllCallback, AfterAllCallback {
 
     @Override
     public void beforeAll(ExtensionContext extensionContext) throws Exception {

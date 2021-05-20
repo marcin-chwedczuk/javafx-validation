@@ -8,8 +8,6 @@ import pl.marcinchwedczuk.javafx.validation.demo.mainwindow.UiService;
 
 import java.util.Objects;
 
-import static pl.marcinchwedczuk.javafx.validation.StringValidators.nonBlank;
-
 public class NumberRangeViewModel {
     private final UiService uiService;
 
@@ -19,8 +17,8 @@ public class NumberRangeViewModel {
 
     public final Input<String, Integer> to =
             new Input<String, Integer>(Converters.stringIntegerConverter())
-                .withUiValidators(StringValidators.nonBlank())
-                .withModelValidator(IntegerValidators.validRangeWithStart(from.modelValueProperty(), IntegerValidators.RangeOptions.NON_EMPTY_RANGE));
+                    .withUiValidators(StringValidators.nonBlank())
+                    .withModelValidator(IntegerValidators.validRangeWithStart(from.modelValueProperty(), IntegerValidators.RangeOptions.NON_EMPTY_RANGE));
 
     private final ValidationGroup rangeForm = new ValidationGroup(from, to);
     private final BooleanProperty showErrorBanner = new SimpleBooleanProperty(false);

@@ -52,9 +52,9 @@ public class Banner extends HBox implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (msg == null) {
             // For some reason this field is not incjected in Scene builder
-            for (Node child: this.getChildrenUnmodifiable()) {
+            for (Node child : this.getChildrenUnmodifiable()) {
                 if (child instanceof Text) {
-                    this.msg = (Text)child;
+                    this.msg = (Text) child;
                     break;
                 }
             }
@@ -74,9 +74,11 @@ public class Banner extends HBox implements Initializable {
     public Type getType() {
         return type.get();
     }
+
     public ObjectProperty<Type> typeProperty() {
         return type;
     }
+
     public void setType(Type type) {
         this.type.set(type);
     }
@@ -84,9 +86,11 @@ public class Banner extends HBox implements Initializable {
     public String getText() {
         return text.get();
     }
+
     public StringProperty textProperty() {
         return text;
     }
+
     public void setText(String text) {
         this.text.set(text);
     }

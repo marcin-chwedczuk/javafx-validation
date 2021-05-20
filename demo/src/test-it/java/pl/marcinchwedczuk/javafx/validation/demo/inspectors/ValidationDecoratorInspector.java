@@ -66,8 +66,8 @@ public class ValidationDecoratorInspector extends BaseControlInspector {
     private String makeDescription(ObjectionSeverity severity) {
         return "ValidationDecorator(id=" + fxid + ") " + (
                 severity == ERROR ? "validation errors" :
-                severity == ObjectionSeverity.WARNING ? "validation warnings" :
-                "objections"
-                );
+                        severity == ObjectionSeverity.WARNING ? "validation warnings" :
+                                "objections"
+        );
     }
 }

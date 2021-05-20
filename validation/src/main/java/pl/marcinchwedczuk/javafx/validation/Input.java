@@ -21,7 +21,7 @@ import static java.util.stream.Collectors.toList;
  * @param <MV>
  */
 
-public class Input<UIV,MV> {
+public class Input<UIV, MV> {
     private final ObjectProperty<UIV> uiValue = new SimpleObjectProperty<>(this, "uiValue", null);
     private final ObjectProperty<MV> modelValue = new SimpleObjectProperty<>(this, "modelValue", null);
 
@@ -179,7 +179,7 @@ public class Input<UIV,MV> {
         objectionsProperty.setAll(objections);
     }
 
-    public Input<UIV,MV> withUiValidator(Validator<? super UIV> validator) {
+    public Input<UIV, MV> withUiValidator(Validator<? super UIV> validator) {
         this.uiValidators.add(validator);
         addDependenciesListener(validator);
         return this;
@@ -187,21 +187,21 @@ public class Input<UIV,MV> {
 
 
     @SafeVarargs
-    public final Input<UIV,MV> withUiValidators(Validator<? super UIV>... validators) {
+    public final Input<UIV, MV> withUiValidators(Validator<? super UIV>... validators) {
         for (Validator<? super UIV> v : validators) {
             withUiValidator(v);
         }
         return this;
     }
 
-    public Input<UIV,MV> withModelValidator(Validator<? super MV> validator) {
+    public Input<UIV, MV> withModelValidator(Validator<? super MV> validator) {
         this.modelValidators.add(validator);
         addDependenciesListener(validator);
         return this;
     }
 
     private void addDependenciesListener(Validator<?> validator) {
-        for (Observable dependency: validator.dependencies()) {
+        for (Observable dependency : validator.dependencies()) {
             validatorDependencyChangedLH.attachTo(dependency);
         }
     }
@@ -229,9 +229,11 @@ public class Input<UIV,MV> {
     public ObjectProperty<UIV> uiValueProperty() {
         return uiValue;
     }
+
     public UIV getUiValue() {
         return uiValueProperty().getValue();
     }
+
     public void setUiValue(UIV value) {
         uiValueProperty().setValue(value);
     }
@@ -239,9 +241,11 @@ public class Input<UIV,MV> {
     public ObjectProperty<MV> modelValueProperty() {
         return modelValue;
     }
+
     public MV getModelValue() {
         return modelValueProperty().getValue();
     }
+
     public void setModelValue(MV value) {
         modelValueProperty().setValue(value);
     }
@@ -249,6 +253,7 @@ public class Input<UIV,MV> {
     public ValidationState getValidationState() {
         return validationState.get();
     }
+
     public ObjectProperty<ValidationState> validationStateProperty() {
         return validationState;
     }
@@ -256,6 +261,7 @@ public class Input<UIV,MV> {
     public ReadOnlyListProperty<Objection> objectionsProperty() {
         return objectionsProperty;
     }
+
     public ObservableList<Objection> getObjections() {
         return objectionsProperty().get();
     }
@@ -263,6 +269,7 @@ public class Input<UIV,MV> {
     public boolean isPristine() {
         return pristine.get();
     }
+
     public BooleanProperty pristineProperty() {
         return pristine;
     }

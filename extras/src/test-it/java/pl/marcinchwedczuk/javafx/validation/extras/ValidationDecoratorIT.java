@@ -1,7 +1,6 @@
 package pl.marcinchwedczuk.javafx.validation.extras;
 
 import javafx.css.PseudoClass;
-import javafx.css.Styleable;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -13,8 +12,6 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 import pl.marcinchwedczuk.javafx.validation.Objections;
 import pl.marcinchwedczuk.javafx.validation.testutils.utils.TakeScreenshotOnFailure;
-
-import java.util.Optional;
 
 import static org.testfx.assertions.api.Assertions.assertThat;
 

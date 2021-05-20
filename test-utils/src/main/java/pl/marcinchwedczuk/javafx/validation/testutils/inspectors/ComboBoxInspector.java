@@ -6,7 +6,6 @@ import org.testfx.api.FxRobot;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.assertj.core.api.Assertions.fail;
-import static org.testfx.assertions.api.Assertions.assertThat;
 
 public class ComboBoxInspector<T> extends BaseControlInspector {
     public ComboBoxInspector(FxRobot robot, String fxid) {

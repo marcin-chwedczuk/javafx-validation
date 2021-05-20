@@ -8,7 +8,8 @@ import org.testfx.api.FxRobot;
 import pl.marcinchwedczuk.javafx.validation.demo.inspectors.BannerInspector;
 import pl.marcinchwedczuk.javafx.validation.demo.inspectors.ValidationDecoratorInspector;
 import pl.marcinchwedczuk.javafx.validation.testutils.BaseJavaFXPageObject;
-import pl.marcinchwedczuk.javafx.validation.testutils.inspectors.*;
+import pl.marcinchwedczuk.javafx.validation.testutils.inspectors.ButtonInspector;
+import pl.marcinchwedczuk.javafx.validation.testutils.inspectors.TextFieldInspector;
 
 public class UserRegistrationPageObject extends BaseJavaFXPageObject<UserRegistrationPageObject> {
     private final BannerInspector invalidBanner;
@@ -32,7 +33,9 @@ public class UserRegistrationPageObject extends BaseJavaFXPageObject<UserRegistr
     }
 
     @Override
-    protected UserRegistrationPageObject self() { return this; }
+    protected UserRegistrationPageObject self() {
+        return this;
+    }
 
     public BannerInspector invalidBanner() {
         return invalidBanner;

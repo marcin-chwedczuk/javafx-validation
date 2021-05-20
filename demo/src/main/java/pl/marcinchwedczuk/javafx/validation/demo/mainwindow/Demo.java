@@ -1,16 +1,10 @@
 package pl.marcinchwedczuk.javafx.validation.demo.mainwindow;
 
-import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.TitledPane;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import pl.marcinchwedczuk.javafx.validation.demo.controls.DebouncingEventHandler;
 import pl.marcinchwedczuk.javafx.validation.demo.controls.LayoutAwareVBox;
@@ -24,17 +18,14 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.ResourceBundle;
 
-import static java.util.stream.Collectors.joining;
-
 public class Demo implements Initializable {
-    public static Demo show() {
+    public static Demo showOn(Stage window) {
         try {
             FXMLLoader loader = new FXMLLoader(Demo.class.getResource("Demo.fxml"));
 
             Scene scene = new Scene(loader.load());
             Demo controller = (Demo) loader.getController();
 
-            Stage window = new Stage();
             window.setTitle("Validation Demo");
             window.setScene(scene);
             window.setResizable(false);
@@ -44,7 +35,7 @@ public class Demo implements Initializable {
                         System.out.println("RESIZE");
                         window.sizeToScene();
                     });
-            LayoutAwareVBox root = (LayoutAwareVBox)scene.getRoot();
+            LayoutAwareVBox root = (LayoutAwareVBox) scene.getRoot();
             root.addEventHandler(LayoutEvent.LAYOUT_EVENT_TYPE, resizeWindowEventHandler);
 
             window.show();

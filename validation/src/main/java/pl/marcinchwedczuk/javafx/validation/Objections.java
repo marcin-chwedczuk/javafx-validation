@@ -1,13 +1,13 @@
 package pl.marcinchwedczuk.javafx.validation;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toUnmodifiableList;
 
 public class Objections {
-    private Objections() { }
+    private Objections() {
+    }
 
     public static List<Objection> errorIf(boolean condition, String message) {
         return condition

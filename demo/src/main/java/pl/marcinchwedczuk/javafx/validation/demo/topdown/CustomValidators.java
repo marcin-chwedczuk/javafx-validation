@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class CustomValidators {
-    private CustomValidators() { }
+    private CustomValidators() {
+    }
 
     public static Validator<PhoneNumber> phoneHasCountryPrefix(ObjectProperty<Country> countryProperty) {
         Objects.requireNonNull(countryProperty);
@@ -23,8 +24,8 @@ public class CustomValidators {
 
                 boolean isValid =
                         (country == null) ||
-                        (value == null) ||
-                        value.toString().startsWith(country.phonePrefix());
+                                (value == null) ||
+                                value.toString().startsWith(country.phonePrefix());
 
                 return new ValidationResult<>(value, Objections.errorIf(!isValid, "Wrong country code prefix."));
             }
@@ -47,8 +48,8 @@ public class CustomValidators {
 
                 boolean isValid =
                         (country == null) ||
-                        (value == null) ||
-                        value.toString().startsWith(country.phonePrefix());
+                                (value == null) ||
+                                value.toString().startsWith(country.phonePrefix());
 
                 return new ValidationResult<>(value, Objections.errorIf(!isValid, "Wrong country code prefix."));
             }

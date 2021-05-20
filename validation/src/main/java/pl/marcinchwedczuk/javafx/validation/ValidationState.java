@@ -8,7 +8,7 @@ public enum ValidationState {
     public static ValidationState combine(ValidationState... states) {
         // Bieda reduce
         ValidationState result = VALID;
-        for (ValidationState state: states) {
+        for (ValidationState state : states) {
             result = combine(result, state);
         }
         return result;

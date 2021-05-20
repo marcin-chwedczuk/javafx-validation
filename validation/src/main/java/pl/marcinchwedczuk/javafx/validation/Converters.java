@@ -3,9 +3,10 @@ package pl.marcinchwedczuk.javafx.validation;
 import java.util.List;
 
 public class Converters {
-    private Converters() { }
+    private Converters() {
+    }
 
-    public static <A> ValidatingValueConverter<A,A> identityConverter() {
+    public static <A> ValidatingValueConverter<A, A> identityConverter() {
         return new ValidatingValueConverter<>() {
             @Override
             public ConversionResult<A, A> toModelValue(A uiValue) {

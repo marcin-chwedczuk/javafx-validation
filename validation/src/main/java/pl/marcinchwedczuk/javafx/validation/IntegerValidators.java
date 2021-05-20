@@ -10,7 +10,8 @@ import static pl.marcinchwedczuk.javafx.validation.IntegerValidators.RangeOption
 import static pl.marcinchwedczuk.javafx.validation.IntegerValidators.RangeOptions.NON_EMPTY_RANGE;
 
 public class IntegerValidators {
-    private IntegerValidators() {}
+    private IntegerValidators() {
+    }
 
     public static Validator<Integer> validRangeWithStart(ObservableValue<Integer> rangeStart, RangeOptions options) {
         Objects.requireNonNull(rangeStart);
@@ -22,9 +23,9 @@ public class IntegerValidators {
 
                 boolean isValid =
                         (start == null) ||
-                        (end == null) ||
-                        (start < end) ||
-                        ((options == ALLOW_EMPTY_RANGE) && (start.equals(end)));
+                                (end == null) ||
+                                (start < end) ||
+                                ((options == ALLOW_EMPTY_RANGE) && (start.equals(end)));
 
                 return new ValidationResult<Integer>(end,
                         Objections.errorIf(!isValid,

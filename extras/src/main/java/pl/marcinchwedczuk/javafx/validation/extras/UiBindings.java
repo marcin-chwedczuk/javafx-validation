@@ -14,7 +14,8 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class UiBindings {
-    private UiBindings() { }
+    private UiBindings() {
+    }
 
     public static <T> void biBind(TextField textControl, Input<String, T> modelInput) {
         biBind(textControl.textProperty(), modelInput);
@@ -22,8 +23,7 @@ public class UiBindings {
     }
 
     public static <T> void biBind(Property<T> uiProperty,
-                                  Input<T, ?> modelInput)
-    {
+                                  Input<T, ?> modelInput) {
         uiProperty.bindBidirectional(modelInput.uiValueProperty());
     }
 
@@ -31,7 +31,7 @@ public class UiBindings {
         return Bindings.createDoubleBinding(() -> mapping.apply(input.getValue()), input);
     }
 
-    public static <A,B> StringBinding map2(ReadOnlyProperty<A> inputA, ReadOnlyProperty<B> inputB, BiFunction<A, B, String> mapping) {
+    public static <A, B> StringBinding map2(ReadOnlyProperty<A> inputA, ReadOnlyProperty<B> inputB, BiFunction<A, B, String> mapping) {
         return Bindings.createStringBinding(
                 () -> mapping.apply(inputA.getValue(), inputB.getValue()),
                 inputA, inputB);
@@ -39,9 +39,8 @@ public class UiBindings {
 
     public static <T> void triggerOnFocusLost(
             ReadOnlyBooleanProperty focusProperty,
-            Input<T, ?> modelInput)
-    {
-        focusProperty.addListener((InvalidationListener)observable -> {
+            Input<T, ?> modelInput) {
+        focusProperty.addListener((InvalidationListener) observable -> {
             // Handle only focus lost
             if (!focusProperty.getValue()) {
                 modelInput.reevaluateUiValue();

@@ -15,4 +15,5 @@ import java.lang.annotation.Target;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface StopOnFirstFailure { }
+public @interface StopOnFirstFailure {
+}

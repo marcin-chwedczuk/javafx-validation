@@ -26,5 +26,6 @@ public enum Country {
     };
 
     abstract String countryCode();
+
     abstract String phonePrefix();
 }

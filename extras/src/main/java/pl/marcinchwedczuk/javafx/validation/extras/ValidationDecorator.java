@@ -38,9 +38,11 @@ public class ValidationDecorator extends Control {
     public final ObjectProperty<Node> contentProperty() {
         return contentProperty;
     }
+
     public final void setContent(Node value) {
         contentProperty().set(value);
     }
+
     public final Node getContent() {
         return contentProperty().get();
     }
@@ -48,9 +50,11 @@ public class ValidationDecorator extends Control {
     public final ListProperty<Objection> objectionsProperty() {
         return objectionsProperty;
     }
+
     public final ObservableList<Objection> getObjections() {
         return objectionsProperty.get();
     }
+
     public final void setObjections(ObservableList<Objection> objections) {
         objectionsProperty.set(objections);
     }
@@ -58,14 +62,16 @@ public class ValidationDecorator extends Control {
     public boolean isPristine() {
         return pristine.get();
     }
+
     public BooleanProperty pristineProperty() {
         return pristine;
     }
+
     public void setPristine(boolean pristine) {
         this.pristine.set(pristine);
     }
 
-    public <UIV,MV> void displayErrorsFor(Input<UIV, MV> input) {
+    public <UIV, MV> void displayErrorsFor(Input<UIV, MV> input) {
         this.objectionsProperty().bind(input.objectionsProperty());
         this.pristineProperty().bind(input.pristineProperty());
     }

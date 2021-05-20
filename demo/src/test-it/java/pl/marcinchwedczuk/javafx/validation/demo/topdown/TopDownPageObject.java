@@ -8,7 +8,9 @@ import org.testfx.api.FxRobot;
 import pl.marcinchwedczuk.javafx.validation.demo.inspectors.BannerInspector;
 import pl.marcinchwedczuk.javafx.validation.demo.inspectors.ValidationDecoratorInspector;
 import pl.marcinchwedczuk.javafx.validation.testutils.BaseJavaFXPageObject;
-import pl.marcinchwedczuk.javafx.validation.testutils.inspectors.*;
+import pl.marcinchwedczuk.javafx.validation.testutils.inspectors.ButtonInspector;
+import pl.marcinchwedczuk.javafx.validation.testutils.inspectors.ComboBoxInspector;
+import pl.marcinchwedczuk.javafx.validation.testutils.inspectors.TextFieldInspector;
 
 public class TopDownPageObject extends BaseJavaFXPageObject<TopDownPageObject> {
     private final BannerInspector invalidBanner;
@@ -42,7 +44,9 @@ public class TopDownPageObject extends BaseJavaFXPageObject<TopDownPageObject> {
     }
 
     @Override
-    protected TopDownPageObject self() { return this; }
+    protected TopDownPageObject self() {
+        return this;
+    }
 
     public BannerInspector invalidBanner() {
         return invalidBanner;

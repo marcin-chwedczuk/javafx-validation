@@ -1,89 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>parent-project</artifactId>
-    <groupId>pl.marcinchwedczuk.javafx.validation</groupId>
-    <version>0.1.0-SNAPSHOT</version>
-  </parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>parent-project</artifactId>
+        <groupId>pl.marcinchwedczuk.javafx.validation</groupId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
 
-  <artifactId>extras</artifactId>
-  <packaging>jar</packaging>
+    <artifactId>extras</artifactId>
+    <packaging>jar</packaging>
 
-  <name>${project.groupId}:${project.artifactId}</name>
-  <description>Extra controls and utils for validation library</description>
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>Extra controls and utils for validation library</description>
 
-  <properties>
-    <extra-jvm-options-when-running-tests>
-      --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
-      --add-opens javafx.graphics/com.sun.glass.ui=ALL-UNNAMED
+    <properties>
+        <extra-jvm-options-when-running-tests>
+            --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
+            --add-opens javafx.graphics/com.sun.glass.ui=ALL-UNNAMED
 
-      --add-opens pl.marcinchwedczuk.javafx.validation.extras/pl.marcinchwedczuk.javafx.validation.extras=ALL-UNNAMED
-      --add-opens pl.marcinchwedczuk.javafx.validation/pl.marcinchwedczuk.javafx.validation=ALL-UNNAMED
-    </extra-jvm-options-when-running-tests>
-  </properties>
+            --add-opens
+            pl.marcinchwedczuk.javafx.validation.extras/pl.marcinchwedczuk.javafx.validation.extras=ALL-UNNAMED
+            --add-opens pl.marcinchwedczuk.javafx.validation/pl.marcinchwedczuk.javafx.validation=ALL-UNNAMED
+        </extra-jvm-options-when-running-tests>
+    </properties>
 
-  <dependencies>
-    <dependency>
-      <groupId>pl.marcinchwedczuk.javafx.validation</groupId>
-      <artifactId>validation</artifactId>
-    </dependency>
+    <dependencies>
+        <dependency>
+            <groupId>pl.marcinchwedczuk.javafx.validation</groupId>
+            <artifactId>validation</artifactId>
+        </dependency>
 
-    <!-- External -->
-    <dependency>
-      <groupId>org.openjfx</groupId>
-      <artifactId>javafx-controls</artifactId>
-    </dependency>
+        <!-- External -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+        </dependency>
 
-    <!-- Test dependencies -->
-    <dependency>
-      <groupId>pl.marcinchwedczuk.javafx.validation</groupId>
-      <artifactId>test-utils</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.assertj</groupId>
-      <artifactId>assertj-core</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.testfx</groupId>
-      <artifactId>testfx-core</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.testfx</groupId>
-      <artifactId>testfx-junit5</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.testfx</groupId>
-      <artifactId>openjfx-monocle</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.openjfx</groupId>
-      <artifactId>javafx-swing</artifactId>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>pl.marcinchwedczuk.javafx.validation</groupId>
+            <artifactId>test-utils</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testfx</groupId>
+            <artifactId>testfx-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testfx</groupId>
+            <artifactId>testfx-junit5</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testfx</groupId>
+            <artifactId>openjfx-monocle</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
-  <profiles>
-    <profile>
-      <id>release-build</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.sonatype.plugins</groupId>
-            <artifactId>nexus-staging-maven-plugin</artifactId>
-            <version>${nexus-staging.plugin.version}</version>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
+    <profiles>
+        <profile>
+            <id>release-build</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>${nexus-staging.plugin.version}</version>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

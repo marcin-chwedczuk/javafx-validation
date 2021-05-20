@@ -3,7 +3,8 @@ package pl.marcinchwedczuk.javafx.validation;
 import java.util.Objects;
 
 public class ObjectValidators {
-    private ObjectValidators() { }
+    private ObjectValidators() {
+    }
 
     public static Validator<Object> required() {
         return required("Value is required.");

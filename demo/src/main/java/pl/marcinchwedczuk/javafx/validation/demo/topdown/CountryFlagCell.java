@@ -2,7 +2,8 @@ package pl.marcinchwedczuk.javafx.validation.demo.topdown;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.css.*;
+import javafx.css.Size;
+import javafx.css.SizeUnits;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -42,9 +43,11 @@ public class CountryFlagCell extends ListCell<Country> {
     public double getImageHeight() {
         return imageHeight.get();
     }
+
     public DoubleProperty imageHeightProperty() {
         return imageHeight;
     }
+
     public void setImageHeight(double imageHeight) {
         this.imageHeight.set(imageHeight);
     }

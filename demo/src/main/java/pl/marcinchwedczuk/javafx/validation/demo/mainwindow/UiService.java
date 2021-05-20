@@ -1,9 +1,6 @@
 package pl.marcinchwedczuk.javafx.validation.demo.mainwindow;
 
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-
-import java.util.Optional;
 
 public class UiService {
 

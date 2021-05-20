@@ -1,7 +1,6 @@
 package pl.marcinchwedczuk.javafx.validation.testutils.inspectors;
 
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputControl;
 import javafx.scene.input.MouseButton;
 import org.testfx.api.FxRobot;
 
@@ -22,17 +21,17 @@ public class TextFieldInspector extends BaseControlInspector {
         TextField control = control();
 
         robot
-            .interact(() -> control.clear())
-            .clickOn(control, MouseButton.PRIMARY)
-            .write(text);
+                .interact(() -> control.clear())
+                .clickOn(control, MouseButton.PRIMARY)
+                .write(text);
 
         return this;
     }
 
     public TextFieldInspector assertEmpty() {
         assertThat(control().getText())
-            .as("TextField[#" + fxid + "] should be empty.")
-            .isNullOrEmpty();
+                .as("TextField[#" + fxid + "] should be empty.")
+                .isNullOrEmpty();
 
         return this;
     }

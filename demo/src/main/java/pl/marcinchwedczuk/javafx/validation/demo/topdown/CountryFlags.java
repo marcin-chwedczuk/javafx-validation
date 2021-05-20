@@ -7,7 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CountryFlags {
-    private CountryFlags() { }
+    private CountryFlags() {
+    }
 
     // Poor man's cache...
     private static final Map<String, Image> flagImagesCache = new HashMap<>();

@@ -1,9 +1,8 @@
 package pl.marcinchwedczuk.javafx.validation;
 
 import org.junit.jupiter.api.Test;
-import pl.marcinchwedczuk.javafx.validation.Converters;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ConvertersTest {
     @Test

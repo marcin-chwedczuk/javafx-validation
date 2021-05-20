@@ -1,11 +1,11 @@
 package pl.marcinchwedczuk.javafx.validation.demo.registration;
 
 import javafx.scene.control.Alert;
-import org.junit.jupiter.api.*;
+import javafx.stage.Stage;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.Start;
-
-import javafx.stage.Stage;
 import pl.marcinchwedczuk.javafx.validation.testutils.BaseSequentialJavaFXTest;
 import pl.marcinchwedczuk.javafx.validation.testutils.inspectors.AlertInspector;
 
@@ -65,9 +65,9 @@ public class UserRegistrationIT extends BaseSequentialJavaFXTest {
         userRegistrationPO.moveFocusToWindow();
 
         userRegistrationPO.usernameErrors()
-            .assertShowsError("Value is required.")
-            .assertShowsError("Value must be at least 2 and at most 15 characters long.")
-            .assertShowsError("Username can only consists of underscore, lower-case letters and digits and cannot start with a digit.");
+                .assertShowsError("Value is required.")
+                .assertShowsError("Value must be at least 2 and at most 15 characters long.")
+                .assertShowsError("Username can only consists of underscore, lower-case letters and digits and cannot start with a digit.");
     }
 
     @Order(40)

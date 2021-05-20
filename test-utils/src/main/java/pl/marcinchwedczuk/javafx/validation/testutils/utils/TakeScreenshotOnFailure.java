@@ -10,4 +10,5 @@ import java.lang.annotation.Target;
 @ExtendWith(TakeScreenShotOnFailureExtension.class)
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface TakeScreenshotOnFailure { }
+public @interface TakeScreenshotOnFailure {
+}

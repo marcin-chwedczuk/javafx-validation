@@ -6,10 +6,10 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import org.testfx.api.FxRobot;
 import pl.marcinchwedczuk.javafx.validation.demo.inspectors.BannerInspector;
+import pl.marcinchwedczuk.javafx.validation.demo.inspectors.ValidationDecoratorInspector;
 import pl.marcinchwedczuk.javafx.validation.testutils.BaseJavaFXPageObject;
 import pl.marcinchwedczuk.javafx.validation.testutils.inspectors.ButtonInspector;
 import pl.marcinchwedczuk.javafx.validation.testutils.inspectors.TextFieldInspector;
-import pl.marcinchwedczuk.javafx.validation.demo.inspectors.ValidationDecoratorInspector;
 
 public class NumberRangePageObject extends BaseJavaFXPageObject<NumberRangePageObject> {
     private final BannerInspector invalidBanner;
@@ -37,7 +37,9 @@ public class NumberRangePageObject extends BaseJavaFXPageObject<NumberRangePageO
     }
 
     @Override
-    protected NumberRangePageObject self() { return this; }
+    protected NumberRangePageObject self() {
+        return this;
+    }
 
     public BannerInspector invalidBanner() {
         return invalidBanner;
