@@ -24,6 +24,8 @@ public class ValidationDecorator extends Control {
             new SimpleObjectProperty<Node>(this, "content", null);
 
     public ValidationDecorator() {
+        this.getStyleClass().setAll("validation-decorator");
+
         this.setPrefHeight(Region.USE_COMPUTED_SIZE);
         this.setPrefWidth(Region.USE_COMPUTED_SIZE);
     }

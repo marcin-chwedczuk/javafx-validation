@@ -9,7 +9,7 @@ import pl.marcinchwedczuk.javafx.validation.demo.inspectors.BannerInspector;
 import pl.marcinchwedczuk.javafx.validation.testutils.BaseJavaFXPageObject;
 import pl.marcinchwedczuk.javafx.validation.testutils.inspectors.ButtonInspector;
 import pl.marcinchwedczuk.javafx.validation.testutils.inspectors.TextFieldInspector;
-import pl.marcinchwedczuk.javafx.validation.testutils.inspectors.ValidationDecoratorInspector;
+import pl.marcinchwedczuk.javafx.validation.demo.inspectors.ValidationDecoratorInspector;
 
 public class NumberRangePageObject extends BaseJavaFXPageObject<NumberRangePageObject> {
     private final BannerInspector invalidBanner;

@@ -19,8 +19,8 @@ import pl.marcinchwedczuk.javafx.validation.Objections;
 import java.util.List;
 
 class ValidationDecoratorSkin extends SkinBase<ValidationDecorator> {
-    private static PseudoClass CSS_WITH_ERRORS = PseudoClass.getPseudoClass("with-errors");
-    private static PseudoClass CSS_WITH_WARNINGS = PseudoClass.getPseudoClass("with-warnings");
+    public static PseudoClass CSS_WITH_ERRORS = PseudoClass.getPseudoClass("with-errors");
+    public static PseudoClass CSS_WITH_WARNINGS = PseudoClass.getPseudoClass("with-warnings");
 
     private final VBox rootNode;
     private final VBox componentContainer;
@@ -30,7 +30,7 @@ class ValidationDecoratorSkin extends SkinBase<ValidationDecorator> {
         super(control);
 
         rootNode = new VBox();
-        rootNode.getStyleClass().setAll("validation-decorator");
+        rootNode.getStyleClass().setAll("root-container");
 
         componentContainer = new VBox();
         componentContainer.getStyleClass().setAll("component-container");

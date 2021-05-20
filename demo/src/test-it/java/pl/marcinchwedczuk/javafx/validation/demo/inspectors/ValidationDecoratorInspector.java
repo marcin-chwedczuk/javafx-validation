@@ -1,4 +1,4 @@
-package pl.marcinchwedczuk.javafx.validation.testutils.inspectors;
+package pl.marcinchwedczuk.javafx.validation.demo.inspectors;
 
 import org.testfx.api.FxRobot;
 import org.testfx.assertions.api.Assertions;
@@ -6,11 +6,13 @@ import pl.marcinchwedczuk.javafx.validation.Objection;
 import pl.marcinchwedczuk.javafx.validation.ObjectionSeverity;
 import pl.marcinchwedczuk.javafx.validation.Objections;
 import pl.marcinchwedczuk.javafx.validation.extras.ValidationDecorator;
+import pl.marcinchwedczuk.javafx.validation.testutils.inspectors.BaseControlInspector;
 
 import java.util.List;
 
 import static pl.marcinchwedczuk.javafx.validation.ObjectionSeverity.ERROR;
 
+// TODO: Extract to extras-test package
 public class ValidationDecoratorInspector extends BaseControlInspector {
     public ValidationDecoratorInspector(FxRobot robot, String fxid) {
         super(robot, fxid);

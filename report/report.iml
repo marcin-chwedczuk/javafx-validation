@@ -16,9 +16,6 @@
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:mac:16" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:16" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:mac:16" level="project" />
-    <orderEntry type="module" module-name="demo" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:16" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:mac:16" level="project" />
     <orderEntry type="module" module-name="test-utils" />
     <orderEntry type="library" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.6.2" level="project" />
     <orderEntry type="library" name="Maven: org.apiguardian:apiguardian-api:1.1.0" level="project" />
@@ -33,5 +30,8 @@
     <orderEntry type="library" name="Maven: org.testfx:openjfx-monocle:jdk-12.0.1+2" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-swing:16" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-swing:mac:16" level="project" />
+    <orderEntry type="module" module-name="demo" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:16" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:mac:16" level="project" />
   </component>
 </module>
