@@ -13,7 +13,6 @@ public class StringValidators {
 
     public static Validator<String> nonBlank(String message) {
         Objects.requireNonNull(message);
-
         return new Validator<>() {
             @Override
             public <VALIDATED extends String> ValidationResult<VALIDATED> validate(VALIDATED value) {
