@@ -23,6 +23,11 @@
             <artifactId>validation</artifactId>
         </dependency>
 
+        <!-- External -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+        </dependency>
         <dependency>
             <!-- TODO: Use api only -->
             <groupId>org.junit.jupiter</groupId>
