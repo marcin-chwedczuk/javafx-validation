@@ -18,6 +18,7 @@
     <properties>
         <extra-jvm-options-when-running-tests>
             --add-opens pl.marcinchwedczuk.javafx.validation/pl.marcinchwedczuk.javafx.validation=ALL-UNNAMED
+            --add-opens pl.marcinchwedczuk.javafx.validation/pl.marcinchwedczuk.javafx.validation.converters=ALL-UNNAMED
         </extra-jvm-options-when-running-tests>
     </properties>
 
