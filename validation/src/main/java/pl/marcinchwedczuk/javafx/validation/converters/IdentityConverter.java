@@ -5,7 +5,7 @@ import pl.marcinchwedczuk.javafx.validation.ValidatingValueConverter;
 
 import java.util.List;
 
-public class IdentityConverter<A> implements ValidatingValueConverter<A, A> {
+class IdentityConverter<A> implements ValidatingValueConverter<A, A> {
     @Override
     public ConversionResult<A, A> toModelValue(A uiValue) {
         return new ConversionResult<>(uiValue, uiValue, List.of());

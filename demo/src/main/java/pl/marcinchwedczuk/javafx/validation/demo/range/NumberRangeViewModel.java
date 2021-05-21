@@ -4,7 +4,10 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import pl.marcinchwedczuk.javafx.validation.*;
+import pl.marcinchwedczuk.javafx.validation.converters.Converters;
 import pl.marcinchwedczuk.javafx.validation.demo.mainwindow.UiService;
+import pl.marcinchwedczuk.javafx.validation.validators.IntegerValidators;
+import pl.marcinchwedczuk.javafx.validation.validators.StringValidators;
 
 import java.util.Objects;
 
@@ -18,7 +21,7 @@ public class NumberRangeViewModel {
     public final Input<String, Integer> to =
             new Input<String, Integer>(Converters.stringIntegerConverter())
                     .withUiValidators(StringValidators.nonBlank())
-                    .withModelValidator(IntegerValidators.validRangeWithStart(from.modelValueProperty(), IntegerValidators.RangeOptions.NON_EMPTY_RANGE));
+                    .withModelValidator(IntegerValidators.validRangeWithStart(from.modelValueProperty(), IntegerValidators.RangeOptions.DISALLOW_EMPTY_RANGE));
 
     private final ValidationGroup rangeForm = new ValidationGroup(from, to);
     private final BooleanProperty showErrorBanner = new SimpleBooleanProperty(false);

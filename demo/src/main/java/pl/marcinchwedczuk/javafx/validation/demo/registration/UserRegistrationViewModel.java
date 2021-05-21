@@ -4,9 +4,9 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import pl.marcinchwedczuk.javafx.validation.Converters;
+import pl.marcinchwedczuk.javafx.validation.converters.Converters;
 import pl.marcinchwedczuk.javafx.validation.Input;
-import pl.marcinchwedczuk.javafx.validation.StringValidators;
+import pl.marcinchwedczuk.javafx.validation.validators.StringValidators;
 import pl.marcinchwedczuk.javafx.validation.ValidationGroup;
 import pl.marcinchwedczuk.javafx.validation.demo.mainwindow.UiService;
 

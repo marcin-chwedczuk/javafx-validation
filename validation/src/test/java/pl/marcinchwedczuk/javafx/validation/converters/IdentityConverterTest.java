@@ -1,10 +1,6 @@
 package pl.marcinchwedczuk.javafx.validation.converters;
 
 import org.junit.jupiter.api.Test;
-import pl.marcinchwedczuk.javafx.validation.Converters;
-import pl.marcinchwedczuk.javafx.validation.ValidatingValueConverter;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class IdentityConverterTest extends BaseConverterTest {
     @Test

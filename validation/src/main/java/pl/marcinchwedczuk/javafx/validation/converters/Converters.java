@@ -1,5 +1,6 @@
-package pl.marcinchwedczuk.javafx.validation;
+package pl.marcinchwedczuk.javafx.validation.converters;
 
+import pl.marcinchwedczuk.javafx.validation.ValidatingValueConverter;
 import pl.marcinchwedczuk.javafx.validation.converters.IdentityConverter;
 import pl.marcinchwedczuk.javafx.validation.converters.StringIntegerConverter;
 

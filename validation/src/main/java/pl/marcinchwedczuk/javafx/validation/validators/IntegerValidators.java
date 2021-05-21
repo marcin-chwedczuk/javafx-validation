@@ -1,13 +1,16 @@
-package pl.marcinchwedczuk.javafx.validation;
+package pl.marcinchwedczuk.javafx.validation.validators;
 
 import javafx.beans.Observable;
 import javafx.beans.value.ObservableValue;
+import pl.marcinchwedczuk.javafx.validation.Objections;
+import pl.marcinchwedczuk.javafx.validation.ValidationResult;
+import pl.marcinchwedczuk.javafx.validation.Validator;
 
 import java.util.List;
 import java.util.Objects;
 
-import static pl.marcinchwedczuk.javafx.validation.IntegerValidators.RangeOptions.ALLOW_EMPTY_RANGE;
-import static pl.marcinchwedczuk.javafx.validation.IntegerValidators.RangeOptions.NON_EMPTY_RANGE;
+import static pl.marcinchwedczuk.javafx.validation.validators.IntegerValidators.RangeOptions.ALLOW_EMPTY_RANGE;
+import static pl.marcinchwedczuk.javafx.validation.validators.IntegerValidators.RangeOptions.DISALLOW_EMPTY_RANGE;
 
 public class IntegerValidators {
     private IntegerValidators() {
@@ -27,11 +30,15 @@ public class IntegerValidators {
                                 (start < end) ||
                                 ((options == ALLOW_EMPTY_RANGE) && (start.equals(end)));
 
-                return new ValidationResult<Integer>(end,
-                        Objections.errorIf(!isValid,
-                                String.format(
-                                        "Invalid range of numbers: %d (this number) must be %s than %d.",
-                                        end, ((options == NON_EMPTY_RANGE) ? "greater" : "greater or equal"), start)));
+                if (isValid) {
+                    return ValidationResult.success(end);
+                }
+                else {
+                    return ValidationResult.failure(end,
+                            Objections.error(String.format(
+                                "Invalid range of numbers: %d (this number) must be %s than %d.",
+                                end, ((options == DISALLOW_EMPTY_RANGE) ? "greater" : "greater or equal"), start)));
+                }
             }
 
             @Override
@@ -43,6 +50,6 @@ public class IntegerValidators {
 
     public enum RangeOptions {
         ALLOW_EMPTY_RANGE,
-        NON_EMPTY_RANGE
+        DISALLOW_EMPTY_RANGE
     }
 }

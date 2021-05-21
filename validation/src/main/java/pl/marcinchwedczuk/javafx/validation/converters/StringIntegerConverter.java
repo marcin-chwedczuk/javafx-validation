@@ -4,7 +4,7 @@ import pl.marcinchwedczuk.javafx.validation.ConversionResult;
 import pl.marcinchwedczuk.javafx.validation.Objections;
 import pl.marcinchwedczuk.javafx.validation.ValidatingValueConverter;
 
-public class StringIntegerConverter implements ValidatingValueConverter<String, Integer> {
+class StringIntegerConverter implements ValidatingValueConverter<String, Integer> {
     @Override
     public ConversionResult<String, Integer> toModelValue(String uiValue) {
         try {

@@ -3,7 +3,10 @@ package pl.marcinchwedczuk.javafx.validation.demo.topdown;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import pl.marcinchwedczuk.javafx.validation.*;
+import pl.marcinchwedczuk.javafx.validation.converters.Converters;
 import pl.marcinchwedczuk.javafx.validation.demo.mainwindow.UiService;
+import pl.marcinchwedczuk.javafx.validation.validators.ObjectValidators;
+import pl.marcinchwedczuk.javafx.validation.validators.StringValidators;
 
 import java.util.Objects;
 

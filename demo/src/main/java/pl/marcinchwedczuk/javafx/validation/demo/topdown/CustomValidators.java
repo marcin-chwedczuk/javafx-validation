@@ -2,6 +2,7 @@ package pl.marcinchwedczuk.javafx.validation.demo.topdown;
 
 import javafx.beans.Observable;
 import javafx.beans.property.ObjectProperty;
+import pl.marcinchwedczuk.javafx.validation.Objection;
 import pl.marcinchwedczuk.javafx.validation.Objections;
 import pl.marcinchwedczuk.javafx.validation.ValidationResult;
 import pl.marcinchwedczuk.javafx.validation.Validator;
@@ -27,7 +28,12 @@ public class CustomValidators {
                                 (value == null) ||
                                 value.toString().startsWith(country.phonePrefix());
 
-                return new ValidationResult<>(value, Objections.errorIf(!isValid, "Wrong country code prefix."));
+                if (isValid) {
+                    return ValidationResult.success(value);
+                }
+                else {
+                    return ValidationResult.failure(value, Objections.error("Wrong country code prefix."));
+                }
             }
 
             @Override
@@ -51,7 +57,12 @@ public class CustomValidators {
                                 (value == null) ||
                                 value.toString().startsWith(country.phonePrefix());
 
-                return new ValidationResult<>(value, Objections.errorIf(!isValid, "Wrong country code prefix."));
+                if (isValid) {
+                    return ValidationResult.success(value);
+                }
+                else {
+                    return ValidationResult.failure(value, Objections.error("Wrong country code prefix."));
+                }
             }
 
             @Override
