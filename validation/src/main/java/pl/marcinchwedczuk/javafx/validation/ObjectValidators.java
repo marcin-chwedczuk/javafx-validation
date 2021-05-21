@@ -15,7 +15,7 @@ public class ObjectValidators {
 
         return new Validator<>() {
             @Override
-            public <VALIDATED> ValidationResult<VALIDATED> validate(VALIDATED value) {
+            public <TT> ValidationResult<TT> validate(TT value) {
                 boolean isValid = (value != null);
                 return new ValidationResult<>(value, Objections.errorIf(!isValid, message));
             }

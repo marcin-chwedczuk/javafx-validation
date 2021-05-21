@@ -18,8 +18,8 @@ public class CustomValidators {
 
         return new Validator<>() {
             @Override
-            public <VALIDATED extends PhoneNumber>
-            ValidationResult<VALIDATED> validate(VALIDATED value) {
+            public <TT extends PhoneNumber>
+            ValidationResult<TT> validate(TT value) {
                 Country country = countryProperty.get();
 
                 boolean isValid =
@@ -42,8 +42,8 @@ public class CustomValidators {
 
         return new Validator<>() {
             @Override
-            public <VALIDATED extends FaxNumber>
-            ValidationResult<VALIDATED> validate(VALIDATED value) {
+            public <TT extends FaxNumber>
+            ValidationResult<TT> validate(TT value) {
                 Country country = countryProperty.get();
 
                 boolean isValid =
