@@ -1,9 +1,9 @@
-package pl.marcinchwedczuk.javafx.validation;
+package pl.marcinchwedczuk.javafx.validation.impl;
 
 import org.junit.jupiter.api.Test;
+import pl.marcinchwedczuk.javafx.validation.impl.ValueDeduper;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ValueDeduperTest {
 

@@ -4,6 +4,7 @@ import javafx.beans.Observable;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import pl.marcinchwedczuk.javafx.validation.impl.ValueDeduper;
 
 import java.util.ArrayList;
 import java.util.List;

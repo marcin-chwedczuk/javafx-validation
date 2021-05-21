@@ -27,7 +27,7 @@ public abstract class BaseConverterTest {
                 .isEqualTo(uiValue);
     }
 
-    protected <UIV,MV> void assertFailsWithObjections(
+    protected <UIV,MV> void assertUiToModelConvertionFails(
             ValidatingValueConverter<UIV, MV> converter,
             UIV uiValue,
             Objection... expectedObjections)

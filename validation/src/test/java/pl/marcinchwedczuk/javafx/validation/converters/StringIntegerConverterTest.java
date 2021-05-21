@@ -3,10 +3,7 @@ package pl.marcinchwedczuk.javafx.validation.converters;
 import org.junit.jupiter.api.Test;
 import pl.marcinchwedczuk.javafx.validation.Objections;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class StringIntegerConverterTest extends BaseConverterTest {
-
     @Test
     public void converter_works() {
         StringIntegerConverter converter = new StringIntegerConverter();
@@ -17,9 +14,7 @@ class StringIntegerConverterTest extends BaseConverterTest {
 
         assertConvertsBetween(converter, null, null);
 
-        assertFailsWithObjections(converter, "abc",
+        assertUiToModelConvertionFails(converter, "abc",
                 Objections.error("Cannot convert 'abc' to a number."));
     }
-
-
 }

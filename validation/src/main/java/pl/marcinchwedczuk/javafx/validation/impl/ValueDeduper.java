@@ -1,4 +1,4 @@
-package pl.marcinchwedczuk.javafx.validation;
+package pl.marcinchwedczuk.javafx.validation.impl;
 
 public class ValueDeduper<V> {
     private V prev = null;
