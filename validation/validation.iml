@@ -3,11 +3,11 @@
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_11">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
-    <content url="file://$MODULE_DIR$/../validation">
-      <sourceFolder url="file://$MODULE_DIR$/../validation/src/main/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../validation/src/test/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../validation/src/test/resources" type="java-test-resource" />
-      <excludeFolder url="file://$MODULE_DIR$/../validation/target" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -20,5 +20,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-commons:1.6.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-api:5.6.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.assertj:assertj-core:3.16.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: nl.jqno.equalsverifier:equalsverifier:3.6.1" level="project" />
   </component>
 </module>

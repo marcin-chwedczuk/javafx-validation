@@ -1,5 +1,8 @@
 package pl.marcinchwedczuk.javafx.validation;
 
+import pl.marcinchwedczuk.javafx.validation.impl.EqualsBuilder;
+import pl.marcinchwedczuk.javafx.validation.impl.ToStringBuilder;
+
 import java.util.Objects;
 
 public class Objection {
@@ -13,19 +16,21 @@ public class Objection {
 
     @Override
     public String toString() {
-        return "Objection{" +
-                "userMessage='" + userMessage + '\'' +
-                ", severity=" + severity +
-                '}';
+        return new ToStringBuilder(Objection.class)
+                .appendField("userMessage", userMessage)
+                .appendField("severity", severity)
+                .toString();
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Objection objection = (Objection) o;
-        return userMessage.equals(objection.userMessage) &&
-                severity == objection.severity;
+        if (!(o instanceof Objection)) { return false; }
+        Objection other = (Objection)o;
+
+        return new EqualsBuilder()
+                .equals(this.userMessage, other.userMessage)
+                .equals(this.severity, other.severity)
+                .isEqual();
     }
 
     @Override
