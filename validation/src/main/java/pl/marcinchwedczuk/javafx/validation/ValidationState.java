@@ -6,7 +6,6 @@ public enum ValidationState {
     NOT_RUN;
 
     public static ValidationState combine(ValidationState... states) {
-        // Bieda reduce
         ValidationState result = VALID;
         for (ValidationState state : states) {
             result = combine(result, state);

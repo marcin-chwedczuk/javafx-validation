@@ -42,14 +42,14 @@ public class Input<UIV, MV> {
 
     private final List<Validator<? super UIV>> uiValidators = new ArrayList<>();
     private final List<Validator<? super MV>> modelValidators = new ArrayList<>();
-    private final ValidatingValueConverter<UIV, MV> converter;
+    private final ValueConverter<UIV, MV> converter;
 
     private final BooleanProperty pristine = new SimpleBooleanProperty(this, "pristine", true);
 
     private final InvalidationListenerHandle validatorDependencyChangedLH =
             new InvalidationListenerHandle(this::onValidatorDependencyChanged);
 
-    public Input(ValidatingValueConverter<UIV, MV> converter) {
+    public Input(ValueConverter<UIV, MV> converter) {
         this.converter = Objects.requireNonNull(converter);
 
         this.uiValue.addListener(observable -> {

@@ -1,7 +1,7 @@
 package pl.marcinchwedczuk.javafx.validation.demo.topdown;
 
 import pl.marcinchwedczuk.javafx.validation.ConversionResult;
-import pl.marcinchwedczuk.javafx.validation.ValidatingValueConverter;
+import pl.marcinchwedczuk.javafx.validation.ValueConverter;
 
 import java.util.List;
 import java.util.Objects;
@@ -18,8 +18,8 @@ public class PhoneNumber {
         return phoneNumber;
     }
 
-    public static ValidatingValueConverter<String, PhoneNumber> converter() {
-        return new ValidatingValueConverter<>() {
+    public static ValueConverter<String, PhoneNumber> converter() {
+        return new ValueConverter<>() {
             @Override
             public ConversionResult<String, PhoneNumber> toModelValue(String uiValue) {
                 if (uiValue == null || uiValue.isBlank()) {

@@ -1,19 +1,15 @@
 package pl.marcinchwedczuk.javafx.validation.converters;
 
-import pl.marcinchwedczuk.javafx.validation.ValidatingValueConverter;
-import pl.marcinchwedczuk.javafx.validation.converters.IdentityConverter;
-import pl.marcinchwedczuk.javafx.validation.converters.StringIntegerConverter;
-
-import java.util.List;
+import pl.marcinchwedczuk.javafx.validation.ValueConverter;
 
 public class Converters {
     private Converters() { }
 
-    public static <A> ValidatingValueConverter<A, A> identityConverter() {
+    public static <A> ValueConverter<A, A> identityConverter() {
         return new IdentityConverter<>();
     }
 
-    public static ValidatingValueConverter<String, Integer> stringIntegerConverter() {
+    public static ValueConverter<String, Integer> stringIntegerConverter() {
         return new StringIntegerConverter();
     }
 }

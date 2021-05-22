@@ -2,12 +2,12 @@ package pl.marcinchwedczuk.javafx.validation.converters;
 
 import pl.marcinchwedczuk.javafx.validation.ConversionResult;
 import pl.marcinchwedczuk.javafx.validation.Objection;
-import pl.marcinchwedczuk.javafx.validation.ValidatingValueConverter;
+import pl.marcinchwedczuk.javafx.validation.ValueConverter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class BaseConverterTest {
-    protected <UIV,MV> void assertConvertsBetween(ValidatingValueConverter<UIV, MV> converter, UIV uiValue, MV modelValue) {
+    protected <UIV,MV> void assertConvertsBetween(ValueConverter<UIV, MV> converter, UIV uiValue, MV modelValue) {
         // UI -> Model
         ConversionResult<UIV, MV> modelResult = converter.toModelValue(uiValue);
 
@@ -28,7 +28,7 @@ public abstract class BaseConverterTest {
     }
 
     protected <UIV,MV> void assertUiToModelConvertionFails(
-            ValidatingValueConverter<UIV, MV> converter,
+            ValueConverter<UIV, MV> converter,
             UIV uiValue,
             Objection... expectedObjections)
     {
