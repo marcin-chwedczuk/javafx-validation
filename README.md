@@ -53,7 +53,13 @@ You can now send `./demo/target/validation-demo.zip` to your friends :tada:
 ```
 ./mvnw clean verify site -Pstatic-analysis
 ```
-Then open `./target/site/index.html` to see full report.
+Then open `./target/site/index.html` to see full report, e.g.
+```
+pushd ./target/site/
+python -m SimpleHTTPServer
+# When you are done
+popd
+```
 
 #### Run integration tests (TestFX)
 ```

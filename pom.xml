@@ -92,6 +92,9 @@
 
         <!-- disable maven deploy by default -->
         <maven.deploy.skip>true</maven.deploy.skip>
+
+        <!-- dummy value for jacoco plugin to set -->
+        <jacocoAgent></jacocoAgent>
     </properties>
 
     <dependencyManagement>
@@ -259,6 +262,9 @@
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>${maven-jcoco.plugin.version}</version>
+                    <configuration>
+                        <propertyName>jacocoAgent</propertyName>
+                    </configuration>
                 </plugin>
 
                 <plugin>
@@ -290,7 +296,7 @@
                     <excludes>
                         <exclude>**/*IT</exclude>
                     </excludes>
-                    <argLine>${extra-jvm-options-when-running-tests}</argLine>
+                    <argLine>@{jacocoAgent} ${extra-jvm-options-when-running-tests}</argLine>
                 </configuration>
             </plugin>
 
@@ -317,7 +323,7 @@
                                     <value>${project.build.directory}/failsafe-reports/screenshots</value>
                                 </property>
                             </systemProperties>
-                            <argLine>${extra-jvm-options-when-running-tests}</argLine>
+                            <argLine>@{jacocoAgent} ${extra-jvm-options-when-running-tests}</argLine>
                         </configuration>
                     </execution>
                 </executions>
@@ -478,29 +484,14 @@
                             </execution>
                         </executions>
                     </plugin>
-                    <!-- copy jacoco report from fake 'report' module to the root site. -->
                     <plugin>
-                        <artifactId>maven-resources-plugin</artifactId>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
                         <executions>
                             <execution>
-                                <id>copy-resource-one</id>
-                                <phase>site</phase>
                                 <goals>
-                                    <goal>copy-resources</goal>
+                                    <goal>prepare-agent</goal>
                                 </goals>
-                                <configuration>
-                                    <outputDirectory>${basedir}/target/site/jacoco-aggregate</outputDirectory>
-                                    <resources>
-                                        <resource>
-                                            <directory>${basedir}/report/target/site/jacoco-aggregate</directory>
-                                            <includes>
-                                                <include>**/*</include>
-                                            </includes>
-                                            <filtering>false</filtering>
-                                        </resource>
-                                    </resources>
-                                    <overwrite>true</overwrite>
-                                </configuration>
                             </execution>
                         </executions>
                     </plugin>

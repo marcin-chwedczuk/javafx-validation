@@ -53,6 +53,32 @@
                             </execution>
                         </executions>
                     </plugin>
+
+                    <!-- copy jacoco report from fake 'report' module to the root site. -->
+                    <plugin>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>site</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.parent.basedir}/target/site/jacoco-aggregate</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${basedir}/target/site/jacoco-aggregate</directory>
+                                            <includes>
+                                                <include>**/*</include>
+                                            </includes>
+                                            <filtering>false</filtering>
+                                        </resource>
+                                    </resources>
+                                    <overwrite>true</overwrite>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
                 </plugins>
             </build>
         </profile>
