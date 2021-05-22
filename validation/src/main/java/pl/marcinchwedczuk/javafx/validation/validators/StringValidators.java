@@ -43,8 +43,12 @@ public class StringValidators {
     }
 
     public static Validator<String> hasLength(int min, int maxExcluding, String message) {
-        Objects.requireNonNull(message);
+        return hasLength(min, maxExcluding, "%s", message);
+    }
+
+    public static Validator<String> hasLength(int min, int maxExcluding, String messageFormat, Object... args) {
         if (min < 0 || min >= maxExcluding) throw new IllegalArgumentException("min");
+        Objects.requireNonNull(messageFormat);
 
         return new Validator<>() {
             @Override
@@ -55,6 +59,7 @@ public class StringValidators {
                     return ValidationResult.success(value);
                 }
                 else {
+                    String message = String.format(messageFormat, args);
                     return ValidationResult.failure(value, Objections.error(message));
                 }
             }
