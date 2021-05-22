@@ -43,7 +43,7 @@ class StringValidators_NonBlankTest extends BaseValidatorTest {
 
         assertThat(result.objections)
                 .isEqualTo(List.of(
-                        Objections.error("Non-blank string is required.")
+                        Objections.error("Value is required.")
                 ));
     }
 

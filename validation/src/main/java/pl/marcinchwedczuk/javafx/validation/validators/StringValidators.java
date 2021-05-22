@@ -13,7 +13,7 @@ public class StringValidators {
     }
 
     public static Validator<String> nonBlank() {
-        return nonBlank("Non-blank string is required.");
+        return nonBlank("Value is required.");
     }
     public static Validator<String> nonBlank(String message) {
         return nonBlank("%s", message);
