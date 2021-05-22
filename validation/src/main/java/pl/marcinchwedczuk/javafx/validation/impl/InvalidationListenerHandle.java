@@ -1,4 +1,4 @@
-package pl.marcinchwedczuk.javafx.validation;
+package pl.marcinchwedczuk.javafx.validation.impl;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
