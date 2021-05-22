@@ -6,6 +6,8 @@ import pl.marcinchwedczuk.javafx.validation.validators.IntegerValidators;
 import pl.marcinchwedczuk.javafx.validation.validators.ObjectValidators;
 import pl.marcinchwedczuk.javafx.validation.validators.StringValidators;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static pl.marcinchwedczuk.javafx.validation.converters.Converters.stringIntegerConverter;
@@ -115,5 +117,26 @@ class InputTest {
         intInput.setModelValue(-100);
         assertThat(intInput.isPristine())
                 .isTrue();
+    }
+
+    @Test
+    void objections_returns_list_of_validation_problems() {
+        assertThat(intInput.getObjections())
+                .isEmpty();
+
+        // Value from UI Validator
+        intInput.setUiValue(null);
+        assertThat(intInput.getObjections())
+                .isEqualTo(List.of(Objections.error("value_is_required")));
+
+        // Value from converter
+        intInput.setUiValue("abc");
+        assertThat(intInput.getObjections())
+                .isEqualTo(List.of(Objections.error("Cannot convert 'abc' to a number.")));
+
+        // Value from model validator
+        intInput.setUiValue("-1");
+        assertThat(intInput.getObjections())
+                .isEqualTo(List.of(Objections.error("-1 must be between 0 and 1024.")));
     }
 }

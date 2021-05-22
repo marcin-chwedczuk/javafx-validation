@@ -54,9 +54,7 @@ public class Input<UIV, MV> {
 
         this.uiValue.addListener(observable -> {
             UIV newValue = uiValue.get();
-            if (uiValueDeduper.checkNewValue(newValue)) {
-                guardedPropagateUiValue(newValue);
-            }
+            handleUiValueMaybeChanged(newValue);
         });
 
         this.modelValue.addListener(observable -> {
@@ -65,6 +63,12 @@ public class Input<UIV, MV> {
                 guardedPropagateModelValue(newValue);
             }
         });
+    }
+
+    private void handleUiValueMaybeChanged(UIV newValue) {
+        if (uiValueDeduper.checkNewValue(newValue)) {
+            guardedPropagateUiValue(newValue);
+        }
     }
 
     public void reevaluateUiValue() {
@@ -238,6 +242,12 @@ public class Input<UIV, MV> {
 
     public void setUiValue(UIV value) {
         uiValueProperty().setValue(value);
+
+        // Special case, since null is the UiValue property
+        // default value.
+        if (value == null) {
+            handleUiValueMaybeChanged(null);
+        }
     }
 
     public ObjectProperty<MV> modelValueProperty() {
