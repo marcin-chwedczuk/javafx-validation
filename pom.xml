@@ -81,6 +81,9 @@
         <maven-fluido.skin.version>1.9</maven-fluido.skin.version>
 
         <!-- Shortcuts -->
+
+        <!-- See why suppress is here: https://youtrack.jetbrains.com/issue/IDEA-190202 -->
+        <!--suppress UnresolvedMavenProperty -->
         <buildConfigDirectory>${maven.multiModuleProjectDirectory}/build-config</buildConfigDirectory>
 
         <!-- Placeholders to be customized by child projects -->
