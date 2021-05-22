@@ -18,26 +18,26 @@ public class IntegerValidators {
 
     public static Validator<Integer> validRangeWithStart(ObservableValue<Integer> rangeStart, RangeOptions options) {
         Objects.requireNonNull(rangeStart);
+        Objects.requireNonNull(options);
 
-        return new Validator<Integer>() {
+        return new Validator<>() {
             @Override
-            public ValidationResult<Integer> validate(Integer end) {
+            public <TT extends Integer> ValidationResult<TT> validate(TT end) {
                 Integer start = rangeStart.getValue();
 
                 boolean isValid =
                         (start == null) ||
-                                (end == null) ||
-                                (start < end) ||
-                                ((options == ALLOW_EMPTY_RANGE) && (start.equals(end)));
+                        (end == null) ||
+                        ((Integer)start < (Integer)end) ||
+                        ((options == ALLOW_EMPTY_RANGE) && (start.equals(end)));
 
                 if (isValid) {
                     return ValidationResult.success(end);
-                }
-                else {
+                } else {
                     return ValidationResult.failure(end,
                             Objections.error(String.format(
-                                "Invalid range of numbers: %d (this number) must be %s than %d.",
-                                end, ((options == DISALLOW_EMPTY_RANGE) ? "greater" : "greater or equal"), start)));
+                                    "Invalid range of numbers: %d (this number) must be %s than %d.",
+                                    end, ((options == DISALLOW_EMPTY_RANGE) ? "greater" : "greater or equal"), start)));
                 }
             }
 

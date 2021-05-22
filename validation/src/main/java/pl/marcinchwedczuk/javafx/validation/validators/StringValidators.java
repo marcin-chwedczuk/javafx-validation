@@ -13,7 +13,7 @@ public class StringValidators {
     }
 
     public static Validator<String> nonBlank() {
-        return nonBlank("Value is required.");
+        return nonBlank("Non-blank string is required.");
     }
     public static Validator<String> nonBlank(String message) {
         return nonBlank("%s", message);
@@ -24,7 +24,7 @@ public class StringValidators {
         return new Validator<>() {
             @Override
             public <TT extends String> ValidationResult<TT> validate(TT value) {
-                boolean isValid = (value != null) && !value.isBlank();
+                boolean isValid = (value == null) || !value.isBlank();
                 if (isValid) {
                     return ValidationResult.success(value);
                 }
