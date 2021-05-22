@@ -6,10 +6,11 @@ import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import org.junit.jupiter.api.Test;
+import pl.marcinchwedczuk.javafx.validation.BaseUnitTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class InvalidationListenerHandleTest {
+class InvalidationListenerHandleTest extends BaseUnitTest {
     Property<String> dummyObservable = new SimpleStringProperty();
 
     FakeInvalidationListener listener = new FakeInvalidationListener();

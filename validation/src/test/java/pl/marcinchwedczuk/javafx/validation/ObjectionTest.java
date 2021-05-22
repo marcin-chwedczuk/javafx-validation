@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-class ObjectionTest {
+class ObjectionTest extends BaseUnitTest {
 
     @Test
     public void verify_equals_and_hashCode() {

@@ -1,11 +1,12 @@
 package pl.marcinchwedczuk.javafx.validation.impl;
 
 import org.junit.jupiter.api.Test;
+import pl.marcinchwedczuk.javafx.validation.BaseUnitTest;
 import pl.marcinchwedczuk.javafx.validation.impl.ValueDeduper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ValueDeduperTest {
+public class ValueDeduperTest extends BaseUnitTest {
 
     @Test
     void value_deduper_works() {

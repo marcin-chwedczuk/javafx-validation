@@ -2,20 +2,18 @@ package pl.marcinchwedczuk.javafx.validation.extras;
 
 import javafx.beans.DefaultProperty;
 import javafx.beans.property.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Control;
 import javafx.scene.control.Skin;
 import javafx.scene.layout.Region;
 import pl.marcinchwedczuk.javafx.validation.Input;
-import pl.marcinchwedczuk.javafx.validation.Objection;
+import pl.marcinchwedczuk.javafx.validation.ObjectionsList;
 
 @DefaultProperty("content")
 public class ValidationDecorator extends Control {
 
-    private final ListProperty<Objection> objectionsProperty =
-            new SimpleListProperty<>(this, "objections", FXCollections.observableArrayList());
+    private final ObjectProperty<ObjectionsList> objections =
+            new SimpleObjectProperty<>(this, "objections", ObjectionsList.EMPTY);
 
     private final BooleanProperty pristine =
             new SimpleBooleanProperty(this, "pristine", true);
@@ -47,16 +45,16 @@ public class ValidationDecorator extends Control {
         return contentProperty().get();
     }
 
-    public final ListProperty<Objection> objectionsProperty() {
-        return objectionsProperty;
+    public ObjectionsList getObjections() {
+        return objections.get();
     }
 
-    public final ObservableList<Objection> getObjections() {
-        return objectionsProperty.get();
+    public ObjectProperty<ObjectionsList> objectionsProperty() {
+        return objections;
     }
 
-    public final void setObjections(ObservableList<Objection> objections) {
-        objectionsProperty.set(objections);
+    public void setObjections(ObjectionsList objectionsProperty) {
+        this.objections.set(objectionsProperty);
     }
 
     public boolean isPristine() {
@@ -72,7 +70,7 @@ public class ValidationDecorator extends Control {
     }
 
     public <UIV, MV> void displayErrorsFor(Input<UIV, MV> input) {
-        this.objectionsProperty().bind(input.objectionsProperty());
+        this.objections.bind(input.objectionsProperty());
         this.pristineProperty().bind(input.pristineProperty());
     }
 }

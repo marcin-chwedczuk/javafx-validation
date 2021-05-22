@@ -41,7 +41,7 @@ class StringValidatorsTest_HasLengthTest extends BaseValidatorTest {
 
         assertInvalidResultWithValue(result, input);
 
-        assertThat(result.objections)
+        assertObjections(result.objections)
                 .isEqualTo(List.of(
                         Objections.error("Value must be at least 3 and at most 6 characters long.")
                 ));
@@ -55,7 +55,7 @@ class StringValidatorsTest_HasLengthTest extends BaseValidatorTest {
 
         ValidationResult<String> result = validator.validate("");
 
-        assertThat(result.objections)
+        assertObjections(result.objections)
                 .isEqualTo(List.of(
                         Objections.error("Invalid value with 123 and foo")
                 ));

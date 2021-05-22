@@ -14,7 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import pl.marcinchwedczuk.javafx.validation.Objection;
-import pl.marcinchwedczuk.javafx.validation.Objections;
+import pl.marcinchwedczuk.javafx.validation.ObjectionsList;
 
 import java.util.List;
 
@@ -61,7 +61,7 @@ class ValidationDecoratorSkin extends SkinBase<ValidationDecorator> {
     }
 
     private void updateObjections() {
-        List<Objection> objections = getSkinnable().objectionsProperty().getValue();
+        ObjectionsList objections = getSkinnable().objectionsProperty().getValue();
 
         var messagesFx = objectionsContainer.getChildren();
 
@@ -80,11 +80,11 @@ class ValidationDecoratorSkin extends SkinBase<ValidationDecorator> {
     }
 
     private void updateComponentCssPsuedoClasses() {
-        List<Objection> objections = getSkinnable().getObjections();
-        boolean containsErrors = Objections.containsError(objections);
+        ObjectionsList objections = getSkinnable().getObjections();
+        boolean containsErrors = objections.containsError();
 
         componentContainer.pseudoClassStateChanged(CSS_WITH_ERRORS, containsErrors);
-        componentContainer.pseudoClassStateChanged(CSS_WITH_WARNINGS, Objections.containsWarning(objections) && !containsErrors);
+        componentContainer.pseudoClassStateChanged(CSS_WITH_WARNINGS, objections.containsWarning() && !containsErrors);
     }
 
     @Override

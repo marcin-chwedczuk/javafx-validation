@@ -5,6 +5,7 @@ import org.testfx.assertions.api.Assertions;
 import pl.marcinchwedczuk.javafx.validation.Objection;
 import pl.marcinchwedczuk.javafx.validation.ObjectionSeverity;
 import pl.marcinchwedczuk.javafx.validation.Objections;
+import pl.marcinchwedczuk.javafx.validation.ObjectionsList;
 import pl.marcinchwedczuk.javafx.validation.extras.ValidationDecorator;
 import pl.marcinchwedczuk.javafx.validation.testutils.inspectors.BaseControlInspector;
 
@@ -18,7 +19,7 @@ public class ValidationDecoratorInspector extends BaseControlInspector {
         super(robot, fxid);
     }
 
-    private List<Objection> getObjections() {
+    private ObjectionsList getObjections() {
         ValidationDecorator control = robot
                 .lookup(idSelector())
                 .queryAs(ValidationDecorator.class);
@@ -31,7 +32,9 @@ public class ValidationDecoratorInspector extends BaseControlInspector {
     }
 
     public ValidationDecoratorInspector assertShowsError(String error) {
-        List<Objection> errors = Objections.onlyOfSeverity(getObjections(), ERROR);
+        List<Objection> errors = getObjections()
+                .ofSeverity(ERROR)
+                .asList();
 
         Assertions.assertThat(errors)
                 .as(makeDescription(ERROR))
@@ -42,7 +45,9 @@ public class ValidationDecoratorInspector extends BaseControlInspector {
     }
 
     public ValidationDecoratorInspector assertDoesNotShowError(String error) {
-        List<Objection> errors = Objections.onlyOfSeverity(getObjections(), ERROR);
+        List<Objection> errors = getObjections()
+                .ofSeverity(ERROR)
+                .asList();
 
         Assertions.assertThat(errors)
                 .as(makeDescription(ERROR))
@@ -53,7 +58,9 @@ public class ValidationDecoratorInspector extends BaseControlInspector {
     }
 
     public ValidationDecoratorInspector assertNoErrorVisible() {
-        List<Objection> errors = Objections.onlyOfSeverity(getObjections(), ERROR);
+        List<Objection> errors = getObjections()
+                .ofSeverity(ERROR)
+                .asList();
 
         Assertions.assertThat(errors)
                 .as(makeDescription(ERROR))

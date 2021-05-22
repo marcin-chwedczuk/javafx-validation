@@ -54,7 +54,7 @@ class IntegerValidators_ValidRangeWithStartTest extends BaseValidatorTest {
         String errorMessage = "Invalid range of numbers: #{number} (this number) must be greater or equal than 0."
                 .replace("#{number}", Integer.toString(rangeEnd));
 
-        assertThat(result.objections)
+        assertObjections(result.objections)
                 .isEqualTo(List.of(Objections.error(errorMessage)));
     }
 

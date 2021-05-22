@@ -28,7 +28,7 @@ class ObjectValidators_RequiredValidatorTest extends BaseValidatorTest {
 
         assertInvalidResultWithValue(result, null);
 
-        assertThat(result.objections)
+        assertObjections(result.objections)
                 .isEqualTo(List.of(
                         Objections.error("Value is required.")
                 ));
@@ -41,7 +41,7 @@ class ObjectValidators_RequiredValidatorTest extends BaseValidatorTest {
 
         ValidationResult<Object> result = validator.validate(null);
 
-        assertThat(result.objections)
+        assertObjections(result.objections)
                 .isEqualTo(List.of(
                         Objections.error("this is message with 123 and foo")
                 ));

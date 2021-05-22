@@ -41,7 +41,7 @@ class StringValidators_NonBlankTest extends BaseValidatorTest {
 
         assertInvalidResultWithValue(result, blank);
 
-        assertThat(result.objections)
+        assertObjections(result.objections)
                 .isEqualTo(List.of(
                         Objections.error("Value is required.")
                 ));
@@ -55,7 +55,7 @@ class StringValidators_NonBlankTest extends BaseValidatorTest {
 
         ValidationResult<String> result = validator.validate("");
 
-        assertThat(result.objections)
+        assertObjections(result.objections)
                 .isEqualTo(List.of(
                         Objections.error("Invalid value with 123 and foo")
                 ));

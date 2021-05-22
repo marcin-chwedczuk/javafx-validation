@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static pl.marcinchwedczuk.javafx.validation.converters.Converters.stringIntegerConverter;
 
-class ValidationGroupTest {
+class ValidationGroupTest extends BaseUnitTest {
     Input<String, Integer> inputA = new Input<>(stringIntegerConverter());
     Input<String, Integer> inputB = new Input<>(stringIntegerConverter());
 

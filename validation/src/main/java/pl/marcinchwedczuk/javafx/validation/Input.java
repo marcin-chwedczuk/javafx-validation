@@ -33,8 +33,8 @@ public class Input<UIV, MV> {
 
     // Sorted by priority
     // TODO: check automatically sorted by JavaFX
-    private final ListProperty<Objection> objectionsProperty =
-            new SimpleListProperty<>(this, "objections", FXCollections.observableArrayList());
+    private final ObjectProperty<ObjectionsList> objectionsProperty =
+            new SimpleObjectProperty<>(this, "objections", ObjectionsList.EMPTY);
 
     private boolean updating = false;
     private final ValueDeduper<UIV> uiValueDeduper = new ValueDeduper<>();
@@ -95,7 +95,7 @@ public class Input<UIV, MV> {
         List<Objection> objections = new ArrayList<>();
 
         ValidationResult<UIV> uiValidationResult = runValidators(uiValidators, newValue);
-        objections.addAll(uiValidationResult.objections);
+        objections.addAll(uiValidationResult.objections.asList());
         if (!uiValidationResult.isValid()) {
             sortAndSetObjections(objections);
             validationState.setValue(ValidationState.INVALID);
@@ -104,7 +104,7 @@ public class Input<UIV, MV> {
         }
 
         ConversionResult<UIV, MV> conversionResult = converter.toModelValue(newValue);
-        objections.addAll(conversionResult.objections);
+        objections.addAll(conversionResult.objections.asList());
         if (!conversionResult.isSuccessful()) {
             sortAndSetObjections(objections);
             validationState.setValue(ValidationState.INVALID);
@@ -115,7 +115,7 @@ public class Input<UIV, MV> {
         MV newModelValue = conversionResult.modelValue;
 
         ValidationResult<MV> modelValidationResult = runValidators(modelValidators, newModelValue);
-        objections.addAll(modelValidationResult.objections);
+        objections.addAll(modelValidationResult.objections.asList());
         if (!modelValidationResult.isValid()) {
             sortAndSetObjections(objections);
             validationState.setValue(ValidationState.INVALID);
@@ -148,17 +148,17 @@ public class Input<UIV, MV> {
         List<Objection> objections = new ArrayList<>();
 
         ValidationResult<MV> modelVR = runValidators(modelValidators, newValue);
-        objections.addAll(modelVR.objections);
+        objections.addAll(modelVR.objections.asList());
         if (!modelVR.isValid()) {
-            sortAndSetObjections(modelVR.objections);
+            sortAndSetObjections(modelVR.objections.asList());
             validationState.setValue(ValidationState.INVALID);
             return;
         }
 
         ValidationResult<UIV> uiVR = runValidators(uiValidators, newUiValue);
-        objections.addAll(uiVR.objections);
+        objections.addAll(uiVR.objections.asList());
         if (!uiVR.isValid()) {
-            sortAndSetObjections(uiVR.objections);
+            sortAndSetObjections(uiVR.objections.asList());
             validationState.setValue(ValidationState.INVALID);
             return;
         }
@@ -181,8 +181,9 @@ public class Input<UIV, MV> {
     }
 
     private void sortAndSetObjections(List<Objection> objections) {
-        objections.sort(Objections.compareBySeverityDesc());
-        objectionsProperty.setAll(objections);
+        objectionsProperty.set(
+                new ObjectionsList(objections).copySortedBySeverity()
+        );
     }
 
     public Input<UIV, MV> withUiValidator(Validator<? super UIV> validator) {
@@ -229,7 +230,7 @@ public class Input<UIV, MV> {
         // Clear validation
         pristine.set(true);
         validationState.set(ValidationState.NOT_RUN);
-        objectionsProperty.clear();
+        objectionsProperty.set(ObjectionsList.EMPTY);
     }
 
     public ObjectProperty<UIV> uiValueProperty() {
@@ -270,12 +271,12 @@ public class Input<UIV, MV> {
         return validationState;
     }
 
-    public ReadOnlyListProperty<Objection> objectionsProperty() {
-        return objectionsProperty;
+    public ObjectionsList getObjections() {
+        return objectionsProperty.get();
     }
 
-    public ObservableList<Objection> getObjections() {
-        return objectionsProperty().get();
+    public ObjectProperty<ObjectionsList> objectionsProperty() {
+        return objectionsProperty;
     }
 
     public boolean isPristine() {

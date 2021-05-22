@@ -1,46 +1,40 @@
 package pl.marcinchwedczuk.javafx.validation;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toUnmodifiableList;
 
 public class ValidationResult<V> {
-    public final V value;
-    public final List<Objection> objections;
+    public static <V>
+    ValidationResult<V> success(V value) {
+        return new ValidationResult<>(value, ObjectionsList.EMPTY);
+    }
 
-    private ValidationResult(V value, List<Objection> objections) {
+    public static <V>
+    ValidationResult<V> failure(V value, Objection first, Objection... rest) {
+        return new ValidationResult<V>(value, ObjectionsList.of(first, rest));
+    }
+
+    public final V value;
+    public final ObjectionsList objections;
+
+    private ValidationResult(V value, ObjectionsList objections) {
         this.value = value;
-        // This list will be sorted by priority. We need a mutable collection.
-        this.objections = objections;
+        this.objections = Objects.requireNonNull(objections);
     }
 
     public boolean isValid() {
-        // TODO: Create objections List type
-        return !Objections.containsError(objections);
+        return !objections.containsError();
     }
 
-    public static <V> ValidationResult<V> merge(List<ValidationResult<V>> results) {
+    public static <V> ValidationResult<V> merge(Collection<ValidationResult<V>> results) {
         // TODO: Args validation
-        V value = results.get(0).value;
+        V value = results.iterator().next().value;
 
-        List<Objection> errors = results.stream()
+        List<Objection> objections = results.stream()
                 .flatMap(r -> r.objections.stream())
-                .collect(toList());
+                .collect(toUnmodifiableList());
 
-        return new ValidationResult<>(value, errors);
-    }
-
-    public static <V> ValidationResult<V> success(V value) {
-        return new ValidationResult<>(value, List.of());
-    }
-
-    public static <V> ValidationResult<V> failure(V value, Objection first, Objection... rest) {
-        List<Objection> objections = new ArrayList<>();
-        objections.add(first);
-        objections.addAll(Arrays.asList(rest));
-        return new ValidationResult<V>(value, objections);
+        return new ValidationResult<>(value, new ObjectionsList(objections));
     }
 }

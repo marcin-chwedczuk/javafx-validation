@@ -11,6 +11,7 @@ import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 import pl.marcinchwedczuk.javafx.validation.Objections;
+import pl.marcinchwedczuk.javafx.validation.ObjectionsList;
 import pl.marcinchwedczuk.javafx.validation.testutils.utils.TakeScreenshotOnFailure;
 
 import static org.testfx.assertions.api.Assertions.assertThat;
@@ -60,8 +61,8 @@ public class ValidationDecoratorIT {
     @Test
     void objections_are_attached_to_objections_container(FxRobot robot) {
         robot.interact(() -> {
-            validationDecorator.getObjections().setAll(
-                    Objections.error("Message")
+            validationDecorator.objectionsProperty().set(
+                    ObjectionsList.of(Objections.error("Message"))
             );
         });
 
@@ -73,10 +74,10 @@ public class ValidationDecoratorIT {
     @Test
     void objections_have_severity_class_set(FxRobot robot) {
         robot.interact(() -> {
-            validationDecorator.getObjections().setAll(
+            validationDecorator.objectionsProperty().set(ObjectionsList.of(
                     Objections.error("Error"),
                     Objections.warning("Warning")
-            );
+            ));
         });
 
         assertThat(robot.lookup(
@@ -94,15 +95,15 @@ public class ValidationDecoratorIT {
         assertComponentsContainerHasNoPseudoClass(robot);
 
         robot.interact(() -> {
-            validationDecorator.getObjections().setAll(
-                    Objections.error("Error")
+            validationDecorator.objectionsProperty().set(
+                    ObjectionsList.of(Objections.error("Error"))
             );
         });
 
         assertComponentsContainerPseudoClass(robot, ValidationDecoratorSkin.CSS_WITH_ERRORS);
 
         robot.interact(() -> {
-            validationDecorator.getObjections().clear();
+            validationDecorator.objectionsProperty().set(ObjectionsList.EMPTY);
         });
 
         assertComponentsContainerHasNoPseudoClass(robot);
@@ -113,15 +114,15 @@ public class ValidationDecoratorIT {
         assertComponentsContainerHasNoPseudoClass(robot);
 
         robot.interact(() -> {
-            validationDecorator.getObjections().setAll(
-                    Objections.warning("Warning")
+            validationDecorator.objectionsProperty().set(
+                    ObjectionsList.of(Objections.warning("Warning"))
             );
         });
 
         assertComponentsContainerPseudoClass(robot, ValidationDecoratorSkin.CSS_WITH_WARNINGS);
 
         robot.interact(() -> {
-            validationDecorator.getObjections().clear();
+            validationDecorator.objectionsProperty().set(ObjectionsList.EMPTY);
         });
 
         assertComponentsContainerHasNoPseudoClass(robot);
@@ -132,16 +133,18 @@ public class ValidationDecoratorIT {
         assertComponentsContainerHasNoPseudoClass(robot);
 
         robot.interact(() -> {
-            validationDecorator.getObjections().setAll(
+            validationDecorator.objectionsProperty().set(ObjectionsList.of(
                     Objections.error("Error"),
                     Objections.warning("Warning")
-            );
+            ));
         });
 
         assertComponentsContainerPseudoClass(robot, ValidationDecoratorSkin.CSS_WITH_ERRORS);
 
         robot.interact(() -> {
-            validationDecorator.getObjections().remove(0);
+            validationDecorator.objectionsProperty().set(ObjectionsList.of(
+                    Objections.warning("Warning")
+            ));
         });
 
         assertComponentsContainerPseudoClass(robot, ValidationDecoratorSkin.CSS_WITH_WARNINGS);

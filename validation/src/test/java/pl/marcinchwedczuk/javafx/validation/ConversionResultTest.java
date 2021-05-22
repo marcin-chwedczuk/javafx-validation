@@ -7,7 +7,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-class ConversionResultTest {
+class ConversionResultTest extends BaseUnitTest {
 
     @Test
     public void can_create_success_result() {
@@ -38,7 +38,7 @@ class ConversionResultTest {
         assertThat(result.isSuccessful())
                 .isFalse();
 
-        assertThat(result.objections)
+        assertObjections(result.objections)
                 .isEqualTo(List.of(
                         Objections.error("Error 1"),
                         Objections.error("Error 2")));
