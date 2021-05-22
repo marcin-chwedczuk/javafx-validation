@@ -16,6 +16,25 @@ public class IntegerValidators {
     private IntegerValidators() {
     }
 
+    public static Validator<Integer> between(int min, int maxExcluded) {
+        return new Validator<>() {
+            @Override
+            public <TT extends Integer> ValidationResult<TT> validate(TT value) {
+
+                boolean isValid =
+                        (value == null) ||
+                        (min <= (Integer)value && (Integer)value < maxExcluded);
+
+                if (isValid) {
+                    return ValidationResult.success(value);
+                } else {
+                    return ValidationResult.failure(value, Objections.error(String.format(
+                            "%d must be between %d and %d.", value, min, maxExcluded)));
+                }
+            }
+        };
+    }
+
     public static Validator<Integer> validRangeWithStart(ObservableValue<Integer> rangeStart, RangeOptions options) {
         Objects.requireNonNull(rangeStart);
         Objects.requireNonNull(options);

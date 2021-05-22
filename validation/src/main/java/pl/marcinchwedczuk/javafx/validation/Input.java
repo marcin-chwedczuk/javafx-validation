@@ -57,7 +57,6 @@ public class Input<UIV, MV> {
             if (uiValueDeduper.checkNewValue(newValue)) {
                 guardedPropagateUiValue(newValue);
             }
-            pristine.set(false);
         });
 
         this.modelValue.addListener(observable -> {
@@ -65,7 +64,6 @@ public class Input<UIV, MV> {
             if (modelValueDeduper.checkNewValue(newValue)) {
                 guardedPropagateModelValue(newValue);
             }
-            pristine.set(false);
         });
     }
 
@@ -88,6 +86,8 @@ public class Input<UIV, MV> {
     }
 
     private void propagateUiValue(UIV newValue) {
+        pristine.setValue(false);
+
         List<Objection> objections = new ArrayList<>();
 
         ValidationResult<UIV> uiValidationResult = runValidators(uiValidators, newValue);
