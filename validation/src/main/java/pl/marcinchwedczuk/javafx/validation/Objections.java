@@ -39,41 +39,7 @@ public class Objections {
                 String.format(format, args), ObjectionSeverity.WARNING);
     }
 
-    @SafeVarargs
-    public static List<Objection> combine(List<Objection>... errors) {
-        return Arrays.stream(errors)
-                .flatMap(Collection::stream)
-                .collect(toList());
-    }
-
-    public static boolean containsError(List<Objection> objections) {
-        return containsSeverity(objections, ObjectionSeverity.ERROR);
-    }
-
-    public static boolean containsWarning(List<Objection> objections) {
-        return containsSeverity(objections, ObjectionSeverity.WARNING);
-    }
-
-    public static boolean containsSeverity(List<Objection> objections, ObjectionSeverity severity) {
-        for (Objection ve : objections) {
-            if (ve.severity == severity) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     public static Comparator<Objection> compareBySeverityDesc() {
         return Comparator.<Objection>comparingInt(o -> o.severity.priority).reversed();
-    }
-
-    public static List<Objection> onlyOfSeverity(List<Objection> objections,
-                                                 ObjectionSeverity first, ObjectionSeverity... rest) {
-        EnumSet<ObjectionSeverity> severities = EnumSet.of(first, rest);
-
-        return objections.stream()
-                .filter(o -> severities.contains(o.severity))
-                .collect(toUnmodifiableList());
     }
 }
