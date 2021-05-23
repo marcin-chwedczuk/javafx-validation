@@ -33,11 +33,9 @@ public class ValidationGroup {
     }
 
     private void reevaluate() {
-        ValidationState acc = VALID;
-
-        for (Input<?, ?> input : inputs) {
-            acc = ValidationState.combine(acc, input.getValidationState());
-        }
+        ValidationState acc = inputs.stream()
+                .map(Input::getValidationState)
+                .collect(ValidationState.combineCollector());
 
         if (acc != validationState.getValue()) {
             validationState.setValue(acc);

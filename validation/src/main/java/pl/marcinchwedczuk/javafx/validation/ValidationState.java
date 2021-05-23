@@ -1,19 +1,21 @@
 package pl.marcinchwedczuk.javafx.validation;
 
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collector.Characteristics.*;
+
 public enum ValidationState {
     VALID,
     INVALID,
     NOT_RUN;
 
-    public static ValidationState combine(ValidationState... states) {
-        ValidationState result = VALID;
-        for (ValidationState state : states) {
-            result = combine(result, state);
-        }
-        return result;
+    public static
+    Collector<ValidationState, ?, ValidationState> combineCollector() {
+        return Collectors.reducing(ValidationState.VALID, ValidationState::combine);
     }
 
-    public static ValidationState combine(ValidationState s1, ValidationState s2) {
+    private static ValidationState combine(ValidationState s1, ValidationState s2) {
         if (s1 == INVALID || s2 == INVALID) return INVALID;
         if (s1 == NOT_RUN || s2 == NOT_RUN) return NOT_RUN;
         return VALID;
