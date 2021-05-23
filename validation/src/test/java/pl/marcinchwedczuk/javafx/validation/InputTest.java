@@ -19,7 +19,8 @@ import static pl.marcinchwedczuk.javafx.validation.validators.IntegerValidators.
 class InputTest extends BaseUnitTest {
     Input<String, Integer> intInput = new Input<>(stringIntegerConverter())
             .withUiValidators(
-                    ObjectValidators.required("value_is_required"))
+                    ObjectValidators.required()
+                            .withExplanation("value_is_required"))
             .withModelValidator(
                     IntegerValidators.between(0, 1024)
             );

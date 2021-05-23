@@ -192,13 +192,24 @@ public class Input<UIV, MV> {
         return this;
     }
 
-
     @SafeVarargs
     public final Input<UIV, MV> withUiValidators(Validator<? super UIV>... validators) {
         for (Validator<? super UIV> v : validators) {
             withUiValidator(v);
         }
         return this;
+    }
+
+    @SafeVarargs
+    public final Input<UIV, MV> withUiValidators(ValidatorBuilder.Builder<? super UIV>... validatorBuilders) {
+        for (ValidatorBuilder.Builder<? super UIV> builder : validatorBuilders) {
+            withUiValidator(builder.build());
+        }
+        return this;
+    }
+
+    public Input<UIV, MV> withModelValidator(ValidatorBuilder.Builder<? super MV> builder) {
+        return withModelValidator(builder.build());
     }
 
     public Input<UIV, MV> withModelValidator(Validator<? super MV> validator) {
