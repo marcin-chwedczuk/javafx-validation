@@ -1,6 +1,7 @@
 package pl.marcinchwedczuk.javafx.validation.validators;
 
 import org.junit.jupiter.api.Test;
+import pl.marcinchwedczuk.javafx.validation.Explanation;
 import pl.marcinchwedczuk.javafx.validation.Objections;
 import pl.marcinchwedczuk.javafx.validation.ValidationResult;
 import pl.marcinchwedczuk.javafx.validation.Validator;
@@ -13,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ObjectValidators_RequiredValidatorTest extends BaseValidatorTest {
     @Test
     void non_null_value_is_valid() {
-        Validator<Object> validator = ObjectValidators.required();
+        Validator<Object> validator = ObjectValidators.required2().build();
 
         ValidationResult<String> result = validator.validate("foo");
 
@@ -22,7 +23,7 @@ class ObjectValidators_RequiredValidatorTest extends BaseValidatorTest {
 
     @Test
     void null_value_is_invalid() {
-        Validator<Object> validator = ObjectValidators.required();
+        Validator<Object> validator = ObjectValidators.required2().build();
 
         ValidationResult<String> result = validator.<String>validate(null);
 
@@ -36,8 +37,10 @@ class ObjectValidators_RequiredValidatorTest extends BaseValidatorTest {
 
     @Test
     void supports_formatted_message() {
-        Validator<Object> validator = ObjectValidators.required(
-                "this is message with %d and %s", 123, "foo");
+        Validator<Object> validator = ObjectValidators.required2()
+                .withExplanation(Explanation.of(
+                    "this is message with %d and %s", 123, "foo"))
+                .build();
 
         ValidationResult<Object> result = validator.validate(null);
 

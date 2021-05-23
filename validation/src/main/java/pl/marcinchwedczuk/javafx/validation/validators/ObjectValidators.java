@@ -1,8 +1,6 @@
 package pl.marcinchwedczuk.javafx.validation.validators;
 
-import pl.marcinchwedczuk.javafx.validation.Objections;
-import pl.marcinchwedczuk.javafx.validation.ValidationResult;
-import pl.marcinchwedczuk.javafx.validation.Validator;
+import pl.marcinchwedczuk.javafx.validation.*;
 
 import java.util.Objects;
 
@@ -35,5 +33,13 @@ public class ObjectValidators {
                 }
             }
         };
+    }
+
+    public static <T>
+    ValidatorBuilder.Builder<T> required2() {
+        return ValidatorBuilder.<T>newValidator()
+                .withName("required")
+                .withPredicate(Objects::nonNull)
+                .withExplanation(Explanation.of("Value is required."));
     }
 }

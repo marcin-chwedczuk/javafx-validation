@@ -6,27 +6,27 @@ public class ValidatorBuilder {
     private ValidatorBuilder() { }
 
     public static <T>
-    Itself<T> newValidator() {
-        return new Itself<>();
+    SetNameMandatoryStep<T> newValidator() {
+        return new BuilderImpl<>();
     }
 
-    public static class Itself<T> implements
+    public static class BuilderImpl<T> implements
             SetNameMandatoryStep<T>,
             SetPredicateMandatoryStep<T>,
             SetDefaultExplanationMandatoryStep<T>,
-            CustomizationStepsAndBuild<T>
+            Builder<T>
     {
         private String name;
         private Predicate<T> isValid;
         private Explanation explanation;
 
-        public Itself() {
+        public BuilderImpl() {
             this(null, null, null);
         }
 
-        protected Itself(String name,
-                         Predicate<T> isValid,
-                         Explanation explanation)
+        protected BuilderImpl(String name,
+                              Predicate<T> isValid,
+                              Explanation explanation)
         {
             this.name = name;
             this.isValid = isValid;
@@ -35,23 +35,23 @@ public class ValidatorBuilder {
 
         @Override
         public SetPredicateMandatoryStep<T> withName(String name) {
-            return new Itself<>(name, this.isValid, this.explanation);
+            return new BuilderImpl<>(name, this.isValid, this.explanation);
         }
 
         @Override
         public SetPredicateMandatoryStep<T> withName(String nameFormat, Object... args) {
             String name = String.format(nameFormat, args);
-            return new Itself<>(name, this.isValid, this.explanation);
+            return new BuilderImpl<>(name, this.isValid, this.explanation);
         }
 
         @Override
         public SetDefaultExplanationMandatoryStep<T> withPredicate(Predicate<T> isValid) {
-            return new Itself<>(this.name, isValid, this.explanation);
+            return new BuilderImpl<>(this.name, isValid, this.explanation);
         }
 
         @Override
-        public CustomizationStepsAndBuild<T> withExplanation(Explanation explanation) {
-            return new Itself<>(this.name, this.isValid, explanation);
+        public Builder<T> withExplanation(Explanation explanation) {
+            return new BuilderImpl<>(this.name, this.isValid, explanation);
         }
 
         @Override
@@ -70,11 +70,11 @@ public class ValidatorBuilder {
     }
 
     public interface SetDefaultExplanationMandatoryStep<T> {
-        CustomizationStepsAndBuild<T> withExplanation(Explanation explanation);
+        Builder<T> withExplanation(Explanation explanation);
     }
 
-    public interface CustomizationStepsAndBuild<T> {
-        CustomizationStepsAndBuild<T> withExplanation(Explanation explanation);
+    public interface Builder<T> {
+        Builder<T> withExplanation(Explanation explanation);
 
         Validator<T> build();
     }
