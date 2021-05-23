@@ -26,6 +26,7 @@ public class ComposableValidator<T> implements Validator<T> {
         this.dependencies = List.copyOf(Objects.requireNonNull(dependencies));
         this.dependencies.forEach(Objects::requireNonNull);
 
+        // TODO: value variable is reserved
         this.explanationVariables = Objects.requireNonNull(explanationVariables);
         this.explanation = Objects.requireNonNull(explanation);
     }
@@ -36,7 +37,7 @@ public class ComposableValidator<T> implements Validator<T> {
             return ValidationResult.success(value);
         } else {
             Objection objection = Objections.error(
-                    explanation.explain(explanationVariables));
+                    explanation.explain(value, explanationVariables));
 
             return ValidationResult.failure(value, objection);
         }

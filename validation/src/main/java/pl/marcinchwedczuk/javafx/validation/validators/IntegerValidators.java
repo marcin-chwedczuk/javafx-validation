@@ -2,11 +2,10 @@ package pl.marcinchwedczuk.javafx.validation.validators;
 
 import javafx.beans.Observable;
 import javafx.beans.value.ObservableValue;
-import pl.marcinchwedczuk.javafx.validation.Objections;
-import pl.marcinchwedczuk.javafx.validation.ValidationResult;
-import pl.marcinchwedczuk.javafx.validation.Validator;
+import pl.marcinchwedczuk.javafx.validation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import static pl.marcinchwedczuk.javafx.validation.validators.IntegerValidators.RangeOptions.ALLOW_EMPTY_RANGE;
@@ -16,55 +15,50 @@ public class IntegerValidators {
     private IntegerValidators() {
     }
 
-    public static Validator<Integer> between(int min, int maxExcluded) {
-        return new Validator<>() {
-            @Override
-            public <TT extends Integer> ValidationResult<TT> validate(TT value) {
-
-                boolean isValid =
-                        (value == null) ||
-                        (min <= (Integer)value && (Integer)value < maxExcluded);
-
-                if (isValid) {
-                    return ValidationResult.success(value);
-                } else {
-                    return ValidationResult.failure(value, Objections.error(String.format(
-                            "%d must be between %d and %d.", value, min, maxExcluded)));
-                }
-            }
-        };
+    public static
+    ValidatorBuilder.Builder<Integer> between(int min, int maxExcluded) {
+        return ValidatorBuilder.<Integer>newValidator()
+                .withName("between(%d, %d)", min, maxExcluded)
+                .withPredicate(value -> {
+                    boolean isValid =
+                            (value == null) ||
+                            (min <= (Integer)value && (Integer)value < maxExcluded);
+                    return isValid;
+                })
+                .withExplanationVariables(Map.of(
+                        "min", min,
+                        "max", maxExcluded
+                ))
+                .withExplanation(Explanation.of(
+                        "#{value} must be between #{min} and #{max}."));
     }
 
-    public static Validator<Integer> validRangeWithStart(ObservableValue<Integer> rangeStart, RangeOptions options) {
+    public static
+    ValidatorBuilder.Builder<Integer> validRangeWithStart(ObservableValue<Integer> rangeStart, RangeOptions options) {
         Objects.requireNonNull(rangeStart);
         Objects.requireNonNull(options);
 
-        return new Validator<>() {
-            @Override
-            public <TT extends Integer> ValidationResult<TT> validate(TT end) {
-                Integer start = rangeStart.getValue();
+        return ValidatorBuilder.<Integer>newValidator()
+                .withName("validRangeWithStart(%s, %s)", rangeStart, options)
+                .withPredicate(end -> {
+                    Integer start = rangeStart.getValue();
 
-                boolean isValid =
-                        (start == null) ||
-                        (end == null) ||
-                        ((Integer)start < (Integer)end) ||
-                        ((options == ALLOW_EMPTY_RANGE) && (start.equals(end)));
+                    boolean isValid =
+                            (start == null) ||
+                            (end == null) ||
+                            ((Integer)start < (Integer)end) ||
+                            ((options == ALLOW_EMPTY_RANGE) && (start.equals(end)));
 
-                if (isValid) {
-                    return ValidationResult.success(end);
-                } else {
-                    return ValidationResult.failure(end,
-                            Objections.error(String.format(
-                                    "Invalid range of numbers: %d (this number) must be %s than %d.",
-                                    end, ((options == DISALLOW_EMPTY_RANGE) ? "greater" : "greater or equal"), start)));
-                }
-            }
-
-            @Override
-            public List<Observable> dependencies() {
-                return List.of(rangeStart);
-            }
-        };
+                    return isValid;
+                })
+                .withDependencies(rangeStart)
+                .withExplanationVariables(Map.of(
+                        "rangeStart", rangeStart,
+                        "conditionType", (options == ALLOW_EMPTY_RANGE) ? "greater or equal" : "greater"
+                ))
+                .withExplanation(Explanation.of(
+                        // TODO: Better message
+                        "Invalid range of numbers: #{value} (this number) must be #{conditionType} than #{rangeStart}."));
     }
 
     public enum RangeOptions {

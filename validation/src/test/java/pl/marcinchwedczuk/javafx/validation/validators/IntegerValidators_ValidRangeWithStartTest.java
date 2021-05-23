@@ -22,7 +22,7 @@ class IntegerValidators_ValidRangeWithStartTest extends BaseValidatorTest {
     @Test
     void null_value_is_valid() {
         Validator<Integer> validator =
-                IntegerValidators.validRangeWithStart(rangeStart, ALLOW_EMPTY_RANGE);
+                IntegerValidators.validRangeWithStart(rangeStart, ALLOW_EMPTY_RANGE).build();
 
         ValidationResult<Integer> result = validator.validate(null);
 
@@ -33,7 +33,7 @@ class IntegerValidators_ValidRangeWithStartTest extends BaseValidatorTest {
     @ValueSource(ints = { 0, 1, 2, 10, 100, 999 })
     void proper_ranges_are_valid(int rangeEnd) {
         Validator<Integer> validator =
-                IntegerValidators.validRangeWithStart(rangeStart, ALLOW_EMPTY_RANGE);
+                IntegerValidators.validRangeWithStart(rangeStart, ALLOW_EMPTY_RANGE).build();
 
         ValidationResult<Integer> result = validator.validate(rangeEnd);
 
@@ -44,7 +44,7 @@ class IntegerValidators_ValidRangeWithStartTest extends BaseValidatorTest {
     @ValueSource(ints = { -1, -5, -6, -100, -999 })
     void improper_ranges_are_invalid(int rangeEnd) {
         Validator<Integer> validator =
-                IntegerValidators.validRangeWithStart(rangeStart, ALLOW_EMPTY_RANGE);
+                IntegerValidators.validRangeWithStart(rangeStart, ALLOW_EMPTY_RANGE).build();
 
         ValidationResult<Integer> result = validator.validate(rangeEnd);
 
@@ -61,7 +61,7 @@ class IntegerValidators_ValidRangeWithStartTest extends BaseValidatorTest {
     @Test
     void range_start_influences_validity() {
         Validator<Integer> validator =
-                IntegerValidators.validRangeWithStart(rangeStart, ALLOW_EMPTY_RANGE);
+                IntegerValidators.validRangeWithStart(rangeStart, ALLOW_EMPTY_RANGE).build();
 
         rangeStart.setValue(0);
         assertValidResultWithValue(validator.validate(3), 3);
@@ -76,7 +76,7 @@ class IntegerValidators_ValidRangeWithStartTest extends BaseValidatorTest {
     @Test
     void allow_empty_range_option_works() {
         Validator<Integer> validator =
-                IntegerValidators.validRangeWithStart(rangeStart, ALLOW_EMPTY_RANGE);
+                IntegerValidators.validRangeWithStart(rangeStart, ALLOW_EMPTY_RANGE).build();
 
         rangeStart.setValue(123);
         assertValidResultWithValue(validator.validate(123), 123);
@@ -85,7 +85,7 @@ class IntegerValidators_ValidRangeWithStartTest extends BaseValidatorTest {
     @Test
     void disallow_empty_range_option_works() {
         Validator<Integer> validator =
-                IntegerValidators.validRangeWithStart(rangeStart, DISALLOW_EMPTY_RANGE);
+                IntegerValidators.validRangeWithStart(rangeStart, DISALLOW_EMPTY_RANGE).build();
 
         rangeStart.setValue(123);
         assertInvalidResultWithValue(validator.validate(123), 123);

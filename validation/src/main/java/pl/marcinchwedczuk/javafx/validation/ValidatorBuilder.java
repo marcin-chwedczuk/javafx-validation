@@ -2,6 +2,7 @@ package pl.marcinchwedczuk.javafx.validation;
 
 import javafx.beans.Observable;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -133,6 +134,10 @@ public class ValidatorBuilder {
 
     public interface SetDependenciesOptionalStep<T> extends SetExplanationVariablesOptionalStep<T> {
         SetExplanationVariablesOptionalStep<T> withDependencies(Collection<Observable> dependencies);
+
+        default SetExplanationVariablesOptionalStep<T> withDependencies(Observable... dependencies) {
+            return withDependencies(Arrays.asList(dependencies));
+        }
     }
 
     public interface SetExplanationVariablesOptionalStep<T> extends SetDefaultExplanationMandatoryStep<T> {

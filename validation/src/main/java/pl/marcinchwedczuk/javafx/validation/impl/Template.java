@@ -1,5 +1,7 @@
 package pl.marcinchwedczuk.javafx.validation.impl;
 
+import javafx.beans.value.ObservableValue;
+
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
@@ -16,11 +18,21 @@ public class Template {
         this.template = Objects.requireNonNull(template);
     }
 
-    public String render(Map<String, Object> variables) {
+    public String render(Object validatedValue, Map<String, Object> variables) {
         // TODO: Handle observable values
         return replace(
                 template,
-                variableName -> Objects.toString(variables.get(variableName)));
+                variableName -> {
+                    if ("value".equals(variableName)) {
+                        return Objects.toString(validatedValue);
+                    } else {
+                        Object value = variables.get(variableName);
+                        if (value instanceof ObservableValue<?>) {
+                            value = ((ObservableValue<?>)value).getValue();
+                        }
+                        return Objects.toString(value);
+                    }
+                });
     }
 
     private static String replace(String input, Function<String, String> replacer) {

@@ -17,9 +17,9 @@ public abstract class Explanation {
 
     protected abstract String getExplainTemplate();
 
-    public final String explain(Map<String, Object> variables) {
+    public final String explain(Object validatedValue, Map<String, Object> variables) {
         String templateText = getExplainTemplate();
-        return new Template(templateText).render(variables);
+        return new Template(templateText).render(validatedValue, variables);
     }
 
     private static class SimpleExplanation extends Explanation {
