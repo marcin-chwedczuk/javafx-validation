@@ -1,7 +1,9 @@
 package pl.marcinchwedczuk.javafx.validation;
 
 import javafx.beans.value.ObservableValue;
+import pl.marcinchwedczuk.javafx.validation.impl.Template;
 
+import java.util.Map;
 import java.util.Objects;
 
 public abstract class Explanation {
@@ -13,14 +15,11 @@ public abstract class Explanation {
         return new FormatStringExplanation(format, args);
     }
 
-    protected abstract String simpleExplain();
+    protected abstract String getExplainTemplate();
 
-    public final String explain() {
-        // TODO: Add substituion of special values
-        // like #{value}
-        // TODO: Extend builder to allow validators specify thier
-        // own values like range #{start} #{end}
-        return simpleExplain();
+    public final String explain(Map<String, Object> variables) {
+        String templateText = getExplainTemplate();
+        return new Template(templateText).render(variables);
     }
 
     private static class SimpleExplanation extends Explanation {
@@ -31,7 +30,7 @@ public abstract class Explanation {
         }
 
         @Override
-        protected String simpleExplain() {
+        protected String getExplainTemplate() {
             return message;
         }
     }
@@ -46,7 +45,7 @@ public abstract class Explanation {
         }
 
         @Override
-        protected String simpleExplain() {
+        protected String getExplainTemplate() {
             Object[] actualArgs = new Object[args.length];
 
             for (int i = 0; i < args.length; i++) {

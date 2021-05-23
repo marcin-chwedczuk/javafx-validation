@@ -20,8 +20,8 @@ public class UserRegistrationViewModel {
     public final Input<String, String> username =
             new Input<String, String>(Converters.identityConverter())
                     .withUiValidators(
-                            StringValidators.nonBlank(),
-                            StringValidators.hasLength(2, 16),
+                            StringValidators.nonBlank().build(),
+                            StringValidators.hasLength(2, 16).build(),
                             StringValidators.matchesRegex("[_a-z][_a-z0-9]+",
                                     "Username can only consists of underscore, " +
                                             "lower-case letters and digits and cannot start with a digit."));
@@ -29,8 +29,10 @@ public class UserRegistrationViewModel {
     public final Input<String, String> password =
             new Input<String, String>(Converters.identityConverter())
                     .withUiValidators(
-                            StringValidators.nonBlank(),
-                            StringValidators.hasLength(8, Integer.MAX_VALUE, "Password must have at least 8 characters."),
+                            StringValidators.nonBlank().build(),
+                            StringValidators.hasLength(8, Integer.MAX_VALUE)
+                                    .withExplanation("Password must have at least 8 characters.")
+                                    .build(),
                             StringValidators.matchesRegex("(?=.*[A-Z]).*", "Password must contain an upper-case letter."),
                             StringValidators.matchesRegex("(?=.*[a-z]).*", "Password must contain a lower-case letter."),
                             StringValidators.matchesRegex("(?=.*[0-9]).*", "Password must contain a digit."),

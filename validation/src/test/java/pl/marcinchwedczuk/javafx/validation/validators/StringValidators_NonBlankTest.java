@@ -3,20 +3,16 @@ package pl.marcinchwedczuk.javafx.validation.validators;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import pl.marcinchwedczuk.javafx.validation.Objection;
 import pl.marcinchwedczuk.javafx.validation.Objections;
 import pl.marcinchwedczuk.javafx.validation.ValidationResult;
 import pl.marcinchwedczuk.javafx.validation.Validator;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-
 class StringValidators_NonBlankTest extends BaseValidatorTest {
     @Test
     void null_is_considered_valid() {
-        Validator<String> validator = StringValidators.nonBlank();
+        Validator<String> validator = StringValidators.nonBlank().build();
 
         ValidationResult<String> result = validator.validate(null);
 
@@ -25,7 +21,7 @@ class StringValidators_NonBlankTest extends BaseValidatorTest {
 
     @Test
     void non_blank_string_is_considered_valid() {
-        Validator<String> validator = StringValidators.nonBlank();
+        Validator<String> validator = StringValidators.nonBlank().build();
 
         ValidationResult<String> result = validator.validate("foo");
 
@@ -35,7 +31,7 @@ class StringValidators_NonBlankTest extends BaseValidatorTest {
     @ParameterizedTest
     @ValueSource(strings = { "", " ", "   ", "\t", "\n", "\r\n" })
     void blank_string_is_considered_invalid(String blank) {
-        Validator<String> validator = StringValidators.nonBlank();
+        Validator<String> validator = StringValidators.nonBlank().build();
 
         ValidationResult<String> result = validator.validate(blank);
 
@@ -49,9 +45,9 @@ class StringValidators_NonBlankTest extends BaseValidatorTest {
 
     @Test
     void formats_error_message() {
-        Validator<String> validator = StringValidators.nonBlank(
-                "Invalid value with %d and %s", 123, "foo"
-        );
+        Validator<String> validator = StringValidators.nonBlank()
+                .withExplanation("Invalid value with %d and %s", 123, "foo")
+                .build();
 
         ValidationResult<String> result = validator.validate("");
 
@@ -60,5 +56,4 @@ class StringValidators_NonBlankTest extends BaseValidatorTest {
                         Objections.error("Invalid value with 123 and foo")
                 ));
     }
-
 }

@@ -10,6 +10,8 @@ import pl.marcinchwedczuk.javafx.validation.validators.StringValidators;
 
 import java.util.Objects;
 
+import static pl.marcinchwedczuk.javafx.validation.validators.StringValidators.nonBlank;
+
 public class TopDownViewModel {
     private final UiService uiService;
 
@@ -20,11 +22,15 @@ public class TopDownViewModel {
             .withUiValidators(ObjectValidators.required());
 
     public final Input<String, PhoneNumber> mobilePhone = new Input<String, PhoneNumber>(PhoneNumber.converter())
-            .withUiValidators(StringValidators.nonBlank("Phone number is required."))
+            .withUiValidators(
+                    nonBlank().withExplanation("Phone number is required.")
+            )
             .withModelValidator(CustomValidators.phoneHasCountryPrefix(selectedCountry.modelValueProperty()));
 
     public final Input<String, FaxNumber> faxNumber = new Input<String, FaxNumber>(FaxNumber.converter())
-            .withUiValidators(StringValidators.nonBlank("Fax number is required."))
+            .withUiValidators(
+                    nonBlank().withExplanation("Fax number is required.")
+            )
             .withModelValidator(CustomValidators.faxHasCountryPrefix(selectedCountry.modelValueProperty()));
 
     private final ValidationGroup topDownDemoForm = new ValidationGroup(selectedCountry, mobilePhone, faxNumber);

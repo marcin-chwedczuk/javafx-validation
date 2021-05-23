@@ -3,6 +3,8 @@ package pl.marcinchwedczuk.javafx.validation;
 import javafx.beans.Observable;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 
 public class ValidatorBuilder {
@@ -18,25 +20,33 @@ public class ValidatorBuilder {
             SetPredicateMandatoryStep<T>,
             SetDefaultExplanationMandatoryStep<T>,
             SetDependenciesOptionalStep<T>,
+            SetExplanationVariablesOptionalStep<T>,
             Builder<T>
     {
         private String name;
         private Predicate<T> isValid;
-        Collection<Observable> dependencies;
+        private Collection<Observable> dependencies;
+        private Map<String, Object> explanationVariables;
         private Explanation explanation;
 
         public BuilderImpl() {
-            this(null, null, null, null);
+            this(null,
+                    null,
+                    List.of(),
+                    Map.of(),
+                    null);
         }
 
         protected BuilderImpl(String name,
                               Predicate<T> isValid,
                               Collection<Observable> dependencies,
+                              Map<String, Object> explanationVariables,
                               Explanation explanation)
         {
             this.name = name;
             this.isValid = isValid;
             this.dependencies = dependencies;
+            this.explanationVariables = explanationVariables;
             this.explanation = explanation;
         }
 
@@ -46,6 +56,7 @@ public class ValidatorBuilder {
                     name,
                     this.isValid,
                     this.dependencies,
+                    this.explanationVariables,
                     this.explanation);
         }
 
@@ -56,15 +67,37 @@ public class ValidatorBuilder {
                     name,
                     this.isValid,
                     this.dependencies,
+                    this.explanationVariables,
                     this.explanation);
         }
 
         @Override
-        public SetDefaultExplanationMandatoryStep<T> withPredicate(Predicate<T> isValid) {
+        public SetDependenciesOptionalStep<T> withPredicate(Predicate<T> isValid) {
             return new BuilderImpl<>(
                     this.name,
                     isValid,
                     this.dependencies,
+                    this.explanationVariables,
+                    this.explanation);
+        }
+
+        @Override
+        public SetExplanationVariablesOptionalStep<T> withDependencies(Collection<Observable> dependencies) {
+            return new BuilderImpl<>(
+                    this.name,
+                    this.isValid,
+                    dependencies,
+                    this.explanationVariables,
+                    this.explanation);
+        }
+
+        @Override
+        public SetDefaultExplanationMandatoryStep<T> withExplanationVariables(Map<String, Object> explanationVariables) {
+            return new BuilderImpl<>(
+                    this.name,
+                    this.isValid,
+                    this.dependencies,
+                    explanationVariables,
                     this.explanation);
         }
 
@@ -74,16 +107,8 @@ public class ValidatorBuilder {
                     this.name,
                     this.isValid,
                     this.dependencies,
+                    this.explanationVariables,
                     explanation);
-        }
-
-        @Override
-        public SetDefaultExplanationMandatoryStep<T> withDependencies(Collection<Observable> dependencies) {
-            return new BuilderImpl<>(
-                    this.name,
-                    this.isValid,
-                    dependencies,
-                    this.explanation);
         }
 
         @Override
@@ -92,6 +117,7 @@ public class ValidatorBuilder {
                     this.name,
                     this.isValid,
                     this.dependencies,
+                    this.explanationVariables,
                     this.explanation);
         }
     }
@@ -102,11 +128,15 @@ public class ValidatorBuilder {
     }
 
     public interface SetPredicateMandatoryStep<T> {
-        SetDefaultExplanationMandatoryStep<T> withPredicate(Predicate<T> predicate);
+        SetDependenciesOptionalStep<T> withPredicate(Predicate<T> predicate);
     }
 
-    public interface SetDependenciesOptionalStep<T> extends SetDefaultExplanationMandatoryStep<T> {
-        SetDefaultExplanationMandatoryStep<T> withDependencies(Collection<Observable> dependencies);
+    public interface SetDependenciesOptionalStep<T> extends SetExplanationVariablesOptionalStep<T> {
+        SetExplanationVariablesOptionalStep<T> withDependencies(Collection<Observable> dependencies);
+    }
+
+    public interface SetExplanationVariablesOptionalStep<T> extends SetDefaultExplanationMandatoryStep<T> {
+        SetDefaultExplanationMandatoryStep<T> withExplanationVariables(Map<String, Object> variables);
     }
 
     public interface SetDefaultExplanationMandatoryStep<T> {
