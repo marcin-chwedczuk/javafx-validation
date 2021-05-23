@@ -59,6 +59,7 @@ public class ObjectionsList implements Iterable<Objection> {
         return new ObjectionsList(
             stream()
                 .sorted(Objections.compareBySeverityDesc())
+                // TODO: toObjectionsList collector
                 .collect(toUnmodifiableList())
         );
     }
