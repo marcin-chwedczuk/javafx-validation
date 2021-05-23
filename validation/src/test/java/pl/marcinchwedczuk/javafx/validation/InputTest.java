@@ -1,5 +1,7 @@
 package pl.marcinchwedczuk.javafx.validation;
 
+import javafx.beans.property.*;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import pl.marcinchwedczuk.javafx.validation.converters.Converters;
 import pl.marcinchwedczuk.javafx.validation.validators.IntegerValidators;
@@ -11,6 +13,8 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static pl.marcinchwedczuk.javafx.validation.converters.Converters.stringIntegerConverter;
+import static pl.marcinchwedczuk.javafx.validation.validators.IntegerValidators.RangeOptions.ALLOW_EMPTY_RANGE;
+import static pl.marcinchwedczuk.javafx.validation.validators.IntegerValidators.validRangeWithStart;
 
 class InputTest extends BaseUnitTest {
     Input<String, Integer> intInput = new Input<>(stringIntegerConverter())
@@ -138,5 +142,48 @@ class InputTest extends BaseUnitTest {
         intInput.setUiValue("-1");
         assertThat(intInput.getObjections().asList())
                 .isEqualTo(List.of(Objections.error("-1 must be between 0 and 1024.")));
+    }
+
+    @Nested
+    class handling_validator_dependencies {
+        ObjectProperty<Integer> dependencyProp = new SimpleObjectProperty<>(0);
+        Input<String, Integer> dependencyInput = new Input<>(stringIntegerConverter())
+                .withModelValidator(validRangeWithStart(dependencyProp, ALLOW_EMPTY_RANGE));
+
+        @Test
+        void rerun_validation_when_validator_dependency_changes_and_input_is_not_pristine() {
+            dependencyProp.setValue(0);
+            dependencyInput.setUiValue("100");
+            assertThat(dependencyInput.getValidationState())
+                    .isEqualTo(ValidationState.VALID);
+
+            dependencyProp.setValue(101);
+            assertThat(dependencyInput.getValidationState())
+                    .isEqualTo(ValidationState.INVALID);
+
+            dependencyProp.setValue(50);
+            assertThat(dependencyInput.getValidationState())
+                    .isEqualTo(ValidationState.VALID);
+        }
+
+        @Test
+        void ignores_validator_dependencies_when_input_is_pristine() {
+            // Input is pristine
+            dependencyInput.reset(100);
+            assertThat(dependencyInput.getValidationState())
+                    .isEqualTo(ValidationState.NOT_RUN);
+
+            dependencyProp.setValue(101);
+            dependencyProp.setValue(50);
+            assertThat(dependencyInput.getValidationState())
+                    .isEqualTo(ValidationState.NOT_RUN);
+
+            dependencyProp.setValue(50);
+
+            // Force validation to run, remove pristine flag
+            dependencyInput.reevaluateUiValue();
+            assertThat(dependencyInput.getValidationState())
+                    .isEqualTo(ValidationState.VALID);
+        }
     }
 }
