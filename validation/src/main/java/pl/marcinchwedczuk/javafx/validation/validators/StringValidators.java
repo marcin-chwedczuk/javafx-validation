@@ -20,6 +20,8 @@ public class StringValidators {
 
     public static
     ValidatorBuilder.Builder<String> hasLength(int min, int maxExcluding) {
+        // TODO: Add parameter validation
+
         return ValidatorBuilder.<String>newValidator()
                 .withName("hasLength(%d, %d)", min, maxExcluding)
                 .withPredicate(value -> {
@@ -35,24 +37,22 @@ public class StringValidators {
                     "Value must be at least #{minLength} and at most #{maxLength} characters long."));
     }
 
-    public static Validator<String> matchesRegex(String regex, String message) {
+    public static ValidatorBuilder.Builder<String> matchesRegex(String regex) {
         Objects.requireNonNull(regex);
-        Objects.requireNonNull(message);
 
         Pattern pattern = Pattern.compile(regex);
 
-        return new Validator<>() {
-            @Override
-            public <TT extends String> ValidationResult<TT> validate(TT value) {
-                String safeValue = (value != null) ? value : "";
-                boolean isValid = (value == null) || pattern.matcher(safeValue).matches();
-                if (isValid) {
-                    return ValidationResult.success(value);
-                }
-                else {
-                    return ValidationResult.failure(value, Objections.error(message));
-                }
-            }
-        };
+        return ValidatorBuilder.<String>newValidator()
+                .withName("matchesRegex(%s)", pattern)
+                .withPredicate(value -> {
+                    String safeValue = (value != null) ? value : "";
+                    boolean isValid = (value == null) || pattern.matcher(safeValue).matches();
+                    return isValid;
+                })
+                .withExplanationVariables(Map.of(
+                        "pattern", pattern.toString()
+                ))
+                .withExplanation(Explanation.of(
+                        "Value must match regex '#{pattern}'."));
     }
 }
