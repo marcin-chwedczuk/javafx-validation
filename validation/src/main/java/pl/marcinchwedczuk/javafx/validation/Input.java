@@ -2,8 +2,6 @@ package pl.marcinchwedczuk.javafx.validation;
 
 import javafx.beans.Observable;
 import javafx.beans.property.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import pl.marcinchwedczuk.javafx.validation.impl.InvalidationListenerHandle;
 import pl.marcinchwedczuk.javafx.validation.impl.ValueDeduper;
 
@@ -201,15 +199,15 @@ public class Input<UIV, MV> {
     }
 
     @SafeVarargs
-    public final Input<UIV, MV> withUiValidators(ValidatorBuilder.Builder<? super UIV>... validatorBuilders) {
-        for (ValidatorBuilder.Builder<? super UIV> builder : validatorBuilders) {
-            withUiValidator(builder.build());
+    public final Input<UIV, MV> withUiValidators(CustomizableValidator<? super UIV>... validatorBuilders) {
+        for (CustomizableValidator<? super UIV> builder : validatorBuilders) {
+            withUiValidator(builder.create());
         }
         return this;
     }
 
-    public Input<UIV, MV> withModelValidator(ValidatorBuilder.Builder<? super MV> builder) {
-        return withModelValidator(builder.build());
+    public Input<UIV, MV> withModelValidator(CustomizableValidator<? super MV> builder) {
+        return withModelValidator(builder.create());
     }
 
     public Input<UIV, MV> withModelValidator(Validator<? super MV> validator) {

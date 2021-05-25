@@ -104,6 +104,8 @@ Deploy:
 ./mvnw clean package deploy -Prelease-build
 ```
 
+You can also publish snapshot versions of the components (skip set versions step).
+
 GPG Signing requires that you generated a GPG key and published it.
 For more details see: https://central.sonatype.org/publish/requirements/gpg/.
 

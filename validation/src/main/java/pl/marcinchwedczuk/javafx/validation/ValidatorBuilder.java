@@ -1,28 +1,26 @@
 package pl.marcinchwedczuk.javafx.validation;
 
 import javafx.beans.Observable;
+import pl.marcinchwedczuk.javafx.validation.ValidatorBuilderSteps.*;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
-public class ValidatorBuilder {
-    private ValidatorBuilder() { }
-
-    public static <T>
-    SetNameMandatoryStep<T> newValidator() {
-        return new BuilderImpl<>();
+public class ValidatorBuilder<T> implements SetNameMandatoryStep<T> {
+    @Override
+    public SetPredicateMandatoryStep<T> withName(String name) {
+        return new BuilderImpl<T>().withName(name);
     }
 
-    public static class BuilderImpl<T> implements
+    private static class BuilderImpl<T> implements
             SetNameMandatoryStep<T>,
             SetPredicateMandatoryStep<T>,
-            SetDefaultExplanationMandatoryStep<T>,
             SetDependenciesOptionalStep<T>,
+            SetDefaultExplanationMandatoryStep<T>,
             SetExplanationVariablesOptionalStep<T>,
-            Builder<T>
+            CustomizableValidator<T>
     {
         private String name;
         private Predicate<T> isValid;
@@ -62,17 +60,6 @@ public class ValidatorBuilder {
         }
 
         @Override
-        public SetPredicateMandatoryStep<T> withName(String nameFormat, Object... args) {
-            String name = String.format(nameFormat, args);
-            return new BuilderImpl<>(
-                    name,
-                    this.isValid,
-                    this.dependencies,
-                    this.explanationVariables,
-                    this.explanation);
-        }
-
-        @Override
         public SetDependenciesOptionalStep<T> withPredicate(Predicate<T> isValid) {
             return new BuilderImpl<>(
                     this.name,
@@ -83,7 +70,7 @@ public class ValidatorBuilder {
         }
 
         @Override
-        public SetExplanationVariablesOptionalStep<T> withDependencies(Collection<Observable> dependencies) {
+        public SetDefaultExplanationMandatoryStep<T> withDependencies(Collection<Observable> dependencies) {
             return new BuilderImpl<>(
                     this.name,
                     this.isValid,
@@ -93,17 +80,7 @@ public class ValidatorBuilder {
         }
 
         @Override
-        public SetDefaultExplanationMandatoryStep<T> withExplanationVariables(Map<String, Object> explanationVariables) {
-            return new BuilderImpl<>(
-                    this.name,
-                    this.isValid,
-                    this.dependencies,
-                    explanationVariables,
-                    this.explanation);
-        }
-
-        @Override
-        public Builder<T> withExplanation(Explanation explanation) {
+        public SetExplanationVariablesOptionalStep<T> withDefaultExplanation(Explanation explanation) {
             return new BuilderImpl<>(
                     this.name,
                     this.isValid,
@@ -113,7 +90,27 @@ public class ValidatorBuilder {
         }
 
         @Override
-        public Validator<T> build() {
+        public CustomizableValidator<T> withExplanationVariables(Map<String, Object> explanationVariables) {
+            return new BuilderImpl<>(
+                    this.name,
+                    this.isValid,
+                    this.dependencies,
+                    explanationVariables,
+                    this.explanation);
+        }
+
+        @Override
+        public CustomizableValidator<T> withExplanation(Explanation explanation) {
+            return new BuilderImpl<>(
+                    this.name,
+                    this.isValid,
+                    this.dependencies,
+                    this.explanationVariables,
+                    explanation);
+        }
+
+        @Override
+        public Validator<T> create() {
             return new ComposableValidator<>(
                     this.name,
                     this.isValid,
@@ -123,42 +120,4 @@ public class ValidatorBuilder {
         }
     }
 
-    public interface SetNameMandatoryStep<T> {
-        SetPredicateMandatoryStep<T> withName(String name);
-        SetPredicateMandatoryStep<T> withName(String name, Object... args);
-    }
-
-    public interface SetPredicateMandatoryStep<T> {
-        SetDependenciesOptionalStep<T> withPredicate(Predicate<T> predicate);
-    }
-
-    public interface SetDependenciesOptionalStep<T> extends SetExplanationVariablesOptionalStep<T> {
-        SetExplanationVariablesOptionalStep<T> withDependencies(Collection<Observable> dependencies);
-
-        default SetExplanationVariablesOptionalStep<T> withDependencies(Observable... dependencies) {
-            return withDependencies(Arrays.asList(dependencies));
-        }
-    }
-
-    public interface SetExplanationVariablesOptionalStep<T> extends SetDefaultExplanationMandatoryStep<T> {
-        SetDefaultExplanationMandatoryStep<T> withExplanationVariables(Map<String, Object> variables);
-    }
-
-    public interface SetDefaultExplanationMandatoryStep<T> {
-        Builder<T> withExplanation(Explanation explanation);
-    }
-
-    public interface Builder<T> {
-        Builder<T> withExplanation(Explanation explanation);
-
-        default Builder<T> withExplanation(String message) {
-            return this.withExplanation(Explanation.of(message));
-        }
-
-        default Builder<T> withExplanation(String messageFormat, Object... args) {
-            return this.withExplanation(Explanation.of(messageFormat, args));
-        }
-
-        Validator<T> build();
-    }
 }

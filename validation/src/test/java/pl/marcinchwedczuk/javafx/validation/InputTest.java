@@ -142,7 +142,7 @@ class InputTest extends BaseUnitTest {
         // Value from model validator
         intInput.setUiValue("-1");
         assertThat(intInput.getObjections().asList())
-                .isEqualTo(List.of(Objections.error("-1 must be between 0 and 1024.")));
+                .isEqualTo(List.of(Objections.error("-1 must be between 0 and 1023.")));
     }
 
     @Nested

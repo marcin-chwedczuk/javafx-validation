@@ -10,12 +10,11 @@ import pl.marcinchwedczuk.javafx.validation.Validator;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class StringValidatorsTest_HasLengthTest extends BaseValidatorTest {
     @Test
     void null_is_considered_valid() {
-        Validator<String> validator = StringValidators.hasLength(3, 7).build();
+        Validator<String> validator = StringValidators.hasLength(3, 7).create();
 
         ValidationResult<String> result = validator.validate(null);
 
@@ -25,7 +24,7 @@ class StringValidatorsTest_HasLengthTest extends BaseValidatorTest {
     @ParameterizedTest
     @ValueSource(strings = { "abc", "abcd", "abcde", "abcdef" })
     void strings_within_length_range_are_considered_valid(String input) {
-        Validator<String> validator = StringValidators.hasLength(3, 7).build();
+        Validator<String> validator = StringValidators.hasLength(3, 7).create();
 
         ValidationResult<String> result = validator.validate(input);
 
@@ -35,7 +34,7 @@ class StringValidatorsTest_HasLengthTest extends BaseValidatorTest {
     @ParameterizedTest
     @ValueSource(strings = { "", "a", "ab", "abcdefX", "abcdefXY" })
     void strings_outside_length_range_are_considered_invalid(String input) {
-        Validator<String> validator = StringValidators.hasLength(3, 7).build();
+        Validator<String> validator = StringValidators.hasLength(3, 7).create();
 
         ValidationResult<String> result = validator.validate(input);
 
@@ -51,7 +50,7 @@ class StringValidatorsTest_HasLengthTest extends BaseValidatorTest {
     void formats_error_message() {
         Validator<String> validator = StringValidators.hasLength(3, 7)
                 .withExplanation("Invalid value with %d and %s", 123, "foo")
-                .build();
+                .create();
 
         ValidationResult<String> result = validator.validate("");
 

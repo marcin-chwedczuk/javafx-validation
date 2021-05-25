@@ -12,7 +12,7 @@ import java.util.List;
 class StringValidators_NonBlankTest extends BaseValidatorTest {
     @Test
     void null_is_considered_valid() {
-        Validator<String> validator = StringValidators.nonBlank().build();
+        Validator<String> validator = StringValidators.nonBlank().create();
 
         ValidationResult<String> result = validator.validate(null);
 
@@ -21,7 +21,7 @@ class StringValidators_NonBlankTest extends BaseValidatorTest {
 
     @Test
     void non_blank_string_is_considered_valid() {
-        Validator<String> validator = StringValidators.nonBlank().build();
+        Validator<String> validator = StringValidators.nonBlank().create();
 
         ValidationResult<String> result = validator.validate("foo");
 
@@ -31,7 +31,7 @@ class StringValidators_NonBlankTest extends BaseValidatorTest {
     @ParameterizedTest
     @ValueSource(strings = { "", " ", "   ", "\t", "\n", "\r\n" })
     void blank_string_is_considered_invalid(String blank) {
-        Validator<String> validator = StringValidators.nonBlank().build();
+        Validator<String> validator = StringValidators.nonBlank().create();
 
         ValidationResult<String> result = validator.validate(blank);
 
@@ -47,7 +47,7 @@ class StringValidators_NonBlankTest extends BaseValidatorTest {
     void formats_error_message() {
         Validator<String> validator = StringValidators.nonBlank()
                 .withExplanation("Invalid value with %d and %s", 123, "foo")
-                .build();
+                .create();
 
         ValidationResult<String> result = validator.validate("");
 

@@ -9,10 +9,10 @@ public class ObjectValidators {
     }
 
     public static <T>
-    ValidatorBuilder.Builder<T> required() {
-        return ValidatorBuilder.<T>newValidator()
+    CustomizableValidator<T> required() {
+        return new ValidatorBuilder<T>()
                 .withName("required")
                 .withPredicate(Objects::nonNull)
-                .withExplanation(Explanation.of("Value is required."));
+                .withDefaultExplanation(Explanation.of("Value is required."));
     }
 }

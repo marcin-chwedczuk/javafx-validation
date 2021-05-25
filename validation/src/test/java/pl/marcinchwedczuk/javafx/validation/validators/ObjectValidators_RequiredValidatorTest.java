@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ObjectValidators_RequiredValidatorTest extends BaseValidatorTest {
     @Test
     void non_null_value_is_valid() {
-        Validator<Object> validator = ObjectValidators.required().build();
+        Validator<Object> validator = ObjectValidators.required().create();
 
         ValidationResult<String> result = validator.validate("foo");
 
@@ -22,7 +22,7 @@ class ObjectValidators_RequiredValidatorTest extends BaseValidatorTest {
 
     @Test
     void null_value_is_invalid() {
-        Validator<Object> validator = ObjectValidators.required().build();
+        Validator<Object> validator = ObjectValidators.required().create();
 
         ValidationResult<String> result = validator.<String>validate(null);
 
@@ -39,7 +39,7 @@ class ObjectValidators_RequiredValidatorTest extends BaseValidatorTest {
         Validator<Object> validator = ObjectValidators.required()
                 .withExplanation(Explanation.of(
                     "this is message with %d and %s", 123, "foo"))
-                .build();
+                .create();
 
         ValidationResult<Object> result = validator.validate(null);
 

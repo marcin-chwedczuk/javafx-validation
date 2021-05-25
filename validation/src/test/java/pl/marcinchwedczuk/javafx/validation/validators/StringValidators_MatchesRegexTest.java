@@ -9,8 +9,6 @@ import pl.marcinchwedczuk.javafx.validation.Validator;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class StringValidators_MatchesRegexTest extends BaseValidatorTest {
 
     @Test
@@ -18,7 +16,7 @@ class StringValidators_MatchesRegexTest extends BaseValidatorTest {
         Validator<String> validator = StringValidators
                 .matchesRegex("[0-9]+")
                 .withExplanation("does_not_match")
-                .build();
+                .create();
 
         ValidationResult<String> result = validator.validate(null);
 
@@ -31,7 +29,7 @@ class StringValidators_MatchesRegexTest extends BaseValidatorTest {
         Validator<String> validator = StringValidators
                 .matchesRegex("[0-9]+")
                 .withExplanation("does_not_match")
-                .build();
+                .create();
 
         ValidationResult<String> result = validator.validate(input);
 
@@ -44,7 +42,7 @@ class StringValidators_MatchesRegexTest extends BaseValidatorTest {
         Validator<String> validator = StringValidators
                 .matchesRegex("[0-9]+")
                 .withExplanation("does_not_match")
-                .build();
+                .create();
 
         ValidationResult<String> result = validator.validate(input);
 
