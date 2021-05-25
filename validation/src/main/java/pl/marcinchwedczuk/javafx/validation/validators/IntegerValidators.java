@@ -27,7 +27,7 @@ public class IntegerValidators {
                 })
                 .withExplanationVariables(Map.of(
                         "min", min,
-                        "max", maxExcluded
+                        "max", maxExcluded-1
                 ))
                 .withExplanation(Explanation.of(
                         "#{value} must be between #{min} and #{max}."));
