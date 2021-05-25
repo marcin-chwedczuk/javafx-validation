@@ -15,6 +15,7 @@
     <description>Test utils.</description>
 
     <properties>
+        <maven.javadoc.skip>true</maven.javadoc.skip>
     </properties>
 
     <dependencies>

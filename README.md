@@ -23,6 +23,8 @@ the library:
 
 ### How to?
 
+Project is build and tested using JDK 11.
+
 #### Run application
 ```
 ./mvnw javafx:run -pl demo
