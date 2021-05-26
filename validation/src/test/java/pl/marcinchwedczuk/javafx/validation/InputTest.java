@@ -187,4 +187,34 @@ class InputTest extends BaseUnitTest {
                     .isEqualTo(ValidationState.VALID);
         }
     }
+
+    @Nested
+    class bug_model_validator_should_not_block_propagating_model_value_to_ui_value {
+        Input<String, Integer> input = new Input<>(stringIntegerConverter())
+                .withModelValidator(IntegerValidators.between(0, 10));
+
+        @Test
+        void works_as_expected_when_input_is_pristine() {
+            input.setModelValue(33);
+
+            assertThat(input.getValidationState())
+                    .isEqualTo(ValidationState.INVALID);
+
+            assertThat(input.getUiValue())
+                    .isEqualTo("33");
+        }
+
+        @Test
+        void works_with_non_pristine_input() {
+            input.setUiValue("4");
+
+            input.setModelValue(33);
+
+            assertThat(input.getValidationState())
+                    .isEqualTo(ValidationState.INVALID);
+
+            assertThat(input.getUiValue())
+                    .isEqualTo("33");
+        }
+    }
 }
