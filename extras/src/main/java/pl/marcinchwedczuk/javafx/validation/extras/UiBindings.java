@@ -7,6 +7,9 @@ import javafx.beans.binding.StringBinding;
 import javafx.beans.property.Property;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.ReadOnlyProperty;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import pl.marcinchwedczuk.javafx.validation.Input;
 
@@ -20,6 +23,15 @@ public class UiBindings {
     public static <T> void biBind(TextField textControl, Input<String, T> modelInput) {
         biBind(textControl.textProperty(), modelInput);
         triggerOnFocusLost(textControl.focusedProperty(), modelInput);
+    }
+
+    public static <T> void biBind(ChoiceBox<T> choiceBox, Input<T, ?> modelInput) {
+        biBind(choiceBox.valueProperty(), modelInput);
+    }
+
+    public static <T> void biBind(Spinner<T> spinner, Input<T, ?> modelInput) {
+        // TODO: Will not work when factory changes
+        biBind(spinner.getValueFactory().valueProperty(), modelInput);
     }
 
     public static <T> void biBind(Property<T> uiProperty,

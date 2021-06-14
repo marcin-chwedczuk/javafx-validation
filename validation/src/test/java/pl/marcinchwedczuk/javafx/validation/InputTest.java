@@ -11,6 +11,7 @@ import pl.marcinchwedczuk.javafx.validation.validators.StringValidators;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.in;
 import static org.junit.jupiter.api.Assertions.*;
 import static pl.marcinchwedczuk.javafx.validation.converters.Converters.stringIntegerConverter;
 import static pl.marcinchwedczuk.javafx.validation.validators.IntegerValidators.RangeOptions.ALLOW_EMPTY_RANGE;
@@ -212,6 +213,17 @@ class InputTest extends BaseUnitTest {
 
             assertThat(input.getValidationState())
                     .isEqualTo(ValidationState.INVALID);
+
+            assertThat(input.getUiValue())
+                    .isEqualTo("33");
+        }
+
+        @Test
+        void works_via_reset() {
+            input.reset(33);
+
+            assertThat(input.getValidationState())
+                    .isEqualTo(ValidationState.NOT_RUN);
 
             assertThat(input.getUiValue())
                     .isEqualTo("33");

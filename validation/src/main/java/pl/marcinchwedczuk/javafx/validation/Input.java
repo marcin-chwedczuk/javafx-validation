@@ -216,6 +216,11 @@ public class Input<UIV, MV> {
         return this;
     }
 
+    public Input<UIV, MV> withInitialValue(MV value) {
+        reset(value);
+        return this;
+    }
+
     private void addDependenciesListener(Validator<?> validator) {
         for (Observable dependency : validator.dependencies()) {
             validatorDependencyChangedLH.attachTo(dependency);
