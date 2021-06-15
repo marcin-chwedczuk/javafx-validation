@@ -192,7 +192,17 @@
                     <jlinkZipName>validation-demo</jlinkZipName>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>release-build</id>
+            <build>
+                <plugins>
+                    <!-- disable release -->
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

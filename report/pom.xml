@@ -82,5 +82,14 @@
                 </plugins>
             </build>
         </profile>
+
+        <profile>
+            <id>release-build</id>
+            <build>
+                <plugins>
+                    <!-- disable release -->
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 </project>

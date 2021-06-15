@@ -20,7 +20,8 @@ import static java.util.stream.Collectors.toList;
  * @param <UIV>
  * @param <MV>
  */
-
+// TODO: Change name to Field
+// TODO: Add ReadOnlyField class
 public class Input<UIV, MV> {
     private final ObjectProperty<UIV> uiValue = new SimpleObjectProperty<>(this, "uiValue", null);
     private final ObjectProperty<MV> modelValue = new SimpleObjectProperty<>(this, "modelValue", null);
