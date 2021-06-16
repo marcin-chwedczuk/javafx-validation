@@ -17,6 +17,7 @@ public class ObjectionsList implements Iterable<Objection> {
     }
 
     public int size() { return objections.size(); }
+    public boolean isEmpty() { return size() == 0; }
     public Objection get(int index) { return objections.get(index); }
 
     @Override

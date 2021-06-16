@@ -26,6 +26,10 @@ public class UiBindings {
         biBind(choiceBox.valueProperty(), modelInput);
     }
 
+    public static void biBind(CheckBox choiceBox, Input<Boolean, ?> modelInput) {
+        biBind(choiceBox.selectedProperty(), modelInput);
+    }
+
     public static <T> void biBind(Spinner<T> spinner, Input<T, ?> modelInput) {
         // TODO: Will not work when factory changes
         biBind(spinner.getValueFactory().valueProperty(), modelInput);
