@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/container/container.iml" filepath="$PROJECT_DIR$/container/container.iml" />
+      <module fileurl="file://$PROJECT_DIR$/container-usecase/container-usecase.iml" filepath="$PROJECT_DIR$/container-usecase/container-usecase.iml" />
       <module fileurl="file://$PROJECT_DIR$/demo/demo.iml" filepath="$PROJECT_DIR$/demo/demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/extras/extras.iml" filepath="$PROJECT_DIR$/extras/extras.iml" />
       <module fileurl="file://$PROJECT_DIR$/parent-project.iml" filepath="$PROJECT_DIR$/parent-project.iml" />

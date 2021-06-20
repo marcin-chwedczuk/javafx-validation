@@ -1,4 +1,4 @@
-package pl.marcinchwedczuk.javafx.validation.extras;
+package pl.marcinchwedczuk.javafx.validation.container;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.binding.Bindings;

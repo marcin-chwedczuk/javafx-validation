@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import pl.marcinchwedczuk.javafx.validation.demo.controls.Banner?>
-<?import pl.marcinchwedczuk.javafx.validation.extras.ValidationDecorator?>
+<?import pl.marcinchwedczuk.javafx.validation.container.ValidationDecorator?>
 <AnchorPane stylesheets="@UserRegistration.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="pl.marcinchwedczuk.javafx.validation.demo.registration.UserRegistration">
 

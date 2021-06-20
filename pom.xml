@@ -37,10 +37,12 @@
 
     <modules>
         <module>validation</module>
-        <module>demo</module>
         <module>extras</module>
-        <module>report</module>
+        <module>container</module>
         <module>test-utils</module>
+        <module>demo</module>
+        <module>report</module>
+        <module>container-usecase</module>
     </modules>
 
     <properties>
@@ -110,6 +112,16 @@
             <dependency>
                 <groupId>pl.marcinchwedczuk.javafx.validation</groupId>
                 <artifactId>extras</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pl.marcinchwedczuk.javafx.validation</groupId>
+                <artifactId>container</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pl.marcinchwedczuk.javafx.validation</groupId>
+                <artifactId>container-usecase</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

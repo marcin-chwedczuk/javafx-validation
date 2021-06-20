@@ -6,13 +6,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="demo" />
         <module name="test-utils" />
         <module name="validation" />
+        <module name="container" />
         <module name="extras" />
-        <module name="demo" />
+        <module name="container-usecase" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="container" target="11" />
+      <module name="container-usecase" target="11" />
       <module name="demo" target="11" />
       <module name="extras" target="11" />
       <module name="parent-project" target="11" />

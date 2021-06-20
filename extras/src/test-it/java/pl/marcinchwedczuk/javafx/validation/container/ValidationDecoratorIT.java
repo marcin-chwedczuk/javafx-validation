@@ -1,4 +1,4 @@
-package pl.marcinchwedczuk.javafx.validation.extras;
+package pl.marcinchwedczuk.javafx.validation.container;
 
 import javafx.css.PseudoClass;
 import javafx.scene.Scene;

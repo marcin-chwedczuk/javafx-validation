@@ -1,4 +1,4 @@
-package pl.marcinchwedczuk.javafx.validation.extras;
+package pl.marcinchwedczuk.javafx.validation.container;
 
 import javafx.beans.InvalidationListener;
 import javafx.css.PseudoClass;
@@ -15,8 +15,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import pl.marcinchwedczuk.javafx.validation.Objection;
 import pl.marcinchwedczuk.javafx.validation.ObjectionsList;
-
-import java.util.List;
 
 class ValidationDecoratorSkin extends SkinBase<ValidationDecorator> {
     public static PseudoClass CSS_WITH_ERRORS = PseudoClass.getPseudoClass("with-errors");

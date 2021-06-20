@@ -11,8 +11,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import pl.marcinchwedczuk.javafx.validation.demo.controls.Banner;
 import pl.marcinchwedczuk.javafx.validation.demo.mainwindow.UiService;
-import pl.marcinchwedczuk.javafx.validation.extras.UiBindings;
-import pl.marcinchwedczuk.javafx.validation.extras.ValidationDecorator;
+import pl.marcinchwedczuk.javafx.validation.container.UiBindings;
+import pl.marcinchwedczuk.javafx.validation.container.ValidationDecorator;
 
 import java.io.IOException;
 import java.net.URL;

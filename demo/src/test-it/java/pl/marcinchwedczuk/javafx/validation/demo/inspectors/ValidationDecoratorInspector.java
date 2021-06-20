@@ -4,9 +4,8 @@ import org.testfx.api.FxRobot;
 import org.testfx.assertions.api.Assertions;
 import pl.marcinchwedczuk.javafx.validation.Objection;
 import pl.marcinchwedczuk.javafx.validation.ObjectionSeverity;
-import pl.marcinchwedczuk.javafx.validation.Objections;
 import pl.marcinchwedczuk.javafx.validation.ObjectionsList;
-import pl.marcinchwedczuk.javafx.validation.extras.ValidationDecorator;
+import pl.marcinchwedczuk.javafx.validation.container.ValidationDecorator;
 import pl.marcinchwedczuk.javafx.validation.testutils.inspectors.BaseControlInspector;
 
 import java.util.List;
