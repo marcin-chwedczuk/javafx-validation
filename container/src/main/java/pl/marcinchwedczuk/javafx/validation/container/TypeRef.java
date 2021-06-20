@@ -1,5 +1,8 @@
 package pl.marcinchwedczuk.javafx.validation.container;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,6 +11,30 @@ class TypeRef {
         TypeRef ref = new TypeRef(genericType, typeArguments);
         ref.validate();
         return ref;
+    }
+
+    public static TypeRef fromReflectionType(Type reflectionType) {
+        if (reflectionType instanceof Class<?>) {
+            return genericType((Class<?>)reflectionType);
+        }
+
+        if (reflectionType instanceof ParameterizedType) {
+            ParameterizedType parameterizedType = (ParameterizedType)reflectionType;
+
+            List<Class<?>> genericArguments = new ArrayList<>();
+            for (Type typeArg : parameterizedType.getActualTypeArguments()) {
+                if (typeArg instanceof Class<?>) {
+                    genericArguments.add((Class<?>)typeArg);
+                }
+                else {
+                    throw new IllegalArgumentException("Invalid type argument: " + typeArg);
+                }
+            }
+
+            return genericType((Class<?>)parameterizedType.getRawType(), genericArguments.toArray(new Class<?>[] { }));
+        }
+
+        throw new IllegalArgumentException("Unsupported type: " + reflectionType);
     }
 
     public final Class<?> baseType;

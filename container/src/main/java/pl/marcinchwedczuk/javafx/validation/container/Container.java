@@ -20,18 +20,22 @@ public class Container implements ComponentResolver, AutoCloseable {
 
     @Override
     public <T> T resolve(TypeTag<T> serviceType) {
+        TypeRef requestedType = getRequestedType(serviceType);
+        return resolveInternal(requestedType);
+    }
+
+    public <T> T resolveInternal(TypeRef requestedType) {
         for (Class<?> component: components) {
-            if (providesService(component, serviceType)) {
+            if (providesService(component, requestedType)) {
                 return createComponent(component);
             }
         }
 
-        throw new IllegalArgumentException("Unknown service: " + serviceType.getClass().toGenericString());
+        throw new IllegalArgumentException("Unknown service: " + requestedType.baseType +
+                " " + requestedType.typeArguments + ".");
     }
 
-    private <T> boolean providesService(Class<?> component, TypeTag<T> typeTag) {
-        TypeRef requestedType = getRequestedType(typeTag);
-
+    private <T> boolean providesService(Class<?> component, TypeRef requestedType) {
         // Check component type itself, interfaces and iteratively base class + it's interfaces
         Class<?> current = component;
         while (current != null) {
@@ -54,10 +58,24 @@ public class Container implements ComponentResolver, AutoCloseable {
 
     private <T> T createComponent(Class<?> component) {
         try {
+            // If has parameter-less ctor then use it
             for (Constructor<?> ctor : component.getDeclaredConstructors()) {
                 if (ctor.getParameterCount() == 0) {
                     return (T)ctor.newInstance(new Object[] { });
                 }
+            }
+
+            // Assuming that we have only one constructor, we will use it
+            if (component.getDeclaredConstructors().length == 1) {
+                Constructor<?> ctor = component.getDeclaredConstructors()[0];
+                List<Object> arguments = new ArrayList<Object>(ctor.getParameterCount());
+                for (int i = 0; i < ctor.getParameterCount(); i++) {
+                    Type paramType = ctor.getGenericParameterTypes()[i];
+                    TypeRef typeRef = TypeRef.fromReflectionType(paramType);
+                    arguments.add(resolveInternal(typeRef));
+                }
+
+                return (T)ctor.newInstance(arguments.toArray());
             }
         } catch (Exception e) {
             throw new RuntimeException("Cannot instantiate: " + component, e);
