@@ -1,6 +1,5 @@
 package pl.marcinchwedczuk.javafx.validation.container;
 
-import java.lang.reflect.TypeVariable;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,11 +10,11 @@ class TypeRef {
         return ref;
     }
 
-    private final Class<?> genericType;
-    private final List<Class<?>> typeArguments;
+    public final Class<?> baseType;
+    public final List<Class<?>> typeArguments;
 
-    private TypeRef(Class<?> genericType, Class<?>... typeArguments) {
-        this.genericType = Objects.requireNonNull(genericType);
+    private TypeRef(Class<?> baseType, Class<?>... typeArguments) {
+        this.baseType = Objects.requireNonNull(baseType);
         this.typeArguments = List.of(typeArguments);
 
         for (Class<?> typeArgument: typeArguments) {
@@ -31,12 +30,12 @@ class TypeRef {
     }
 
     private void checkValidNumberOfTypeArguments() {
-        int expected = genericType.getTypeParameters().length;
+        int expected = baseType.getTypeParameters().length;
         int actual = typeArguments.size();
         if (expected != actual) {
             throw new IllegalArgumentException(String.format(
                     "Type %s expects exactly %d type parameters, but %d type parameters where passed.",
-                    genericType.getName(), expected, actual));
+                    baseType.getName(), expected, actual));
         }
     }
 
@@ -45,13 +44,13 @@ class TypeRef {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TypeRef typeRef = (TypeRef) o;
-        return genericType.equals(typeRef.genericType) &&
+        return baseType.equals(typeRef.baseType) &&
                 typeArguments.equals(typeRef.typeArguments);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(genericType, typeArguments);
+        return Objects.hash(baseType, typeArguments);
     }
 }
 
