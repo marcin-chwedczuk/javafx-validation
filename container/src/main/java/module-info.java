@@ -1,4 +1,4 @@
-module pl.marcinchwedczuk.javafx.validation.container {
-    exports pl.marcinchwedczuk.javafx.validation.container;
+module pl.marcinchwedczuk.javafx.mvvm.container {
+    exports pl.marcinchwedczuk.javafx.mvvm.container;
 }
 

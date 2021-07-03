@@ -17,7 +17,7 @@
 
     <properties>
         <extra-jvm-options-when-running-tests>
-            --add-opens pl.marcinchwedczuk.javafx.validation.container/pl.marcinchwedczuk.javafx.validation.container=ALL-UNNAMED
+            --add-opens pl.marcinchwedczuk.javafx.mvvm.container/pl.marcinchwedczuk.javafx.mvvm.container=ALL-UNNAMED
         </extra-jvm-options-when-running-tests>
     </properties>
 

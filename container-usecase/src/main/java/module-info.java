@@ -1,6 +1,6 @@
-module pl.marcinchwedczuk.javafx.validation.container.usecase {
-    requires pl.marcinchwedczuk.javafx.validation.container;
+module pl.marcinchwedczuk.javafx.mvvm.container.usecase {
+    requires pl.marcinchwedczuk.javafx.mvvm.container;
 
-    exports pl.marcinchwedczuk.javafx.validation.container.usecase;
-    exports pl.marcinchwedczuk.javafx.validation.container.usecase.abstractions;
+    exports pl.marcinchwedczuk.javafx.validation.extras.usecase;
+    exports pl.marcinchwedczuk.javafx.validation.extras.usecase.abstractions;
 }

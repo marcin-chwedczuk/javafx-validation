@@ -17,7 +17,8 @@
 
     <properties>
         <extra-jvm-options-when-running-tests>
-            --add-opens pl.marcinchwedczuk.javafx.validation.container.usecase/pl.marcinchwedczuk.javafx.validation.container.usecase=ALL-UNNAMED
+            --add-opens
+            pl.marcinchwedczuk.javafx.validation.extras.usecase/pl.marcinchwedczuk.javafx.validation.extras.usecase=ALL-UNNAMED
         </extra-jvm-options-when-running-tests>
     </properties>
 
